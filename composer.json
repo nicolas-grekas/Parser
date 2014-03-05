@@ -1,0 +1,17 @@
+{
+    "description": "A parser based on kmyacc",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Grekas",
+            "email": "p@tchwork.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": { "Tchwork\\Parser\\": "" }
+    },
+    "target-dir": "Tchwork/Parser"
+}
