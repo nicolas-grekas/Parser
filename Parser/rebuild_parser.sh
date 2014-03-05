@@ -1,0 +1,7 @@
+#!/bin/sh
+
+PARSER_NAME="Parser"
+GRAMMAR_FILE="$PARSER_NAME.phpy"
+MODEL_FILE="$PARSER_NAME.kmyacc.php"
+
+kmyacc -l -m $MODEL_FILE -p $PARSER_NAME $GRAMMAR_FILE
