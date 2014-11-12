@@ -35,26 +35,24 @@
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
-              <internal_functions_in_yacc>
-                <semantic-token type="T_REQUIRE" line="7">require</semantic-token>
-                <asemantic-token type="T_WHITESPACE" line="7"> </asemantic-token>
-                <expr>
-                  <expr_without_variable>
-                    <scalar>
-                      <common_scalar>
-                        <semantic-token type="T_CONSTANT_ENCAPSED_STRING" line="7">'vendor/autoload.php'</semantic-token>
-                      </common_scalar>
-                    </scalar>
-                  </expr_without_variable>
-                </expr>
-              </internal_functions_in_yacc>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="7">;</semantic-token>
-        </unticked_statement>
+        <expr>
+          <expr_without_variable>
+            <internal_functions_in_yacc>
+              <semantic-token type="T_REQUIRE" line="7">require</semantic-token>
+              <asemantic-token type="T_WHITESPACE" line="7"> </asemantic-token>
+              <expr>
+                <expr_without_variable>
+                  <scalar>
+                    <dereferencable_scalar>
+                      <semantic-token type="T_CONSTANT_ENCAPSED_STRING" line="7">'vendor/autoload.php'</semantic-token>
+                    </dereferencable_scalar>
+                  </scalar>
+                </expr_without_variable>
+              </expr>
+            </internal_functions_in_yacc>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="7">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="7-9">
@@ -62,50 +60,46 @@
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
-              <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="9">$lexer</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-              </variable>
-              <asemantic-token type="T_WHITESPACE" line="9"> </asemantic-token>
-              <semantic-token type="'='" line="9">=</semantic-token>
-              <asemantic-token type="T_WHITESPACE" line="9"> </asemantic-token>
-              <expr>
-                <expr_without_variable>
-                  <new_expr>
-                    <semantic-token type="T_NEW" line="9">new</semantic-token>
-                    <asemantic-token type="T_WHITESPACE" line="9"> </asemantic-token>
-                    <class_name_reference>
-                      <class_name>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <callable_variable>
+                <simple_variable>
+                  <semantic-token type="T_VARIABLE" line="9">$lexer</semantic-token>
+                </simple_variable>
+              </callable_variable>
+            </variable>
+            <asemantic-token type="T_WHITESPACE" line="9"> </asemantic-token>
+            <semantic-token type="'='" line="9">=</semantic-token>
+            <asemantic-token type="T_WHITESPACE" line="9"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <new_expr>
+                  <semantic-token type="T_NEW" line="9">new</semantic-token>
+                  <asemantic-token type="T_WHITESPACE" line="9"> </asemantic-token>
+                  <class_name_reference>
+                    <class_name>
+                      <name>
                         <namespace_name>
                           <semantic-token type="T_STRING" line="9">Lexer</semantic-token>
                           <semantic-token type="T_NS_SEPARATOR" line="9">\</semantic-token>
                           <semantic-token type="T_STRING" line="9">PhpLexer</semantic-token>
                         </namespace_name>
-                      </class_name>
-                    </class_name_reference>
-                    <ctor_arguments>
-                      <function_call_parameter_list>
-                        <semantic-token type="'('" line="9">(</semantic-token>
-                        <semantic-token type="')'" line="9">)</semantic-token>
-                      </function_call_parameter_list>
-                    </ctor_arguments>
-                  </new_expr>
-                </expr_without_variable>
-              </expr>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="9">;</semantic-token>
-        </unticked_statement>
+                      </name>
+                    </class_name>
+                  </class_name_reference>
+                  <ctor_arguments>
+                    <argument_list>
+                      <semantic-token type="'('" line="9">(</semantic-token>
+                      <semantic-token type="')'" line="9">)</semantic-token>
+                    </argument_list>
+                  </ctor_arguments>
+                </new_expr>
+              </expr_without_variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="9">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="9-11">
@@ -113,193 +107,175 @@
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
-              <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="11">$doc</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-              </variable>
-              <asemantic-token type="T_WHITESPACE" line="11"> </asemantic-token>
-              <semantic-token type="'='" line="11">=</semantic-token>
-              <asemantic-token type="T_WHITESPACE" line="11"> </asemantic-token>
-              <expr>
-                <expr_without_variable>
-                  <new_expr>
-                    <semantic-token type="T_NEW" line="11">new</semantic-token>
-                    <asemantic-token type="T_WHITESPACE" line="11"> </asemantic-token>
-                    <class_name_reference>
-                      <class_name>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <callable_variable>
+                <simple_variable>
+                  <semantic-token type="T_VARIABLE" line="11">$doc</semantic-token>
+                </simple_variable>
+              </callable_variable>
+            </variable>
+            <asemantic-token type="T_WHITESPACE" line="11"> </asemantic-token>
+            <semantic-token type="'='" line="11">=</semantic-token>
+            <asemantic-token type="T_WHITESPACE" line="11"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <new_expr>
+                  <semantic-token type="T_NEW" line="11">new</semantic-token>
+                  <asemantic-token type="T_WHITESPACE" line="11"> </asemantic-token>
+                  <class_name_reference>
+                    <class_name>
+                      <name>
                         <namespace_name>
                           <semantic-token type="T_STRING" line="11">DOMDocument</semantic-token>
                         </namespace_name>
-                      </class_name>
-                    </class_name_reference>
-                    <ctor_arguments>
-                      <function_call_parameter_list>
-                        <semantic-token type="'('" line="11">(</semantic-token>
-                        <semantic-token type="')'" line="11">)</semantic-token>
-                      </function_call_parameter_list>
-                    </ctor_arguments>
-                  </new_expr>
-                </expr_without_variable>
-              </expr>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="11">;</semantic-token>
-        </unticked_statement>
+                      </name>
+                    </class_name>
+                  </class_name_reference>
+                  <ctor_arguments>
+                    <argument_list>
+                      <semantic-token type="'('" line="11">(</semantic-token>
+                      <semantic-token type="')'" line="11">)</semantic-token>
+                    </argument_list>
+                  </ctor_arguments>
+                </new_expr>
+              </expr_without_variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="11">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="11-12">
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
-              <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="12">$ast</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-              </variable>
-              <asemantic-token type="T_WHITESPACE" line="12"> </asemantic-token>
-              <semantic-token type="'='" line="12">=</semantic-token>
-              <asemantic-token type="T_WHITESPACE" line="12"> </asemantic-token>
-              <expr>
-                <expr_without_variable>
-                  <new_expr>
-                    <semantic-token type="T_NEW" line="12">new</semantic-token>
-                    <asemantic-token type="T_WHITESPACE" line="12"> </asemantic-token>
-                    <class_name_reference>
-                      <class_name>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <callable_variable>
+                <simple_variable>
+                  <semantic-token type="T_VARIABLE" line="12">$ast</semantic-token>
+                </simple_variable>
+              </callable_variable>
+            </variable>
+            <asemantic-token type="T_WHITESPACE" line="12"> </asemantic-token>
+            <semantic-token type="'='" line="12">=</semantic-token>
+            <asemantic-token type="T_WHITESPACE" line="12"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <new_expr>
+                  <semantic-token type="T_NEW" line="12">new</semantic-token>
+                  <asemantic-token type="T_WHITESPACE" line="12"> </asemantic-token>
+                  <class_name_reference>
+                    <class_name>
+                      <name>
                         <namespace_name>
                           <semantic-token type="T_STRING" line="12">AstBuilder</semantic-token>
                           <semantic-token type="T_NS_SEPARATOR" line="12">\</semantic-token>
                           <semantic-token type="T_STRING" line="12">XmlAstBuilder</semantic-token>
                         </namespace_name>
-                      </class_name>
-                    </class_name_reference>
-                    <ctor_arguments>
-                      <function_call_parameter_list>
-                        <semantic-token type="'('" line="12">(</semantic-token>
-                        <non_empty_function_call_parameter_list>
-                          <function_call_parameter>
+                      </name>
+                    </class_name>
+                  </class_name_reference>
+                  <ctor_arguments>
+                    <argument_list>
+                      <semantic-token type="'('" line="12">(</semantic-token>
+                      <non_empty_argument_list>
+                        <argument>
+                          <expr>
                             <variable>
-                              <base_variable_with_function_calls>
-                                <base_variable>
-                                  <reference_variable>
-                                    <compound_variable>
-                                      <semantic-token type="T_VARIABLE" line="12">$doc</semantic-token>
-                                    </compound_variable>
-                                  </reference_variable>
-                                </base_variable>
-                              </base_variable_with_function_calls>
+                              <callable_variable>
+                                <simple_variable>
+                                  <semantic-token type="T_VARIABLE" line="12">$doc</semantic-token>
+                                </simple_variable>
+                              </callable_variable>
                             </variable>
-                          </function_call_parameter>
-                        </non_empty_function_call_parameter_list>
-                        <semantic-token type="')'" line="12">)</semantic-token>
-                      </function_call_parameter_list>
-                    </ctor_arguments>
-                  </new_expr>
-                </expr_without_variable>
-              </expr>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="12">;</semantic-token>
-        </unticked_statement>
+                          </expr>
+                        </argument>
+                      </non_empty_argument_list>
+                      <semantic-token type="')'" line="12">)</semantic-token>
+                    </argument_list>
+                  </ctor_arguments>
+                </new_expr>
+              </expr_without_variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="12">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="12-13">
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
-              <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="13">$parser</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-              </variable>
-              <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
-              <semantic-token type="'='" line="13">=</semantic-token>
-              <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
-              <expr>
-                <expr_without_variable>
-                  <new_expr>
-                    <semantic-token type="T_NEW" line="13">new</semantic-token>
-                    <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
-                    <class_name_reference>
-                      <class_name>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <callable_variable>
+                <simple_variable>
+                  <semantic-token type="T_VARIABLE" line="13">$parser</semantic-token>
+                </simple_variable>
+              </callable_variable>
+            </variable>
+            <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
+            <semantic-token type="'='" line="13">=</semantic-token>
+            <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <new_expr>
+                  <semantic-token type="T_NEW" line="13">new</semantic-token>
+                  <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
+                  <class_name_reference>
+                    <class_name>
+                      <name>
                         <namespace_name>
                           <semantic-token type="T_STRING" line="13">Parser</semantic-token>
                           <semantic-token type="T_NS_SEPARATOR" line="13">\</semantic-token>
                           <semantic-token type="T_STRING" line="13">PhpParser</semantic-token>
                         </namespace_name>
-                      </class_name>
-                    </class_name_reference>
-                    <ctor_arguments>
-                      <function_call_parameter_list>
-                        <semantic-token type="'('" line="13">(</semantic-token>
-                        <non_empty_function_call_parameter_list>
-                          <function_call_parameter>
+                      </name>
+                    </class_name>
+                  </class_name_reference>
+                  <ctor_arguments>
+                    <argument_list>
+                      <semantic-token type="'('" line="13">(</semantic-token>
+                      <non_empty_argument_list>
+                        <argument>
+                          <expr>
                             <variable>
-                              <base_variable_with_function_calls>
-                                <base_variable>
-                                  <reference_variable>
-                                    <compound_variable>
-                                      <semantic-token type="T_VARIABLE" line="13">$lexer</semantic-token>
-                                    </compound_variable>
-                                  </reference_variable>
-                                </base_variable>
-                              </base_variable_with_function_calls>
+                              <callable_variable>
+                                <simple_variable>
+                                  <semantic-token type="T_VARIABLE" line="13">$lexer</semantic-token>
+                                </simple_variable>
+                              </callable_variable>
                             </variable>
-                          </function_call_parameter>
-                          <semantic-token type="','" line="13">,</semantic-token>
-                          <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
-                          <function_call_parameter>
+                          </expr>
+                        </argument>
+                        <semantic-token type="','" line="13">,</semantic-token>
+                        <asemantic-token type="T_WHITESPACE" line="13"> </asemantic-token>
+                        <argument>
+                          <expr>
                             <variable>
-                              <base_variable_with_function_calls>
-                                <base_variable>
-                                  <reference_variable>
-                                    <compound_variable>
-                                      <semantic-token type="T_VARIABLE" line="13">$ast</semantic-token>
-                                    </compound_variable>
-                                  </reference_variable>
-                                </base_variable>
-                              </base_variable_with_function_calls>
+                              <callable_variable>
+                                <simple_variable>
+                                  <semantic-token type="T_VARIABLE" line="13">$ast</semantic-token>
+                                </simple_variable>
+                              </callable_variable>
                             </variable>
-                          </function_call_parameter>
-                        </non_empty_function_call_parameter_list>
-                        <semantic-token type="')'" line="13">)</semantic-token>
-                      </function_call_parameter_list>
-                    </ctor_arguments>
-                  </new_expr>
-                </expr_without_variable>
-              </expr>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="13">;</semantic-token>
-        </unticked_statement>
+                          </expr>
+                        </argument>
+                      </non_empty_argument_list>
+                      <semantic-token type="')'" line="13">)</semantic-token>
+                    </argument_list>
+                  </ctor_arguments>
+                </new_expr>
+              </expr_without_variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="13">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="13-15">
@@ -307,244 +283,232 @@
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <callable_variable>
+                <simple_variable>
+                  <semantic-token type="T_VARIABLE" line="15">$ast</semantic-token>
+                </simple_variable>
+              </callable_variable>
+            </variable>
+            <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
+            <semantic-token type="'='" line="15">=</semantic-token>
+            <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
+            <expr>
               <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="15">$ast</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-              </variable>
-              <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
-              <semantic-token type="'='" line="15">=</semantic-token>
-              <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
-              <expr>
-                <r_variable>
-                  <variable>
-                    <base_variable_with_function_calls>
-                      <base_variable>
-                        <reference_variable>
-                          <compound_variable>
-                            <semantic-token type="T_VARIABLE" line="15">$parser</semantic-token>
-                          </compound_variable>
-                        </reference_variable>
-                      </base_variable>
-                    </base_variable_with_function_calls>
-                    <semantic-token type="T_OBJECT_OPERATOR" line="15">-&gt;</semantic-token>
-                    <object_property>
-                      <object_dim_list>
-                        <variable_name>
-                          <semantic-token type="T_STRING" line="15">parse</semantic-token>
-                        </variable_name>
-                      </object_dim_list>
-                    </object_property>
-                    <method_or_not>
-                      <method>
-                        <function_call_parameter_list>
-                          <semantic-token type="'('" line="15">(</semantic-token>
-                          <non_empty_function_call_parameter_list>
-                            <function_call_parameter>
-                              <variable>
-                                <base_variable_with_function_calls>
-                                  <function_call>
-                                    <namespace_name>
-                                      <semantic-token type="T_STRING" line="15">file_get_contents</semantic-token>
-                                    </namespace_name>
-                                    <function_call_parameter_list>
-                                      <semantic-token type="'('" line="15">(</semantic-token>
-                                      <non_empty_function_call_parameter_list>
-                                        <function_call_parameter>
-                                          <expr_without_variable>
-                                            <expr>
-                                              <expr_without_variable>
-                                                <internal_functions_in_yacc>
-                                                  <semantic-token type="T_ISSET" line="15">isset</semantic-token>
-                                                  <semantic-token type="'('" line="15">(</semantic-token>
-                                                  <isset_variables>
-                                                    <isset_variable>
+                <callable_variable>
+                  <dereferencable>
+                    <variable>
+                      <callable_variable>
+                        <simple_variable>
+                          <semantic-token type="T_VARIABLE" line="15">$parser</semantic-token>
+                        </simple_variable>
+                      </callable_variable>
+                    </variable>
+                  </dereferencable>
+                  <semantic-token type="T_OBJECT_OPERATOR" line="15">-&gt;</semantic-token>
+                  <member_name>
+                    <semantic-token type="T_STRING" line="15">parse</semantic-token>
+                  </member_name>
+                  <argument_list>
+                    <semantic-token type="'('" line="15">(</semantic-token>
+                    <non_empty_argument_list>
+                      <argument>
+                        <expr>
+                          <variable>
+                            <callable_variable>
+                              <function_call>
+                                <name>
+                                  <namespace_name>
+                                    <semantic-token type="T_STRING" line="15">file_get_contents</semantic-token>
+                                  </namespace_name>
+                                </name>
+                                <argument_list>
+                                  <semantic-token type="'('" line="15">(</semantic-token>
+                                  <non_empty_argument_list>
+                                    <argument>
+                                      <expr>
+                                        <expr_without_variable>
+                                          <expr>
+                                            <expr_without_variable>
+                                              <internal_functions_in_yacc>
+                                                <semantic-token type="T_ISSET" line="15">isset</semantic-token>
+                                                <semantic-token type="'('" line="15">(</semantic-token>
+                                                <isset_variables>
+                                                  <isset_variable>
+                                                    <expr>
                                                       <variable>
-                                                        <base_variable_with_function_calls>
-                                                          <base_variable>
-                                                            <reference_variable>
-                                                            <compound_variable>
+                                                        <callable_variable>
+                                                          <dereferencable>
+                                                            <variable>
+                                                            <callable_variable>
+                                                            <dereferencable>
+                                                            <variable>
+                                                            <callable_variable>
+                                                            <simple_variable>
                                                             <semantic-token type="T_VARIABLE" line="15">$_SERVER</semantic-token>
-                                                            </compound_variable>
+                                                            </simple_variable>
+                                                            </callable_variable>
+                                                            </variable>
+                                                            </dereferencable>
                                                             <semantic-token type="'['" line="15">[</semantic-token>
-                                                            <dim_offset>
+                                                            <optional_expr>
                                                             <expr>
                                                             <expr_without_variable>
                                                             <scalar>
-                                                            <common_scalar>
+                                                            <dereferencable_scalar>
                                                             <semantic-token type="T_CONSTANT_ENCAPSED_STRING" line="15">'argv'</semantic-token>
-                                                            </common_scalar>
+                                                            </dereferencable_scalar>
                                                             </scalar>
                                                             </expr_without_variable>
                                                             </expr>
-                                                            </dim_offset>
+                                                            </optional_expr>
                                                             <semantic-token type="']'" line="15">]</semantic-token>
-                                                            <semantic-token type="'['" line="15">[</semantic-token>
-                                                            <dim_offset>
+                                                            </callable_variable>
+                                                            </variable>
+                                                          </dereferencable>
+                                                          <semantic-token type="'['" line="15">[</semantic-token>
+                                                          <optional_expr>
                                                             <expr>
                                                             <expr_without_variable>
                                                             <scalar>
-                                                            <common_scalar>
                                                             <semantic-token type="T_LNUMBER" line="15">1</semantic-token>
-                                                            </common_scalar>
                                                             </scalar>
                                                             </expr_without_variable>
                                                             </expr>
-                                                            </dim_offset>
-                                                            <semantic-token type="']'" line="15">]</semantic-token>
-                                                            </reference_variable>
-                                                          </base_variable>
-                                                        </base_variable_with_function_calls>
+                                                          </optional_expr>
+                                                          <semantic-token type="']'" line="15">]</semantic-token>
+                                                        </callable_variable>
                                                       </variable>
-                                                    </isset_variable>
-                                                  </isset_variables>
-                                                  <semantic-token type="')'" line="15">)</semantic-token>
-                                                </internal_functions_in_yacc>
-                                              </expr_without_variable>
-                                            </expr>
-                                            <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
-                                            <semantic-token type="'?'" line="15">?</semantic-token>
-                                            <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
-                                            <expr>
-                                              <r_variable>
-                                                <variable>
-                                                  <base_variable_with_function_calls>
-                                                    <base_variable>
-                                                      <reference_variable>
-                                                        <compound_variable>
-                                                          <semantic-token type="T_VARIABLE" line="15">$_SERVER</semantic-token>
-                                                        </compound_variable>
-                                                        <semantic-token type="'['" line="15">[</semantic-token>
-                                                        <dim_offset>
-                                                          <expr>
-                                                            <expr_without_variable>
+                                                    </expr>
+                                                  </isset_variable>
+                                                </isset_variables>
+                                                <semantic-token type="')'" line="15">)</semantic-token>
+                                              </internal_functions_in_yacc>
+                                            </expr_without_variable>
+                                          </expr>
+                                          <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
+                                          <semantic-token type="'?'" line="15">?</semantic-token>
+                                          <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
+                                          <expr>
+                                            <variable>
+                                              <callable_variable>
+                                                <dereferencable>
+                                                  <variable>
+                                                    <callable_variable>
+                                                      <dereferencable>
+                                                        <variable>
+                                                          <callable_variable>
+                                                            <simple_variable>
+                                                            <semantic-token type="T_VARIABLE" line="15">$_SERVER</semantic-token>
+                                                            </simple_variable>
+                                                          </callable_variable>
+                                                        </variable>
+                                                      </dereferencable>
+                                                      <semantic-token type="'['" line="15">[</semantic-token>
+                                                      <optional_expr>
+                                                        <expr>
+                                                          <expr_without_variable>
                                                             <scalar>
-                                                            <common_scalar>
+                                                            <dereferencable_scalar>
                                                             <semantic-token type="T_CONSTANT_ENCAPSED_STRING" line="15">'argv'</semantic-token>
-                                                            </common_scalar>
+                                                            </dereferencable_scalar>
                                                             </scalar>
-                                                            </expr_without_variable>
-                                                          </expr>
-                                                        </dim_offset>
-                                                        <semantic-token type="']'" line="15">]</semantic-token>
-                                                        <semantic-token type="'['" line="15">[</semantic-token>
-                                                        <dim_offset>
-                                                          <expr>
-                                                            <expr_without_variable>
-                                                            <scalar>
-                                                            <common_scalar>
-                                                            <semantic-token type="T_LNUMBER" line="15">1</semantic-token>
-                                                            </common_scalar>
-                                                            </scalar>
-                                                            </expr_without_variable>
-                                                          </expr>
-                                                        </dim_offset>
-                                                        <semantic-token type="']'" line="15">]</semantic-token>
-                                                      </reference_variable>
-                                                    </base_variable>
-                                                  </base_variable_with_function_calls>
-                                                </variable>
-                                              </r_variable>
-                                            </expr>
-                                            <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
-                                            <semantic-token type="':'" line="15">:</semantic-token>
-                                            <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
-                                            <expr>
-                                              <expr_without_variable>
-                                                <scalar>
-                                                  <common_scalar>
-                                                    <semantic-token type="T_FILE" line="15">__FILE__</semantic-token>
-                                                  </common_scalar>
-                                                </scalar>
-                                              </expr_without_variable>
-                                            </expr>
-                                          </expr_without_variable>
-                                        </function_call_parameter>
-                                      </non_empty_function_call_parameter_list>
-                                      <semantic-token type="')'" line="15">)</semantic-token>
-                                    </function_call_parameter_list>
-                                  </function_call>
-                                </base_variable_with_function_calls>
-                              </variable>
-                            </function_call_parameter>
-                          </non_empty_function_call_parameter_list>
-                          <semantic-token type="')'" line="15">)</semantic-token>
-                        </function_call_parameter_list>
-                      </method>
-                    </method_or_not>
-                    <variable_properties/>
-                  </variable>
-                </r_variable>
-              </expr>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="15">;</semantic-token>
-        </unticked_statement>
+                                                          </expr_without_variable>
+                                                        </expr>
+                                                      </optional_expr>
+                                                      <semantic-token type="']'" line="15">]</semantic-token>
+                                                    </callable_variable>
+                                                  </variable>
+                                                </dereferencable>
+                                                <semantic-token type="'['" line="15">[</semantic-token>
+                                                <optional_expr>
+                                                  <expr>
+                                                    <expr_without_variable>
+                                                      <scalar>
+                                                        <semantic-token type="T_LNUMBER" line="15">1</semantic-token>
+                                                      </scalar>
+                                                    </expr_without_variable>
+                                                  </expr>
+                                                </optional_expr>
+                                                <semantic-token type="']'" line="15">]</semantic-token>
+                                              </callable_variable>
+                                            </variable>
+                                          </expr>
+                                          <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
+                                          <semantic-token type="':'" line="15">:</semantic-token>
+                                          <asemantic-token type="T_WHITESPACE" line="15"> </asemantic-token>
+                                          <expr>
+                                            <expr_without_variable>
+                                              <scalar>
+                                                <semantic-token type="T_FILE" line="15">__FILE__</semantic-token>
+                                              </scalar>
+                                            </expr_without_variable>
+                                          </expr>
+                                        </expr_without_variable>
+                                      </expr>
+                                    </argument>
+                                  </non_empty_argument_list>
+                                  <semantic-token type="')'" line="15">)</semantic-token>
+                                </argument_list>
+                              </function_call>
+                            </callable_variable>
+                          </variable>
+                        </expr>
+                      </argument>
+                    </non_empty_argument_list>
+                    <semantic-token type="')'" line="15">)</semantic-token>
+                  </argument_list>
+                </callable_variable>
+              </variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="15">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="15-16">
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <r_variable>
-              <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="16">$doc</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-                <semantic-token type="T_OBJECT_OPERATOR" line="16">-&gt;</semantic-token>
-                <object_property>
-                  <object_dim_list>
-                    <variable_name>
-                      <semantic-token type="T_STRING" line="16">appendChild</semantic-token>
-                    </variable_name>
-                  </object_dim_list>
-                </object_property>
-                <method_or_not>
-                  <method>
-                    <function_call_parameter_list>
-                      <semantic-token type="'('" line="16">(</semantic-token>
-                      <non_empty_function_call_parameter_list>
-                        <function_call_parameter>
-                          <variable>
-                            <base_variable_with_function_calls>
-                              <base_variable>
-                                <reference_variable>
-                                  <compound_variable>
-                                    <semantic-token type="T_VARIABLE" line="16">$ast</semantic-token>
-                                  </compound_variable>
-                                </reference_variable>
-                              </base_variable>
-                            </base_variable_with_function_calls>
-                          </variable>
-                        </function_call_parameter>
-                      </non_empty_function_call_parameter_list>
-                      <semantic-token type="')'" line="16">)</semantic-token>
-                    </function_call_parameter_list>
-                  </method>
-                </method_or_not>
-                <variable_properties/>
-              </variable>
-            </r_variable>
-          </expr>
-          <semantic-token type="';'" line="16">;</semantic-token>
-        </unticked_statement>
+        <expr>
+          <variable>
+            <callable_variable>
+              <dereferencable>
+                <variable>
+                  <callable_variable>
+                    <simple_variable>
+                      <semantic-token type="T_VARIABLE" line="16">$doc</semantic-token>
+                    </simple_variable>
+                  </callable_variable>
+                </variable>
+              </dereferencable>
+              <semantic-token type="T_OBJECT_OPERATOR" line="16">-&gt;</semantic-token>
+              <member_name>
+                <semantic-token type="T_STRING" line="16">appendChild</semantic-token>
+              </member_name>
+              <argument_list>
+                <semantic-token type="'('" line="16">(</semantic-token>
+                <non_empty_argument_list>
+                  <argument>
+                    <expr>
+                      <variable>
+                        <callable_variable>
+                          <simple_variable>
+                            <semantic-token type="T_VARIABLE" line="16">$ast</semantic-token>
+                          </simple_variable>
+                        </callable_variable>
+                      </variable>
+                    </expr>
+                  </argument>
+                </non_empty_argument_list>
+                <semantic-token type="')'" line="16">)</semantic-token>
+              </argument_list>
+            </callable_variable>
+          </variable>
+        </expr>
+        <semantic-token type="';'" line="16">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="16-18">
@@ -552,92 +516,84 @@
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
-              <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="18">$doc</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-                <semantic-token type="T_OBJECT_OPERATOR" line="18">-&gt;</semantic-token>
-                <object_property>
-                  <object_dim_list>
-                    <variable_name>
-                      <semantic-token type="T_STRING" line="18">preserveWhiteSpace</semantic-token>
-                    </variable_name>
-                  </object_dim_list>
-                </object_property>
-                <method_or_not/>
-                <variable_properties/>
-              </variable>
-              <asemantic-token type="T_WHITESPACE" line="18"> </asemantic-token>
-              <semantic-token type="'='" line="18">=</semantic-token>
-              <asemantic-token type="T_WHITESPACE" line="18"> </asemantic-token>
-              <expr>
-                <expr_without_variable>
-                  <scalar>
-                    <namespace_name>
-                      <semantic-token type="T_STRING" line="18">true</semantic-token>
-                    </namespace_name>
-                  </scalar>
-                </expr_without_variable>
-              </expr>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="18">;</semantic-token>
-        </unticked_statement>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <dereferencable>
+                <variable>
+                  <callable_variable>
+                    <simple_variable>
+                      <semantic-token type="T_VARIABLE" line="18">$doc</semantic-token>
+                    </simple_variable>
+                  </callable_variable>
+                </variable>
+              </dereferencable>
+              <semantic-token type="T_OBJECT_OPERATOR" line="18">-&gt;</semantic-token>
+              <member_name>
+                <semantic-token type="T_STRING" line="18">preserveWhiteSpace</semantic-token>
+              </member_name>
+            </variable>
+            <asemantic-token type="T_WHITESPACE" line="18"> </asemantic-token>
+            <semantic-token type="'='" line="18">=</semantic-token>
+            <asemantic-token type="T_WHITESPACE" line="18"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <scalar>
+                  <constant>
+                    <name>
+                      <namespace_name>
+                        <semantic-token type="T_STRING" line="18">true</semantic-token>
+                      </namespace_name>
+                    </name>
+                  </constant>
+                </scalar>
+              </expr_without_variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="18">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="18-19">
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <expr>
-            <expr_without_variable>
-              <variable>
-                <base_variable_with_function_calls>
-                  <base_variable>
-                    <reference_variable>
-                      <compound_variable>
-                        <semantic-token type="T_VARIABLE" line="19">$doc</semantic-token>
-                      </compound_variable>
-                    </reference_variable>
-                  </base_variable>
-                </base_variable_with_function_calls>
-                <semantic-token type="T_OBJECT_OPERATOR" line="19">-&gt;</semantic-token>
-                <object_property>
-                  <object_dim_list>
-                    <variable_name>
-                      <semantic-token type="T_STRING" line="19">formatOutput</semantic-token>
-                    </variable_name>
-                  </object_dim_list>
-                </object_property>
-                <method_or_not/>
-                <variable_properties/>
-              </variable>
-              <asemantic-token type="T_WHITESPACE" line="19"> </asemantic-token>
-              <semantic-token type="'='" line="19">=</semantic-token>
-              <asemantic-token type="T_WHITESPACE" line="19"> </asemantic-token>
-              <expr>
-                <expr_without_variable>
-                  <scalar>
-                    <namespace_name>
-                      <semantic-token type="T_STRING" line="19">true</semantic-token>
-                    </namespace_name>
-                  </scalar>
-                </expr_without_variable>
-              </expr>
-            </expr_without_variable>
-          </expr>
-          <semantic-token type="';'" line="19">;</semantic-token>
-        </unticked_statement>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <dereferencable>
+                <variable>
+                  <callable_variable>
+                    <simple_variable>
+                      <semantic-token type="T_VARIABLE" line="19">$doc</semantic-token>
+                    </simple_variable>
+                  </callable_variable>
+                </variable>
+              </dereferencable>
+              <semantic-token type="T_OBJECT_OPERATOR" line="19">-&gt;</semantic-token>
+              <member_name>
+                <semantic-token type="T_STRING" line="19">formatOutput</semantic-token>
+              </member_name>
+            </variable>
+            <asemantic-token type="T_WHITESPACE" line="19"> </asemantic-token>
+            <semantic-token type="'='" line="19">=</semantic-token>
+            <asemantic-token type="T_WHITESPACE" line="19"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <scalar>
+                  <constant>
+                    <name>
+                      <namespace_name>
+                        <semantic-token type="T_STRING" line="19">true</semantic-token>
+                      </namespace_name>
+                    </name>
+                  </constant>
+                </scalar>
+              </expr_without_variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token type="';'" line="19">;</semantic-token>
       </statement>
     </top_statement>
     <asemantic-token type="T_WHITESPACE" line="19-21">
@@ -645,45 +601,36 @@
 </asemantic-token>
     <top_statement>
       <statement>
-        <unticked_statement>
-          <semantic-token type="T_ECHO" line="21">echo</semantic-token>
-          <asemantic-token type="T_WHITESPACE" line="21"> </asemantic-token>
-          <echo_expr_list>
+        <semantic-token type="T_ECHO" line="21">echo</semantic-token>
+        <asemantic-token type="T_WHITESPACE" line="21"> </asemantic-token>
+        <echo_expr_list>
+          <echo_expr>
             <expr>
-              <r_variable>
-                <variable>
-                  <base_variable_with_function_calls>
-                    <base_variable>
-                      <reference_variable>
-                        <compound_variable>
+              <variable>
+                <callable_variable>
+                  <dereferencable>
+                    <variable>
+                      <callable_variable>
+                        <simple_variable>
                           <semantic-token type="T_VARIABLE" line="21">$doc</semantic-token>
-                        </compound_variable>
-                      </reference_variable>
-                    </base_variable>
-                  </base_variable_with_function_calls>
+                        </simple_variable>
+                      </callable_variable>
+                    </variable>
+                  </dereferencable>
                   <semantic-token type="T_OBJECT_OPERATOR" line="21">-&gt;</semantic-token>
-                  <object_property>
-                    <object_dim_list>
-                      <variable_name>
-                        <semantic-token type="T_STRING" line="21">saveXML</semantic-token>
-                      </variable_name>
-                    </object_dim_list>
-                  </object_property>
-                  <method_or_not>
-                    <method>
-                      <function_call_parameter_list>
-                        <semantic-token type="'('" line="21">(</semantic-token>
-                        <semantic-token type="')'" line="21">)</semantic-token>
-                      </function_call_parameter_list>
-                    </method>
-                  </method_or_not>
-                  <variable_properties/>
-                </variable>
-              </r_variable>
+                  <member_name>
+                    <semantic-token type="T_STRING" line="21">saveXML</semantic-token>
+                  </member_name>
+                  <argument_list>
+                    <semantic-token type="'('" line="21">(</semantic-token>
+                    <semantic-token type="')'" line="21">)</semantic-token>
+                  </argument_list>
+                </callable_variable>
+              </variable>
             </expr>
-          </echo_expr_list>
-          <semantic-token type="';'" line="21">;</semantic-token>
-        </unticked_statement>
+          </echo_expr>
+        </echo_expr_list>
+        <semantic-token type="';'" line="21">;</semantic-token>
       </statement>
     </top_statement>
   </top_statement_list>

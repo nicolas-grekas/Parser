@@ -7,15 +7,15 @@ rm grammars/*
 
 cd php-src
 
-for TAG in `git tag -l`
+for TAG in `git tag -l && echo 'master'`
 do
     git checkout $TAG -- Zend/zend_language_parser.y 2> /dev/null
     cp Zend/zend_language_parser.y zend_language_parser.$TAG.y
 done
 
-mv zend_language_parser.php-5.*.y ../grammars/
-
 cd - > /dev/null
+mv php-src/zend_language_parser.master.y grammars/zend_language_parser.php-`grep ' PHP_VERSION ' php-src/main/php_version.h | sed 's/.*"\\(.*\\)"/\\1/'`.y
+mv php-src/zend_language_parser.php-*.*.y grammars/
 cd grammars
 
 PREV_Y_FILE=/dev/null
@@ -30,7 +30,7 @@ do
     php -- $Y_FILE <<'EOPHP'
 <?php
         $y = file_get_contents($_SERVER['argv'][1]);
-        $y = explode("\n%pure_parser", $y, 2);
+        $y = explode("%pure_parser", $y, 2);
         $y = str_replace("$", "\x7F", $y[1]);
         $y = token_get_all('<?php %pure_parser' . $y);
         $errorState = 0;
@@ -71,7 +71,7 @@ do
                         break;
 
                     case ';':
-                        if ('|' === $prevToken) {
+                        if (':' === $prevToken || '|' === $prevToken) {
                             $z .= " /* empty */";
                         }
                         $z .= "\n;\n\n";
@@ -101,6 +101,12 @@ do
                         $prevToken = '%';
                         break;
 
+                    case '<':
+                        if ('>' === $y[$i+2]) {
+                            $i += 2;
+                            continue 2;
+                        }
+
                     default:
                         if (':' === $nextToken[0] && '%' !== $prevToken && ';' !== $prevToken) {
                             if ('|' === $prevToken) {
@@ -128,8 +134,10 @@ do
         }
 
         $z = str_replace("\x7F", "$", $z);
+        $z = preg_replace("/^%(type|destructor).*$/m", '', $z);
         $z = preg_replace('/ ".*"$/m', '', $z);
         $z = preg_replace('/\n%code.*/', '', $z);
+        $z = preg_replace('/\n{3,}/', "\n", $z);
 
         echo substr($z, 8, -2)."%%\n";
 EOPHP
