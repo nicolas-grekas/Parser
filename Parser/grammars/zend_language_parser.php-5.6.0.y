@@ -742,14 +742,15 @@ combined_scalar_offset:
     combined_scalar '[' dim_offset ']'
   | combined_scalar_offset '[' dim_offset ']'
   | T_CONSTANT_ENCAPSED_STRING '[' dim_offset ']'
+  | general_constant '[' dim_offset ']'
 ;
 
- combined_scalar:
+combined_scalar:
     T_ARRAY '(' array_pair_list ')'
   | '[' array_pair_list ']'
 ;
 
- function:
+function:
     T_FUNCTION
 ;
 
@@ -846,8 +847,6 @@ static_class_constant:
 
 static_scalar:
     static_scalar_value
-  | T_ARRAY '(' static_array_pair_list ')'
-  | '[' static_array_pair_list ']'
 ;
 
 static_scalar_value:
@@ -856,15 +855,19 @@ static_scalar_value:
   | namespace_name
   | T_NAMESPACE T_NS_SEPARATOR namespace_name
   | T_NS_SEPARATOR namespace_name
+  | T_ARRAY '(' static_array_pair_list ')'
+  | '[' static_array_pair_list ']'
   | static_class_constant
   | T_CLASS_C
   | static_operation
 ;
 
 static_operation:
-    static_scalar_value '+' static_scalar_value
+    static_scalar_value '[' static_scalar_value ']'
+  | static_scalar_value '+' static_scalar_value
   | static_scalar_value '-' static_scalar_value
   | static_scalar_value '*' static_scalar_value
+  | static_scalar_value T_POW static_scalar_value
   | static_scalar_value '/' static_scalar_value
   | static_scalar_value '%' static_scalar_value
   | '!' static_scalar_value
@@ -895,13 +898,17 @@ static_operation:
   | '(' static_scalar_value ')'
 ;
 
-scalar:
-    T_STRING_VARNAME
-  | class_name_scalar
-  | class_constant
+general_constant:
+    class_constant
   | namespace_name
   | T_NAMESPACE T_NS_SEPARATOR namespace_name
   | T_NS_SEPARATOR namespace_name
+;
+
+scalar:
+    T_STRING_VARNAME
+  | general_constant
+  | class_name_scalar
   | common_scalar
   | '"' encaps_list '"'
   | T_START_HEREDOC encaps_list T_END_HEREDOC
@@ -919,10 +926,10 @@ possible_comma:
 ;
 
 non_empty_static_array_pair_list:
-    non_empty_static_array_pair_list ',' static_scalar T_DOUBLE_ARROW static_scalar
-  | non_empty_static_array_pair_list ',' static_scalar
-  | static_scalar T_DOUBLE_ARROW static_scalar
-  | static_scalar
+    non_empty_static_array_pair_list ',' static_scalar_value T_DOUBLE_ARROW static_scalar_value
+  | non_empty_static_array_pair_list ',' static_scalar_value
+  | static_scalar_value T_DOUBLE_ARROW static_scalar_value
+  | static_scalar_value
 ;
 
 expr:
