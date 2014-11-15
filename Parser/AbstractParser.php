@@ -24,8 +24,10 @@ use Tchwork\Parser\Lexer\LexerInterface;
  */
 abstract class AbstractParser
 {
-    protected $lexer;
-    protected $ast;
+    private $lexer;
+    private $ast;
+    private $tokenIds;
+    private $tokenNames;
 
     /**
      * Creates a parser instance.
@@ -34,6 +36,11 @@ abstract class AbstractParser
     {
         $this->lexer = $lexer;
         $this->ast = $ast;
+
+        list($this->tokenIds, $this->tokenNames) = $this->lexer->getMaps(array_flip(static::$yymap), static::$yytoken, static::YYBADCH);
+
+        $this->tokenNames[0] = 'EOF';
+        $this->tokenIds[0] = 0;
     }
 
     /**
@@ -53,9 +60,7 @@ abstract class AbstractParser
         $YYBADCH = static::YYBADCH;
 
         $yyerror = static::$yyerror;
-        $yytoken = static::$yytoken;
         $yynode = static::$yynode;
-        $yymap = static::$yymap;
         $yyaction = static::$yyaction;
         $yycheck = static::$yycheck;
         $yybase = static::$yybase;
@@ -69,21 +74,21 @@ abstract class AbstractParser
         $array = array();
         $node = $array;
 
-        list($yymap, $yytoken) = $this->lexer->getMaps($yymap, $yytoken, $YYBADCH);
-
         $ast = $this->ast;
+        $tokenIds = $this->tokenIds;
+        $tokenNames = $this->tokenNames;
         $state = 0;
         $stackPos = 0;
         $stateStack = array($state);
         $nodeStack = $array;
-        $asemantics = $array;
+        $asems = $array;
         $line = 1;
 
         foreach ($this->lexer->getTokens($code) as $token) {
-            $tokenName = $yytoken[$token[0]];
+            $tokenName = $tokenNames[$token[0]];
 
-            if ($YYBADCH == $tokenId = $yymap[$token[0]]) {
-                $asemantics[] = $ast->createToken($tokenName, $token, $line, false);
+            if ($YYBADCH == $tokenId = $tokenIds[$token[0]]) {
+                $asems[] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], false);
                 $line = $token[2];
 
                 continue;
@@ -103,14 +108,15 @@ abstract class AbstractParser
 
                         ++$stackPos;
 
-                        $node[0] = $tokenId - $YYBADCH; // Negative id for tokens, positive for nodes
-                        $node[1] = $ast->createToken($tokenName, $token, $line, true);
-                        $node[2] = $asemantics;
+                        $node['id'] = $tokenId - $YYBADCH; // Negative id for tokens, positive for nodes
+                        $node['name'] = $tokenName;
+                        $node['ast'] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], true);
+                        $node['asems'] = $asems;
                         $nodeStack[$stackPos] = $node;
                         $stateStack[$stackPos] = $state = $yyn;
 
                         $tokenId = -1;
-                        $asemantics = $array;
+                        $asems = $array;
 
                         if (0 > $yyn -= $YYNLSTATES) {
                             /* do not reduce */
@@ -146,7 +152,7 @@ abstract class AbstractParser
                                         break;
                                     }
 
-                                    $expected[] = static::$yytoken[$i]; // Use the parser map, not the lexer one
+                                    $expected[] = static::$yytoken[$i];
                                 }
                             }
                         }
@@ -168,19 +174,18 @@ abstract class AbstractParser
                         $yyn = $yylhs[$yyn];
                         $stackPos -= $yyl;
 
-                        if (0 > $yyl || $yyn != $nodeStack[$stackPos][0]) {
-                            $node[0] = $yyn;
-                            $node[1] = $ast->createNode($yynode[$yyn]);
+                        if (0 > $yyl || $yyn != $nodeStack[$stackPos]['id']) {
+                            $node['id'] = $yyn;
+                            $node['ast'] = $ast->createNode($node['name'] = $yynode[$yyn], $yyn);
                             if (0 > $yyl) {
-                                $node[2] = $array;
+                                $node['asems'] = $array;
                             } else {
-                                $node[2] = $nodeStack[$stackPos][2];
+                                $node['asems'] = $nodeStack[$stackPos]['asems'];
                             }
-                            $ast->reduceNode($node, $nodeStack, $stackPos, $yyl, 0);
-                            $nodeStack[$stackPos] = $node;
+                            $nodeStack[$stackPos] = $ast->reduceNode($node, array_slice($nodeStack, $stackPos - 1, $yyl + 1));
                         } else {
-                            $nodeStack[$stackPos][2] or $nodeStack[$stackPos][2] = $nodeStack[$stackPos+1][2];
-                            $ast->reduceNode($nodeStack[$stackPos], $nodeStack, $stackPos, $yyl, 1);
+                            $nodeStack[$stackPos]['asems'] or $nodeStack[$stackPos]['asems'] = $nodeStack[$stackPos + 1]['asems'];
+                            $nodeStack[$stackPos] = $ast->reduceNode($nodeStack[$stackPos], array_slice($nodeStack, $stackPos, $yyl));
                         }
 
                         /* Goto - shift nonterminal */
@@ -194,12 +199,13 @@ abstract class AbstractParser
                     } else {
                         /* accept */
 
-                        $node =& $nodeStack[$stackPos];
-                        $node[0] = 0;
-                        $node[2] = $asemantics;
-                        $ast->reduceNode($node, $nodeStack, $stackPos, 0, 0);
+                        $node['id'] = 0;
+                        $node['name'] = 'EOF';
+                        $node['ast'] = $ast->createToken('EOF', $token[0], $token[1], $line, $token[2], true);
+                        $node['asems'] = $asems;
+                        $node = $ast->reduceNode($nodeStack[$stackPos], array($node));
 
-                        return $node[1];
+                        return $node['ast'];
                     }
 
                     if ($state >= $YYNLSTATES) {

@@ -14,22 +14,40 @@ namespace Tchwork\Parser\AstBuilder;
  */
 abstract class AbstractAstBuilder implements AstBuilderInterface
 {
-    abstract public function createToken($type, $token, $line, $semantic);
-    abstract public function createNode($type);
-    abstract public function appendChild(&$node, $child);
+    /**
+     * Appends a child to an AST node.
+     *
+     * @param mixed &$ast  The parent AST node, as returned by ->createNode()
+     * @param mixed $child The child AST node, as returned by ->createNode() or ->createToken()
+     *
+     * @return void
+     */
+    abstract public function appendChild(&$ast, $child);
 
-    public function reduceNode(&$node, $nodeStack, $stackPos, $yyl, $stackOffset)
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function createToken($name, $id, $code, $startLine, $endLine, $semantic);
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function createNode($name, $ruleId);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reduceNode(array $node, array $children)
     {
-        for ($i = $stackOffset; $i <= $yyl; ++$i) {
-            $n = $nodeStack[$stackPos + $i];
-            foreach ($n[2] as $asemantic) {
-                if ($asemantic) {
-                    $this->appendChild($node[1], $asemantic);
-                }
+        foreach ($children as $n) {
+            foreach ($n['asems'] as $a) {
+                $this->appendChild($node['ast'], $a);
             }
-            if ($n[0] && $n[1]) {
-                $this->appendChild($node[1], $n[1]);
+            if ($n['id']) {
+                $this->appendChild($node['ast'], $n['ast']);
             }
         }
+
+        return $node;
     }
 }

@@ -14,26 +14,35 @@ namespace Tchwork\Parser\AstBuilder;
  */
 class ArrayAstBuilder extends AbstractAstBuilder
 {
-    public function createToken($type, $token, $line, $semantic)
+    /**
+     * {@inheritdoc}
+     */
+    public function createToken($name, $id, $code, $startLine, $endLine, $semantic)
     {
         return array(
-            'type' => $type,
-            'text' => $token[1],
-            'line' => $line,
+            'name' => $name,
+            'code' => $code,
+            'line' => $startLine,
             'semantic' => $semantic,
         );
     }
 
-    public function createNode($type)
+    /**
+     * {@inheritdoc}
+     */
+    public function createNode($name, $ruleId)
     {
         return array(
-            'type' => $type,
+            'name' => $name,
             'kids' => array(),
         );
     }
 
-    public function appendChild(&$node, $child)
+    /**
+     * {@inheritdoc}
+     */
+    public function appendChild(&$ast, $child)
     {
-        $node['kids'][] = $child;
+        $ast['kids'][] = $child;
     }
 }

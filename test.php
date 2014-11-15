@@ -329,7 +329,7 @@ $n                                         #T_VARIABLE
                                          #expr_without_variable
                                           #scalar
                                            #dereferencable_scalar
-'type'                                      #T_CONSTANT_ENCAPSED_STRING
+'name'                                      #T_CONSTANT_ENCAPSED_STRING
 ]                                      #']'
 ;                               #';'
                               #inner_statement
@@ -494,7 +494,7 @@ $n                                                        #T_VARIABLE
                                                         #expr_without_variable
                                                          #scalar
                                                           #dereferencable_scalar
-'text'                                                     #T_CONSTANT_ENCAPSED_STRING
+'code'                                                     #T_CONSTANT_ENCAPSED_STRING
 ]                                                     #']'
 .                                                  #'.'
                                                    #expr
@@ -542,7 +542,7 @@ $n                                                               #T_VARIABLE
                                                                #expr_without_variable
                                                                 #scalar
                                                                  #dereferencable_scalar
-'text'                                                            #T_CONSTANT_ENCAPSED_STRING
+'code'                                                            #T_CONSTANT_ENCAPSED_STRING
 ]                                                            #']'
 )                                                       #')'
 )                                              #')'
