@@ -19,3 +19,6 @@ $doc->preserveWhiteSpace = true;
 $doc->formatOutput = true;
 
 echo $doc->saveXML();
+
+__halt_compiler();
+()<?php ()

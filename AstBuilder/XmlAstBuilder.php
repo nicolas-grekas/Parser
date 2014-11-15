@@ -23,23 +23,32 @@ class XmlAstBuilder extends AbstractAstBuilder
         $this->doc = $doc;
     }
 
-    public function createToken($type, $token, $line, $semantic)
+    /**
+     * {@inheritdoc}
+     */
+    public function createToken($name, $id, $code, $startLine, $endLine, $semantic)
     {
         $node = $this->doc->createElement($semantic ? 'semantic-token' : 'asemantic-token');
-        $node->setAttribute('type', $type);
-        $node->setAttribute('line', $line != $token[2] ? $line.'-'.$token[2] : $line);
-        $node->appendChild($this->doc->createTextNode($token[1]));
+        $node->setAttribute('name', $name);
+        $node->setAttribute('line', $startLine != $endLine ? $startLine.'-'.$endLine : $startLine);
+        $node->appendChild($this->doc->createTextNode($code));
 
         return $node;
     }
 
-    public function createNode($type)
+    /**
+     * {@inheritdoc}
+     */
+    public function createNode($name, $ruleId)
     {
-        return $this->doc->createElement($type);
+        return $this->doc->createElement($name);
     }
 
-    public function appendChild(&$node, $child)
+    /**
+     * {@inheritdoc}
+     */
+    public function appendChild(&$ast, $child)
     {
-        $node->appendChild($child);
+        $ast->appendChild($child);
     }
 }

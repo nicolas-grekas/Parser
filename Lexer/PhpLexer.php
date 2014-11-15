@@ -16,6 +16,8 @@ use Tchwork\Parser\Exception\Error;
  */
 class PhpLexer implements LexerInterface
 {
+    private static $nextExtraToken = 10000;
+    private static $extraTokens = array();
     private static $asemantics = array(
         T_OPEN_TAG,
         T_WHITESPACE,
@@ -25,33 +27,33 @@ class PhpLexer implements LexerInterface
     );
 
     /**
-     * Map lexer tokens to parser's ones.
+     * {@inheritdoc}
      */
-    public function getMaps($yymap, $yytoken, $YYBADCH)
+    public function getMaps(array $yymap, array $yytoken, $yyasemid)
     {
-        $yymap = array_flip($yymap);
-        $map = array(0 => 0);
-        $token = array(0 => $yytoken[0]);
+        $map = array();
+        $token = array();
 
         foreach ($yytoken as $yyid => $yyname) {
-            if ($yyid && 'error' !== $yyname) {
-                if ($yymap[$yyid] > 256) {
-                    if (!defined($yyname)) {
-                        continue;
-                    }
+            if ($yymap[$yyid] > 256) {
+                if (defined($yyname)) {
                     $id = constant($yyname); // T_* token
+                } elseif (isset(self::$extraTokens[$yyname])) {
+                    $id = self::$extraTokens[$yyname];
                 } else {
-                    $id = chr($yymap[$yyid]);
+                    $id = self::$extraTokens[$yyname] = self::$nextExtraToken++;
                 }
-
-                $token[$id] = $yyname;
-                $map[$id] = $yyid;
+            } else {
+                $id = chr($yymap[$yyid]);
             }
+
+            $token[$id] = $yyname;
+            $map[$id] = $yyid;
         }
 
         foreach (self::$asemantics as $id) {
             $token[$id] = token_name($id);
-            $map[$id] = $YYBADCH;
+            $map[$id] = $yyasemid;
         }
 
         $token[T_OPEN_TAG_WITH_ECHO] = 'T_OPEN_TAG_WITH_ECHO';
@@ -63,9 +65,7 @@ class PhpLexer implements LexerInterface
     }
 
     /**
-     * Return the tokens for the given code.
-     *
-     * @returns array|Traversable
+     * {@inheritdoc}
      */
     public function getTokens($code)
     {
@@ -96,7 +96,7 @@ class PhpLexer implements LexerInterface
 
         $i = count($tokens);
         $token = array();
-        $tokens[] = array(0, '', $endLine); // END token
+        $tokens[] = array(0, '', $endLine); // EOF token
 
         // Put end line instead of start line in every $tokens[$i][2]
         for (; $i >= 0; --$i) {
