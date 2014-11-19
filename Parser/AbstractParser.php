@@ -58,6 +58,7 @@ abstract class AbstractParser
         $YYUNEXPECTED = static::YYUNEXPECTED;
         $YYDEFAULT = static::YYDEFAULT;
         $YYBADCH = static::YYBADCH;
+        $YYINTERRTOK = static::YYINTERRTOK;
 
         $yyerror = static::$yyerror;
         $yynode = static::$yynode;
@@ -79,19 +80,25 @@ abstract class AbstractParser
         $tokenNames = $this->tokenNames;
         $state = 0;
         $stackPos = 0;
+        $errFlag = 0;
         $stateStack = array($state);
         $nodeStack = $array;
         $asems = $array;
         $line = 1;
 
         foreach ($this->lexer->getTokens($code) as $token) {
-            $tokenName = $tokenNames[$token[0]];
+            if (!isset($tokenNames[$token[0]])) {
+                $tokenId = $YYBADCH;
+                $tokenName = "'{$token[1]}'";
+            } else {
+                $tokenName = $tokenNames[$token[0]];
 
-            if ($YYBADCH == $tokenId = $tokenIds[$token[0]]) {
-                $asems[] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], false);
-                $line = $token[2];
+                if ($YYBADCH == $tokenId = $tokenIds[$token[0]]) {
+                    $asems[] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], false);
+                    $line = $token[2];
 
-                continue;
+                    continue;
+                }
             }
 
             for (;;) {
@@ -118,6 +125,9 @@ abstract class AbstractParser
                         $tokenId = -1;
                         $asems = $array;
 
+                        if (0 < $errFlag) {
+                            --$errFlag;
+                        }
                         if (0 > $yyn -= $YYNLSTATES) {
                             /* do not reduce */
                             $line = $token[2];
@@ -135,39 +145,69 @@ abstract class AbstractParser
                     if ($yyn == $YYUNEXPECTED) {
                         /* error */
 
-                        $expected = $array;
+                        for (;;) {
+                            switch ($errFlag) {
+                                case 0:
+                                case 1:
+                                case 2:
+                                    $errFlag = 3;
+                                    /* Pop until error-expecting state uncovered */
 
-                        $base = $yybase[$state];
-                        for ($i = 1; $i < $YYBADCH; ++$i) {
-                            if (isset($yycheck[$n = $base + $i])
-                                && $yycheck[$n] == $i
-                                || $state < $YY2TBLSTATE
-                                && isset($yycheck[$n = $yybase[$state + $YYNLSTATES] + $i])
-                                && $yycheck[$n] == $i
-                            ) {
-                                if ($yyaction[$n] != $YYUNEXPECTED) {
-                                    if (count($expected) == 4) {
-                                        /* Too many expected tokens */
-                                        $expected = $array;
+                                    while (!(isset($yycheck[$yyn = $yybase[$state] + $YYINTERRTOK])
+                                        && $yycheck[$yyn] == $YYINTERRTOK
+                                        || $state < $YY2TBLSTATE
+                                        && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $YYINTERRTOK])
+                                        && $yycheck[$yyn] == $YYINTERRTOK
+                                    )) {
+                                        if (0 >= $stackPos) {
+                                            break 2;
+                                        }
+                                        $state = $stateStack[--$stackPos];
+                                    }
+                                    $stateStack[++$stackPos] = $state = $yyn = $yyaction[$yyn];
+                                    break 2;
+
+                                case 3:
+                                    if (!$tokenId) {
                                         break;
                                     }
+                                    $tokenId = -1;
+                                    break 2;
+                            }
 
-                                    $expected[] = static::$yytoken[$i];
+                            $expected = $array;
+
+                            for ($i = 1; $i < $YYBADCH; ++$i) {
+                                if (isset($yycheck[$yyn = $yybase[$state] + $i])
+                                    && $yycheck[$yyn] == $i
+                                    || $state < $YY2TBLSTATE
+                                    && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $i])
+                                    && $yycheck[$yyn] == $i
+                                ) {
+                                    if ($yyaction[$yyn] != $YYUNEXPECTED) {
+                                        if (4 == count($expected)) {
+                                            /* Too many expected tokens */
+                                            $expected = $array;
+                                            break;
+                                        }
+
+                                        $expected[] = static::$yytoken[$i];
+                                    }
                                 }
                             }
-                        }
 
-                        $expectedString = $tokenName;
-                        if ($expected) {
-                            $expectedString .= ', expecting '.implode(' or ', $expected);
-                        }
+                            $message = 'Syntax error, unexpected '.$tokenName;
+                            if ($expected) {
+                                $message .= ', expecting '.implode(' or ', $expected);
+                            }
 
-                        throw new Error('Syntax error, unexpected '.$expectedString, $token[2]);
+                            throw new Error($message, $line);
+                        }
                     } elseif ($yyn) {
                         /* reduce */
 
                         if (isset($yyerror[$yyn])) {
-                            throw new Error($yyerror[$yyn], $token[2]);
+                            throw new Error($yyerror[$yyn], $line);
                         }
 
                         $yyl = $yylen[$yyn] - 1;

@@ -35,7 +35,7 @@ class PhpLexer implements LexerInterface
         $token = array();
 
         foreach ($yytoken as $yyid => $yyname) {
-            if ($yymap[$yyid] > 256) {
+            if ($yymap[$yyid] > 255) {
                 if (defined($yyname)) {
                     $id = constant($yyname); // T_* token
                 } elseif (isset(self::$extraTokens[$yyname])) {

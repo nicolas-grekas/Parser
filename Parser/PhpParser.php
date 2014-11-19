@@ -12,6 +12,7 @@ class PhpParser extends AbstractParser
     const YYUNEXPECTED = 32767;
     const YYDEFAULT    = -32766;
     const YYBADCH      = 155;
+    const YYINTERRTOK  = 1;
 
     protected static $yyerror = array(
         33 => "__HALT_COMPILER() can only be used from the outermost scope",
