@@ -14,6 +14,7 @@ class #(-p) extends AbstractParser
     const YYUNEXPECTED = #(YYUNEXPECTED);
     const YYDEFAULT    = #(YYDEFAULT);
     const YYBADCH      = #(YYBADCH);
+    const YYINTERRTOK  = #(YYINTERRTOK);
 
     protected static $yyerror = array(
 #reduce

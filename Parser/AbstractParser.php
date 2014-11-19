@@ -58,6 +58,7 @@ abstract class AbstractParser
         $YYUNEXPECTED = static::YYUNEXPECTED;
         $YYDEFAULT = static::YYDEFAULT;
         $YYBADCH = static::YYBADCH;
+        $YYINTERRTOK = static::YYINTERRTOK;
 
         $yyerror = static::$yyerror;
         $yynode = static::$yynode;
@@ -79,6 +80,7 @@ abstract class AbstractParser
         $tokenNames = $this->tokenNames;
         $state = 0;
         $stackPos = 0;
+        $errFlag = 0;
         $stateStack = array($state);
         $nodeStack = $array;
         $asems = $array;
@@ -118,6 +120,9 @@ abstract class AbstractParser
                         $tokenId = -1;
                         $asems = $array;
 
+                        if (0 < $errFlag) {
+                            --$errFlag;
+                        }
                         if (0 > $yyn -= $YYNLSTATES) {
                             /* do not reduce */
                             $line = $token[2];
@@ -135,34 +140,66 @@ abstract class AbstractParser
                     if ($yyn == $YYUNEXPECTED) {
                         /* error */
 
-                        $expected = $array;
+                        for (;;) {
+                            switch ($errFlag) {
+                                case 0:
+                                    $expected = $array;
 
-                        $base = $yybase[$state];
-                        for ($i = 1; $i < $YYBADCH; ++$i) {
-                            if (isset($yycheck[$n = $base + $i])
-                                && $yycheck[$n] == $i
-                                || $state < $YY2TBLSTATE
-                                && isset($yycheck[$n = $yybase[$state + $YYNLSTATES] + $i])
-                                && $yycheck[$n] == $i
-                            ) {
-                                if ($yyaction[$n] != $YYUNEXPECTED) {
-                                    if (count($expected) == 4) {
-                                        /* Too many expected tokens */
-                                        $expected = $array;
-                                        break;
+                                    for ($i = 1; $i < $YYBADCH; ++$i) {
+                                        if (isset($yycheck[$yyn = $yybase[$state] + $i])
+                                            && $yycheck[$yyn] == $i
+                                            || $state < $YY2TBLSTATE
+                                            && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $i])
+                                            && $yycheck[$yyn] == $i
+                                        ) {
+                                            if ($yyaction[$n] != $YYUNEXPECTED) {
+                                                if (4 == count($expected)) {
+                                                    /* Too many expected tokens */
+                                                    $expected = $array;
+                                                    break;
+                                                }
+
+                                                $expected[] = static::$yytoken[$i];
+                                            }
+                                        }
                                     }
 
-                                    $expected[] = static::$yytoken[$i];
-                                }
+                                    $ast->syntaxError($tokenId, $tokenName, $expected);
+                                    // No break;
+                                case 1:
+                                case 2:
+                                    $errFlag = 3;
+                                    /* Pop until error-expecting state uncovered */
+
+                                    while (!(isset($yycheck[$yyn = $yybase[$state] + $YYINTERRTOK])
+                                        && $yycheck[$yyn] == $YYINTERRTOK
+                                        || $state < $YY2TBLSTATE
+                                        && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $YYINTERRTOK])
+                                        && $yycheck[$yyn] == $YYINTERRTOK
+                                    )) {
+                                        if (0 >= $stackPos) {
+                                            break 2;
+                                        }
+                                        $state = $stateStack[--$stackPos];
+                                    }
+                                    $stateStack[++$stackPos] = $state = $yyn = $yyaction[$yyn];
+                                    break 2;
+
+                                case 3:
+                                    if (!$tokenId) {
+                                        break;
+                                    }
+                                    $tokenId = -1;
+                                    break 2;
                             }
-                        }
 
-                        $expectedString = $tokenName;
-                        if ($expected) {
-                            $expectedString .= ', expecting '.implode(' or ', $expected);
-                        }
+                            $expectedString = $tokenName;
+                            if ($expected) {
+                                $expectedString .= ', expecting '.implode(' or ', $expected);
+                            }
 
-                        throw new Error('Syntax error, unexpected '.$expectedString, $token[2]);
+                            throw new Error('Syntax error, unexpected '.$expectedString, $token[2]);
+                        }
                     } elseif ($yyn) {
                         /* reduce */
 
