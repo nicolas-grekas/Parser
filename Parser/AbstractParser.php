@@ -11,6 +11,7 @@ namespace Tchwork\Parser\Parser;
 
 use Tchwork\Parser\AstBuilder\AstBuilderInterface;
 use Tchwork\Parser\Exception\Error;
+use Tchwork\Parser\Exception\SyntaxError;
 use Tchwork\Parser\Lexer\LexerInterface;
 
 /**
@@ -46,7 +47,7 @@ abstract class AbstractParser
     /**
      * Parses code.
      *
-     * @param string $code The source code to parse
+     * @param mixed $code The source code to parse
      *
      * @return array AST
      */
@@ -87,13 +88,18 @@ abstract class AbstractParser
         $line = 1;
 
         foreach ($this->lexer->getTokens($code) as $token) {
-            $tokenName = $tokenNames[$token[0]];
+            if (!isset($tokenNames[$token[0]])) {
+                $tokenId = $YYBADCH;
+                $tokenName = "'{$token[1]}'";
+            } else {
+                $tokenName = $tokenNames[$token[0]];
 
-            if ($YYBADCH == $tokenId = $tokenIds[$token[0]]) {
-                $asems[] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], false);
-                $line = $token[2];
+                if ($YYBADCH == $tokenId = $tokenIds[$token[0]]) {
+                    $asems[] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], false);
+                    $line = $token[2];
 
-                continue;
+                    continue;
+                }
             }
 
             for (;;) {
@@ -152,7 +158,7 @@ abstract class AbstractParser
                                             && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $i])
                                             && $yycheck[$yyn] == $i
                                         ) {
-                                            if ($yyaction[$n] != $YYUNEXPECTED) {
+                                            if ($yyaction[$yyn] != $YYUNEXPECTED) {
                                                 if (4 == count($expected)) {
                                                     /* Too many expected tokens */
                                                     $expected = $array;
@@ -164,7 +170,7 @@ abstract class AbstractParser
                                         }
                                     }
 
-                                    $ast->syntaxError($tokenId, $tokenName, $expected);
+                                    $ast->handleSyntaxError($token[0], $tokenName, $expected);
                                     // No break;
                                 case 1:
                                 case 2:
@@ -193,18 +199,13 @@ abstract class AbstractParser
                                     break 2;
                             }
 
-                            $expectedString = $tokenName;
-                            if ($expected) {
-                                $expectedString .= ', expecting '.implode(' or ', $expected);
-                            }
-
-                            throw new Error('Syntax error, unexpected '.$expectedString, $token[2]);
+                            throw new SyntaxError($tokenName, $expected, $line);
                         }
                     } elseif ($yyn) {
                         /* reduce */
 
                         if (isset($yyerror[$yyn])) {
-                            throw new Error($yyerror[$yyn], $token[2]);
+                            throw new Error($yyerror[$yyn], $line);
                         }
 
                         $yyl = $yylen[$yyn] - 1;

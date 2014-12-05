@@ -51,4 +51,15 @@ interface AstBuilderInterface
      * @return array The reduced node
      */
     public function reduceNode(array $node, array $children);
+
+    /**
+     * Handles a syntax error.
+     *
+     * @param string     $name     Name of the unexpected token
+     * @param int|string $id       Lexer id of the unexpected token
+     * @param array      $expected Some token names that could be acceptable
+     *
+     * @return void
+     */
+    public function handleSyntaxError($name, $id, array $expected);
 }

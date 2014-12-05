@@ -33,6 +33,8 @@ interface LexerInterface
      * - the source code excerpt
      * - the ending line of the token
      *
+     * @param mixed $code The source code to lex
+     *
      * @return array|Traversable The lexer's tokens for $code
      */
     public function getTokens($code);

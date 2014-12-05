@@ -5,7 +5,7 @@ namespace Tchwork\Parser\Parser;
 /**
  * This is an automatically generated file, DO NOT EDIT.
  */
-class DemoCalculator extends AbstractParser
+class DemoParser extends AbstractParser
 {
     const YY2TBLSTATE  = 4;
     const YYNLSTATES   = 13;

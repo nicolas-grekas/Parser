@@ -9,6 +9,8 @@
 
 namespace Tchwork\Parser\AstBuilder;
 
+use Tchwork\Exception\SyntaxError;
+
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -49,5 +51,13 @@ abstract class AbstractAstBuilder implements AstBuilderInterface
         }
 
         return $node;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleSyntaxError($name, $id, array $expected)
+    {
+        throw new SyntaxError($name, $expected);
     }
 }
