@@ -81,6 +81,7 @@ abstract class AbstractParser
         $state = 0;
         $stackPos = 0;
         $errFlag = 0;
+        $errDiscard = $array;
         $stateStack = array($state);
         $nodeStack = $array;
         $asems = $array;
@@ -111,6 +112,17 @@ abstract class AbstractParser
                     && ($yyn = $yyaction[$yyn]) != $YYDEFAULT
                 ) {
                     if ($yyn > 0) {
+                        if (0 < $errFlag) {
+                            if (3 == $errFlag) {
+                                /* reduce error */
+
+                                $nodeStack[$stackPos]['asems'] = $errDiscard[0]['asems'];
+                                $nodeStack[$stackPos] = $ast->reduceNode($nodeStack[$stackPos], $errDiscard);
+                                $errDiscard = $array;
+                            }
+                            --$errFlag;
+                        }
+
                         /* shift */
 
                         ++$stackPos;
@@ -125,9 +137,6 @@ abstract class AbstractParser
                         $tokenId = -1;
                         $asems = $array;
 
-                        if (0 < $errFlag) {
-                            --$errFlag;
-                        }
                         if (0 > $yyn -= $YYNLSTATES) {
                             /* do not reduce */
                             $line = $token[2];
@@ -145,36 +154,46 @@ abstract class AbstractParser
                     if ($yyn == $YYUNEXPECTED) {
                         /* error */
 
-                        for (;;) {
-                            switch ($errFlag) {
-                                case 0:
-                                case 1:
-                                case 2:
-                                    $errFlag = 3;
-                                    /* Pop until error-expecting state uncovered */
+                        if (3 == $errFlag) {
+                            /* discard */
 
-                                    while (!(isset($yycheck[$yyn = $yybase[$state] + $YYINTERRTOK])
-                                        && $yycheck[$yyn] == $YYINTERRTOK
-                                        || $state < $YY2TBLSTATE
-                                        && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $YYINTERRTOK])
-                                        && $yycheck[$yyn] == $YYINTERRTOK
-                                    )) {
-                                        if (0 >= $stackPos) {
-                                            break 2;
-                                        }
-                                        $state = $stateStack[--$stackPos];
-                                    }
-                                    $stateStack[++$stackPos] = $state = $yyn = $yyaction[$yyn];
-                                    break 2;
-
-                                case 3:
-                                    if (!$tokenId) {
-                                        break;
-                                    }
-                                    $tokenId = -1;
-                                    break 2;
+                            if (!$tokenId) {
+                                goto syntaxError;
                             }
+                            $node['id'] = -$YYBADCH;
+                            $node['name'] = $tokenName;
+                            $node['ast'] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], true);
+                            $node['asems'] = $asems;
+                            $errDiscard[] = $node;
+                            $tokenId = -1;
+                            $asems = $array;
+                        } else {
+                            /* recover */
 
+                            $errFlag = 3;
+
+                            while (!(isset($yycheck[$yyn = $yybase[$state] + $YYINTERRTOK])
+                                && $yycheck[$yyn] == $YYINTERRTOK
+                                || $state < $YY2TBLSTATE
+                                && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $YYINTERRTOK])
+                                && $yycheck[$yyn] == $YYINTERRTOK
+                            )) {
+                                if (0 >= $stackPos) {
+                                    goto syntaxError;
+                                }
+                                $state = $stateStack[--$stackPos];
+                            }
+                            $stateStack[++$stackPos] = $state = $yyn = $yyaction[$yyn];
+
+                            $node['id'] = $yyn;
+                            $node['ast'] = $ast->createNode($node['name'] = 'error', $yyn);
+                            $node['asems'] = $array;
+
+                            $nodeStack[$stackPos] = $node;
+                        }
+
+                        if (3 != $errFlag) {
+                            syntaxError:
                             $expected = $array;
 
                             for ($i = 1; $i < $YYBADCH; ++$i) {

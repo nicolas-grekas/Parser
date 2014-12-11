@@ -14,6 +14,8 @@ namespace Tchwork\Parser\AstBuilder;
  */
 interface AstBuilderInterface
 {
+    const ERROR = 'error';
+
     /**
      * Creates an AST token representation.
      *

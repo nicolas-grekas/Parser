@@ -35,6 +35,14 @@ class DemoAstBuilder implements AstBuilderInterface
      */
     public function reduceNode(array $node, array $children)
     {
+        if (self::ERROR === $node['name']) {
+            $node['ast'] = 'Syntax error, unexpected: ';
+            foreach ($children as $c) {
+                $node['ast'] .= implode('', $c['asems']).$c['ast'];
+            }
+
+            return $node;
+        }
         if ('expr' === $node['name'] && isset($children[1])) {
             switch ($children[1]['ast']) {
                 case '+': $children[0]['ast'] += $children[2]['ast']; break;
