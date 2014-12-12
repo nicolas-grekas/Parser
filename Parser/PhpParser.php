@@ -7,18 +7,18 @@ namespace Tchwork\Parser\Parser;
  */
 class PhpParser extends AbstractParser
 {
-    const YY2TBLSTATE  = 330;
-    const YYNLSTATES   = 532;
-    const YYUNEXPECTED = 32767;
-    const YYDEFAULT    = -32766;
-    const YYBADCH      = 155;
-    const YYINTERRTOK  = 1;
+    protected $YY2TBLSTATE = 330;
+    protected $YYNLSTATES = 532;
+    protected $YYUNEXPECTED = 32767;
+    protected $YYDEFAULT = -32766;
+    protected $YYBADCH = 155;
+    protected $YYINTERRTOK = 1;
 
-    protected static $yyerror = array(
+    protected $yyerror = array(
         33 => "__HALT_COMPILER() can only be used from the outermost scope",
     );
 
-    protected static $yytoken = array(
+    protected $yytoken = array(
         "EOF",
         "error",
         "T_INCLUDE",
@@ -176,7 +176,7 @@ class PhpParser extends AbstractParser
         "'$'"
     );
 
-    protected static $yynode = array(
+    protected $yynode = array(
         "start",
         "start",
         "top_statement_list",
@@ -291,7 +291,7 @@ class PhpParser extends AbstractParser
         "isset_variable"
     );
 
-    protected static $yymap = array(
+    protected $yymap = array(
             0,  155,  155,  155,  155,  155,  155,  155,  155,  155,
           155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
           155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
@@ -333,7 +333,7 @@ class PhpParser extends AbstractParser
           155,  137,  138,  139,  140,  141,  142,  143,  144,  145
     );
 
-    protected static $yyaction = array(
+    protected $yyaction = array(
            53,   54,  367,   55,   56,-32766,-32766,-32766, -345,   57,
            58,  699,  700,  701,  698,  697,  696,-32766,-32766,-32766,
            49,-32766,-32766,-32766,  861,-32766,-32766,-32766,-32766,-32766,
@@ -421,7 +421,7 @@ class PhpParser extends AbstractParser
           867,  893,  469
     );
 
-    protected static $yycheck = array(
+    protected $yycheck = array(
             2,    3,    4,    5,    6,    8,    9,   10,    7,   11,
            12,   70,   71,   72,   73,   74,   75,    8,    9,   10,
            64,   71,   72,   26,   80,   28,   29,   30,   31,   32,
@@ -509,7 +509,7 @@ class PhpParser extends AbstractParser
           152,  152,  152
     );
 
-    protected static $yybase = array(
+    protected $yybase = array(
             0,   43,   76,  -46,  238,  172,   58,  -55,  300,  316,
           344,  350,  359,  362,  293,  364,  365,  506,  506,  506,
           506,  153,  195,  395,  598,  395,   87,  -50,  -50,  -50,
@@ -599,7 +599,7 @@ class PhpParser extends AbstractParser
             0,  196
     );
 
-    protected static $yydefault = array(
+    protected $yydefault = array(
             3,32767,32767,    1,32767,32767,32767,32767,32767,32767,
         32767,32767,32767,32767,32767,32767,32767,  106,  107,   97,
            96,32767,32767,32767,32767,32767,32767,32767,32767,32767,
@@ -656,7 +656,7 @@ class PhpParser extends AbstractParser
           260,   29
     );
 
-    protected static $yygoto = array(
+    protected $yygoto = array(
           168,  140,  140,  140,  168,  150,  152,  181,  169,  164,
           166,  167,  166,  166,  165,  165,  165,  165,  165,  165,
           165,  164,  167,  160,  161,  162,  163,  179,  177,  393,
@@ -706,7 +706,7 @@ class PhpParser extends AbstractParser
             0,    0,    0,    0,    0,    0,    0,    0,    0,  363
     );
 
-    protected static $yygcheck = array(
+    protected $yygcheck = array(
            17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
            17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
            17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
@@ -756,7 +756,7 @@ class PhpParser extends AbstractParser
            -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   34
     );
 
-    protected static $yygbase = array(
+    protected $yygbase = array(
             0,    0, -230,    0,   27,  -82,  268,  178,  198,   -5,
           -14,   22,  -32, -314,    0,    0,    0,  -30,    0,  104,
             0,    0,  116,    0,    0,    0,    0,   64,  148,    0,
@@ -771,7 +771,7 @@ class PhpParser extends AbstractParser
             0,  223
     );
 
-    protected static $yygdefault = array(
+    protected $yygdefault = array(
         -32768,  366,    3,  534,  386,  293,  562,  563,  564,  307,
           305,  553,  559,    4,  560,  567,  568,  139,  569,  428,
           571,  572,  411,  308,  303,  304,  315,  325,  582,  584,
@@ -786,7 +786,7 @@ class PhpParser extends AbstractParser
           317,  909
     );
 
-    protected static $yylhs = array(
+    protected $yylhs = array(
             0,    1,    2,    2,    4,    4,    5,    5,    5,    3,
             3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
             9,    9,   11,   11,   11,   11,   10,   10,   13,   13,
@@ -828,7 +828,7 @@ class PhpParser extends AbstractParser
            99
     );
 
-    protected static $yylen = array(
+    protected $yylen = array(
             1,    1,    2,    0,    1,    3,    1,    3,    2,    1,
             1,    1,    4,    3,    5,    4,    3,    4,    4,    3,
             3,    1,    1,    3,    2,    4,    3,    1,    2,    0,

@@ -24,10 +24,32 @@ use Tchwork\Parser\Lexer\LexerInterface;
  */
 abstract class AbstractParser
 {
-    private $lexer;
-    private $ast;
-    private $tokenIds;
-    private $tokenNames;
+    private $lexer;                  // The LexerInterface object used to provide tokens
+    private $ast;                    // The AstBuilderInterface object used to build the parsing result
+    private $tokenIds = array();     // Map lexer tokens to parser ids
+    private $tokenNames = array();   // Map lexer tokens from their id to their name
+
+    protected $YY2TBLSTATE = 0;
+    protected $YYNLSTATES = 0;
+    protected $YYUNEXPECTED = 0;     // Id of the "unexpected token" rule
+    protected $YYDEFAULT = 0;        // Id for default action
+    protected $YYBADCH = 0;          // Id of asemantic tokens
+    protected $YYINTERRTOK = 0;      // Id of the special "error" token
+
+    protected $yyerror = array();    // Map rules to parse error messages
+    protected $yytoken = array();    // Map token ids to their name
+    protected $yynode = array();     // Map node ids to their name
+    protected $yymap = array();      // Map lexer tokens to parser ids
+    protected $yyaction = array();   // Map of actions indexed by $yybase[$state] + $tokenId
+    protected $yycheck = array();
+    protected $yybase = array();
+    protected $yydefault = array();  // Map of states to their default action
+    protected $yygoto = array();     // Map of states to goto after reduction indexed by $yygbase[$nodeId] + $state
+    protected $yygcheck = array();
+    protected $yygbase = array();
+    protected $yygdefault = array(); // Map nodes to the default state to goto after reduction
+    protected $yylhs = array();      // Map rules to their parent node, determining the state to goto after reduction
+    protected $yylen = array();      // Map rules to their number of child nodes
 
     /**
      * Creates a parser instance.
@@ -37,7 +59,7 @@ abstract class AbstractParser
         $this->lexer = $lexer;
         $this->ast = $ast;
 
-        list($this->tokenIds, $this->tokenNames) = $this->lexer->getMaps(array_flip(static::$yymap), static::$yytoken, static::YYBADCH);
+        list($this->tokenIds, $this->tokenNames) = $this->lexer->getMaps(array_flip($this->yymap), $this->yytoken, $this->YYBADCH);
 
         $this->tokenNames[0] = 'EOF';
         $this->tokenIds[0] = 0;
@@ -53,25 +75,25 @@ abstract class AbstractParser
     public function parse($code)
     {
         // Alias locally for speed
-        $YY2TBLSTATE = static::YY2TBLSTATE;
-        $YYNLSTATES = static::YYNLSTATES;
-        $YYUNEXPECTED = static::YYUNEXPECTED;
-        $YYDEFAULT = static::YYDEFAULT;
-        $YYBADCH = static::YYBADCH;
-        $YYINTERRTOK = static::YYINTERRTOK;
+        $YY2TBLSTATE = $this->YY2TBLSTATE;
+        $YYNLSTATES = $this->YYNLSTATES;
+        $YYUNEXPECTED = $this->YYUNEXPECTED;
+        $YYDEFAULT = $this->YYDEFAULT;
+        $YYBADCH = $this->YYBADCH;
+        $YYINTERRTOK = $this->YYINTERRTOK;
 
-        $yyerror = static::$yyerror;
-        $yynode = static::$yynode;
-        $yyaction = static::$yyaction;
-        $yycheck = static::$yycheck;
-        $yybase = static::$yybase;
-        $yydefault = static::$yydefault;
-        $yygoto = static::$yygoto;
-        $yygcheck = static::$yygcheck;
-        $yygbase = static::$yygbase;
-        $yygdefault = static::$yygdefault;
-        $yylhs = static::$yylhs;
-        $yylen = static::$yylen;
+        $yyerror = $this->yyerror;
+        $yynode = $this->yynode;
+        $yyaction = $this->yyaction;
+        $yycheck = $this->yycheck;
+        $yybase = $this->yybase;
+        $yydefault = $this->yydefault;
+        $yygoto = $this->yygoto;
+        $yygcheck = $this->yygcheck;
+        $yygbase = $this->yygbase;
+        $yygdefault = $this->yygdefault;
+        $yylhs = $this->yylhs;
+        $yylen = $this->yylen;
         $array = array();
         $node = $array;
 
@@ -94,7 +116,7 @@ abstract class AbstractParser
             } else {
                 $tokenName = $tokenNames[$token[0]];
 
-                if ($YYBADCH == $tokenId = $tokenIds[$token[0]]) {
+                if ($YYBADCH === $tokenId = $tokenIds[$token[0]]) {
                     $asems[] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], false);
                     $line = $token[2];
 
@@ -105,15 +127,15 @@ abstract class AbstractParser
             for (;;) {
                 if ($yybase[$state]
                     && (isset($yycheck[$yyn = $yybase[$state] + $tokenId])
-                        && $yycheck[$yyn] == $tokenId
+                        && $yycheck[$yyn] === $tokenId
                         || $state < $YY2TBLSTATE
                         && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $tokenId])
-                        && $yycheck[$yyn] == $tokenId)
-                    && ($yyn = $yyaction[$yyn]) != $YYDEFAULT
+                        && $yycheck[$yyn] === $tokenId)
+                    && ($yyn = $yyaction[$yyn]) !== $YYDEFAULT
                 ) {
                     if ($yyn > 0) {
                         if (0 < $errFlag) {
-                            if (3 == $errFlag) {
+                            if (3 === $errFlag) {
                                 /* reduce error */
 
                                 $nodeStack[$stackPos]['asems'] = $errDiscard[0]['asems'];
@@ -151,14 +173,14 @@ abstract class AbstractParser
                 }
 
                 for (;;) {
-                    if ($yyn == $YYUNEXPECTED) {
+                    if ($yyn === $YYUNEXPECTED) {
                         /* error */
 
-                        if (3 == $errFlag) {
+                        if (3 === $errFlag) {
                             /* discard */
 
                             if (!$tokenId) {
-                                goto syntaxError;
+                                throw $this->getSyntaxError($tokenName, $state, $line);
                             }
                             $node['id'] = -$YYBADCH;
                             $node['name'] = $tokenName;
@@ -173,13 +195,13 @@ abstract class AbstractParser
                             $errFlag = 3;
 
                             while (!(isset($yycheck[$yyn = $yybase[$state] + $YYINTERRTOK])
-                                && $yycheck[$yyn] == $YYINTERRTOK
+                                && $yycheck[$yyn] === $YYINTERRTOK
                                 || $state < $YY2TBLSTATE
                                 && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $YYINTERRTOK])
-                                && $yycheck[$yyn] == $YYINTERRTOK
+                                && $yycheck[$yyn] === $YYINTERRTOK
                             )) {
                                 if (0 >= $stackPos) {
-                                    goto syntaxError;
+                                    throw $this->getSyntaxError($tokenName, $state, $line);
                                 }
                                 $state = $stateStack[--$stackPos];
                             }
@@ -190,37 +212,6 @@ abstract class AbstractParser
                             $node['asems'] = $array;
 
                             $nodeStack[$stackPos] = $node;
-                        }
-
-                        if (3 != $errFlag) {
-                            syntaxError:
-                            $expected = $array;
-
-                            for ($i = 1; $i < $YYBADCH; ++$i) {
-                                if (isset($yycheck[$yyn = $yybase[$state] + $i])
-                                    && $yycheck[$yyn] == $i
-                                    || $state < $YY2TBLSTATE
-                                    && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $i])
-                                    && $yycheck[$yyn] == $i
-                                ) {
-                                    if ($yyaction[$yyn] != $YYUNEXPECTED) {
-                                        if (4 == count($expected)) {
-                                            /* Too many expected tokens */
-                                            $expected = $array;
-                                            break;
-                                        }
-
-                                        $expected[] = static::$yytoken[$i];
-                                    }
-                                }
-                            }
-
-                            $message = 'Syntax error, unexpected '.$tokenName;
-                            if ($expected) {
-                                $message .= ', expecting '.implode(' or ', $expected);
-                            }
-
-                            throw new Error($message, $line);
                         }
                     } elseif ($yyn) {
                         /* reduce */
@@ -233,7 +224,7 @@ abstract class AbstractParser
                         $yyn = $yylhs[$yyn];
                         $stackPos -= $yyl;
 
-                        if (0 > $yyl || $yyn != $nodeStack[$stackPos]['id']) {
+                        if (0 > $yyl || $yyn !== $nodeStack[$stackPos]['id']) {
                             $node['id'] = $yyn;
                             $node['ast'] = $ast->createNode($node['name'] = $yynode[$yyn], $yyn);
                             if (0 > $yyl) {
@@ -250,7 +241,7 @@ abstract class AbstractParser
                         /* Goto - shift nonterminal */
 
                         $yyp = $yygbase[$yyn] + $stateStack[$stackPos-1];
-                        $state = isset($yygcheck[$yyp]) && $yygcheck[$yyp] == $yyn
+                        $state = isset($yygcheck[$yyp]) && $yygcheck[$yyp] === $yyn
                             ? $yygoto[$yyp]
                             : $yygdefault[$yyn];
 
@@ -271,7 +262,7 @@ abstract class AbstractParser
                         /* shift-and-reduce */
 
                         $yyn = $state - $YYNLSTATES;
-                    } elseif (-1 == $tokenId) {
+                    } elseif (-1 === $tokenId) {
                         $line = $token[2];
 
                         continue 3;
@@ -281,5 +272,37 @@ abstract class AbstractParser
                 }
             }
         }
+    }
+
+    private function getSyntaxError($tokenName, $state, $line)
+    {
+        $expected = $array;
+
+        for ($i = 1; $i < $this->YYBADCH; ++$i) {
+            if (isset($this->yycheck[$yyn = $this->yybase[$state] + $i])
+                && $this->yycheck[$yyn] === $i
+                || $state < $this->YY2TBLSTATE
+                && isset($this->yycheck[$yyn = $this->yybase[$state + $this->YYNLSTATES] + $i])
+                && $this->yycheck[$yyn] === $i
+            ) {
+                if ($this->yyaction[$yyn] !== $this->YYUNEXPECTED) {
+                    if (4 === count($expected)) {
+                        /* Too many expected tokens */
+                        $expected = array();
+                        break;
+                    }
+
+                    $expected[] = $this->yytoken[$i];
+                }
+            }
+        }
+
+        $message = 'Syntax error, unexpected '.$tokenName;
+        if ($expected) {
+            $last = array_pop($expected);
+            $message .= ', expecting '.($expected ? implode(', ', $expected).' or ' : '').$last;
+        }
+
+        return new Error($message, $line);
     }
 }

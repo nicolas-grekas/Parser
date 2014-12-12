@@ -30,7 +30,7 @@ class XmlAstBuilder extends AbstractAstBuilder
     {
         $node = $this->doc->createElement($semantic ? 'semantic-token' : 'asemantic-token');
         $node->setAttribute('name', $name);
-        $node->setAttribute('line', $startLine != $endLine ? $startLine.'-'.$endLine : $startLine);
+        $node->setAttribute('line', $startLine !== $endLine ? $startLine.'-'.$endLine : $startLine);
         $node->appendChild($this->doc->createTextNode($code));
 
         return $node;
