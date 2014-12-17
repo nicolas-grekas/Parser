@@ -103,7 +103,6 @@ abstract class AbstractParser
         $state = 0;
         $stackPos = 0;
         $errFlag = 0;
-        $errDiscard = $array;
         $stateStack = array($state);
         $nodeStack = $array;
         $asems = $array;
@@ -134,17 +133,6 @@ abstract class AbstractParser
                     && ($yyn = $yyaction[$yyn]) !== $YYDEFAULT
                 ) {
                     if ($yyn > 0) {
-                        if (0 < $errFlag) {
-                            if (3 === $errFlag) {
-                                /* reduce error */
-
-                                $nodeStack[$stackPos]['asems'] = $errDiscard[0]['asems'];
-                                $nodeStack[$stackPos] = $ast->reduceNode($nodeStack[$stackPos], $errDiscard);
-                                $errDiscard = $array;
-                            }
-                            --$errFlag;
-                        }
-
                         /* shift */
 
                         ++$stackPos;
@@ -158,6 +146,10 @@ abstract class AbstractParser
 
                         $tokenId = -1;
                         $asems = $array;
+
+                        if (0 < $errFlag) {
+                            --$errFlag;
+                        }
 
                         if (0 > $yyn -= $YYNLSTATES) {
                             /* do not reduce */
@@ -182,11 +174,16 @@ abstract class AbstractParser
                             if (!$tokenId) {
                                 throw $this->getSyntaxError($tokenName, $state, $line);
                             }
+
                             $node['id'] = -$YYBADCH;
                             $node['name'] = $tokenName;
                             $node['ast'] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], true);
                             $node['asems'] = $asems;
-                            $errDiscard[] = $node;
+                            $nodeStack[$stackPos] = $ast->reduceNode($nodeStack[$stackPos], array($node));
+                            if ('error' !== $nodeStack[$stackPos]['name']) {
+                                throw new Error(sprintf('Node `error` has been renamed to `%s` upon reduction by %s', $nodeStack[$stackPos]['name'], get_class($ast)), $line);
+                            }
+
                             $tokenId = -1;
                             $asems = $array;
                         } else {
@@ -209,7 +206,7 @@ abstract class AbstractParser
 
                             $node['id'] = $yyn;
                             $node['ast'] = $ast->createNode($node['name'] = 'error', $yyn);
-                            $node['asems'] = $array;
+                            $node['asems'] = $asems;
 
                             $nodeStack[$stackPos] = $node;
                         }
