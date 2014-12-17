@@ -27,7 +27,6 @@ class DemoAstBuilder implements AstBuilderInterface
      */
     public function createNode($name, $ruleId)
     {
-        return;
     }
 
     /**
@@ -36,10 +35,7 @@ class DemoAstBuilder implements AstBuilderInterface
     public function reduceNode(array $node, array $children)
     {
         if (self::ERROR === $node['name']) {
-            $node['ast'] = 'Syntax error, unexpected: ';
-            foreach ($children as $c) {
-                $node['ast'] .= implode('', $c['asems']).$c['ast'];
-            }
+            $node['ast'] .= implode('', $children[0]['asems']).$children[0]['ast'];
 
             return $node;
         }
@@ -53,7 +49,11 @@ class DemoAstBuilder implements AstBuilderInterface
             }
         } elseif ('line' === $node['name']) {
             if ("\n" !== $children[0]['ast']) {
-                echo '=> ', $children[0]['ast'], "\n\n";
+                if (self::ERROR === $children[0]['name']) {
+                    echo "Syntax error, unexpected `{$children[0]['ast']}`\n\n";
+                } else {
+                    echo '=> ', $children[0]['ast'], "\n\n";
+                }
             }
         }
 
@@ -62,5 +62,12 @@ class DemoAstBuilder implements AstBuilderInterface
         }
 
         return $node;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear($isError)
+    {
     }
 }

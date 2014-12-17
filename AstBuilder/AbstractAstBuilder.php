@@ -50,4 +50,11 @@ abstract class AbstractAstBuilder implements AstBuilderInterface
 
         return $node;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear($isError)
+    {
+    }
 }
