@@ -273,7 +273,7 @@ abstract class AbstractParser
 
     private function getSyntaxError($tokenName, $state, $line)
     {
-        $expected = $array;
+        $expected = array();
 
         for ($i = 1; $i < $this->YYBADCH; ++$i) {
             if (isset($this->yycheck[$yyn = $this->yybase[$state] + $i])
