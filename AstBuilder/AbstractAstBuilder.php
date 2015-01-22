@@ -14,6 +14,11 @@ namespace Tchwork\Parser\AstBuilder;
  */
 abstract class AbstractAstBuilder implements AstBuilderInterface
 {
+    public function __construct()
+    {
+        $this->clear();
+    }
+
     /**
      * Appends a child to an AST node.
      *
@@ -54,7 +59,15 @@ abstract class AbstractAstBuilder implements AstBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function clear($isError)
+    public function getAst($ast)
+    {
+        return $ast;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear()
     {
     }
 }

@@ -55,11 +55,18 @@ interface AstBuilderInterface
     public function reduceNode(array $node, array $children);
 
     /**
-     * Clears any state in the AstBuilder to make it ready to build a new AST.
+     * Closes and returns the AST.
      *
-     * @param bool $isError Whether the clear follows a syntax error or not.
+     * @param mixed The not-closed but reduced AST.
+     *
+     * @return mixed The closed AST representation.
+     */
+    public function getAst($ast);
+
+    /**
+     * Clears any state and gets ready to build a new AST.
      *
      * @return void
      */
-    public function clear($isError);
+    public function clear();
 }

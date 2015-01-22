@@ -265,9 +265,11 @@ abstract class AbstractParser
                         $node['ast'] = $ast->createToken('EOF', $token[0], $token[1], $line, $token[2], true);
                         $node['asems'] = $asems;
                         $node = $ast->reduceNode($nodeStack[$stackPos], array($node));
-                        $ast->clear(false);
 
-                        return $node['ast'];
+                        $node = $ast->getAst($node['ast']);
+                        $ast->clear();
+
+                        return $node;
                     }
 
                     if ($state >= $YYNLSTATES) {
@@ -288,7 +290,7 @@ abstract class AbstractParser
 
     private function getSyntaxError($tokenName, $state, $line)
     {
-        $this->ast->clear(true);
+        $this->ast->clear();
 
         $expected = $array;
 

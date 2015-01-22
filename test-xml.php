@@ -8,13 +8,10 @@ require 'vendor/autoload.php';
 
 $lexer = new Lexer\PhpLexer();
 
-$doc = new DOMDocument();
-$ast = new AstBuilder\XmlAstBuilder($doc);
+$ast = new AstBuilder\XmlAstBuilder();
 $parser = new Parser\PhpParser($lexer, $ast);
 
-$ast = $parser->parse(file_get_contents(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : __FILE__));
-$doc->appendChild($ast);
-
+$doc = $parser->parse(file_get_contents(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : __FILE__));
 $doc->preserveWhiteSpace = true;
 $doc->formatOutput = true;
 

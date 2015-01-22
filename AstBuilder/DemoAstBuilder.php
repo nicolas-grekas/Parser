@@ -67,7 +67,15 @@ class DemoAstBuilder implements AstBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function clear($isError)
+    public function getAst($ast)
+    {
+        return $ast;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear()
     {
     }
 }

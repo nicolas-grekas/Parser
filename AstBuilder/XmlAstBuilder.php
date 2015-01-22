@@ -9,19 +9,12 @@
 
 namespace Tchwork\Parser\AstBuilder;
 
-use DOMDocument;
-
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
 class XmlAstBuilder extends AbstractAstBuilder
 {
     protected $doc;
-
-    public function __construct(DOMDocument $doc)
-    {
-        $this->doc = $doc;
-    }
 
     /**
      * {@inheritdoc}
@@ -50,5 +43,23 @@ class XmlAstBuilder extends AbstractAstBuilder
     public function appendChild(&$ast, $child)
     {
         $ast->appendChild($child);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAst($ast)
+    {
+        $this->doc->appendChild($ast);
+
+        return $this->doc;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear()
+    {
+        $this->doc = new \DOMDocument();
     }
 }

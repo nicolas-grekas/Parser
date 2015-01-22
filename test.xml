@@ -112,7 +112,7 @@
             <variable>
               <callable_variable>
                 <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="11">$doc</semantic-token>
+                  <semantic-token name="T_VARIABLE" line="11">$ast</semantic-token>
                 </simple_variable>
               </callable_variable>
             </variable>
@@ -128,7 +128,9 @@
                     <class_name>
                       <name>
                         <namespace_name>
-                          <semantic-token name="T_STRING" line="11">DOMDocument</semantic-token>
+                          <semantic-token name="T_STRING" line="11">AstBuilder</semantic-token>
+                          <semantic-token name="T_NS_SEPARATOR" line="11">\</semantic-token>
+                          <semantic-token name="T_STRING" line="11">XmlAstBuilder</semantic-token>
                         </namespace_name>
                       </name>
                     </class_name>
@@ -156,7 +158,7 @@
             <variable>
               <callable_variable>
                 <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="12">$ast</semantic-token>
+                  <semantic-token name="T_VARIABLE" line="12">$parser</semantic-token>
                 </simple_variable>
               </callable_variable>
             </variable>
@@ -172,9 +174,9 @@
                     <class_name>
                       <name>
                         <namespace_name>
-                          <semantic-token name="T_STRING" line="12">AstBuilder</semantic-token>
+                          <semantic-token name="T_STRING" line="12">Parser</semantic-token>
                           <semantic-token name="T_NS_SEPARATOR" line="12">\</semantic-token>
-                          <semantic-token name="T_STRING" line="12">XmlAstBuilder</semantic-token>
+                          <semantic-token name="T_STRING" line="12">PhpParser</semantic-token>
                         </namespace_name>
                       </name>
                     </class_name>
@@ -188,7 +190,20 @@
                             <variable>
                               <callable_variable>
                                 <simple_variable>
-                                  <semantic-token name="T_VARIABLE" line="12">$doc</semantic-token>
+                                  <semantic-token name="T_VARIABLE" line="12">$lexer</semantic-token>
+                                </simple_variable>
+                              </callable_variable>
+                            </variable>
+                          </expr>
+                        </argument>
+                        <semantic-token name="','" line="12">,</semantic-token>
+                        <asemantic-token name="T_WHITESPACE" line="12"> </asemantic-token>
+                        <argument>
+                          <expr>
+                            <variable>
+                              <callable_variable>
+                                <simple_variable>
+                                  <semantic-token name="T_VARIABLE" line="12">$ast</semantic-token>
                                 </simple_variable>
                               </callable_variable>
                             </variable>
@@ -206,79 +221,7 @@
         <semantic-token name="';'" line="12">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="12-13">
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <callable_variable>
-                <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="13">$parser</semantic-token>
-                </simple_variable>
-              </callable_variable>
-            </variable>
-            <asemantic-token name="T_WHITESPACE" line="13"> </asemantic-token>
-            <semantic-token name="'='" line="13">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="13"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <new_expr>
-                  <semantic-token name="T_NEW" line="13">new</semantic-token>
-                  <asemantic-token name="T_WHITESPACE" line="13"> </asemantic-token>
-                  <class_name_reference>
-                    <class_name>
-                      <name>
-                        <namespace_name>
-                          <semantic-token name="T_STRING" line="13">Parser</semantic-token>
-                          <semantic-token name="T_NS_SEPARATOR" line="13">\</semantic-token>
-                          <semantic-token name="T_STRING" line="13">PhpParser</semantic-token>
-                        </namespace_name>
-                      </name>
-                    </class_name>
-                  </class_name_reference>
-                  <ctor_arguments>
-                    <argument_list>
-                      <semantic-token name="'('" line="13">(</semantic-token>
-                      <non_empty_argument_list>
-                        <argument>
-                          <expr>
-                            <variable>
-                              <callable_variable>
-                                <simple_variable>
-                                  <semantic-token name="T_VARIABLE" line="13">$lexer</semantic-token>
-                                </simple_variable>
-                              </callable_variable>
-                            </variable>
-                          </expr>
-                        </argument>
-                        <semantic-token name="','" line="13">,</semantic-token>
-                        <asemantic-token name="T_WHITESPACE" line="13"> </asemantic-token>
-                        <argument>
-                          <expr>
-                            <variable>
-                              <callable_variable>
-                                <simple_variable>
-                                  <semantic-token name="T_VARIABLE" line="13">$ast</semantic-token>
-                                </simple_variable>
-                              </callable_variable>
-                            </variable>
-                          </expr>
-                        </argument>
-                      </non_empty_argument_list>
-                      <semantic-token name="')'" line="13">)</semantic-token>
-                    </argument_list>
-                  </ctor_arguments>
-                </new_expr>
-              </expr_without_variable>
-            </expr>
-          </expr_without_variable>
-        </expr>
-        <semantic-token name="';'" line="13">;</semantic-token>
-      </statement>
-    </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="13-15">
+    <asemantic-token name="T_WHITESPACE" line="12-14">
 
 </asemantic-token>
     <top_statement>
@@ -288,13 +231,13 @@
             <variable>
               <callable_variable>
                 <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="15">$ast</semantic-token>
+                  <semantic-token name="T_VARIABLE" line="14">$doc</semantic-token>
                 </simple_variable>
               </callable_variable>
             </variable>
-            <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
-            <semantic-token name="'='" line="15">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
+            <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
+            <semantic-token name="'='" line="14">=</semantic-token>
+            <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
             <expr>
               <variable>
                 <callable_variable>
@@ -302,17 +245,17 @@
                     <variable>
                       <callable_variable>
                         <simple_variable>
-                          <semantic-token name="T_VARIABLE" line="15">$parser</semantic-token>
+                          <semantic-token name="T_VARIABLE" line="14">$parser</semantic-token>
                         </simple_variable>
                       </callable_variable>
                     </variable>
                   </dereferencable>
-                  <semantic-token name="T_OBJECT_OPERATOR" line="15">-&gt;</semantic-token>
+                  <semantic-token name="T_OBJECT_OPERATOR" line="14">-&gt;</semantic-token>
                   <member_name>
-                    <semantic-token name="T_STRING" line="15">parse</semantic-token>
+                    <semantic-token name="T_STRING" line="14">parse</semantic-token>
                   </member_name>
                   <argument_list>
-                    <semantic-token name="'('" line="15">(</semantic-token>
+                    <semantic-token name="'('" line="14">(</semantic-token>
                     <non_empty_argument_list>
                       <argument>
                         <expr>
@@ -321,11 +264,11 @@
                               <function_call>
                                 <name>
                                   <namespace_name>
-                                    <semantic-token name="T_STRING" line="15">file_get_contents</semantic-token>
+                                    <semantic-token name="T_STRING" line="14">file_get_contents</semantic-token>
                                   </namespace_name>
                                 </name>
                                 <argument_list>
-                                  <semantic-token name="'('" line="15">(</semantic-token>
+                                  <semantic-token name="'('" line="14">(</semantic-token>
                                   <non_empty_argument_list>
                                     <argument>
                                       <expr>
@@ -333,8 +276,8 @@
                                           <expr>
                                             <expr_without_variable>
                                               <internal_functions_in_yacc>
-                                                <semantic-token name="T_ISSET" line="15">isset</semantic-token>
-                                                <semantic-token name="'('" line="15">(</semantic-token>
+                                                <semantic-token name="T_ISSET" line="14">isset</semantic-token>
+                                                <semantic-token name="'('" line="14">(</semantic-token>
                                                 <isset_variables>
                                                   <isset_variable>
                                                     <expr>
@@ -347,50 +290,50 @@
                                                             <variable>
                                                             <callable_variable>
                                                             <simple_variable>
-                                                            <semantic-token name="T_VARIABLE" line="15">$_SERVER</semantic-token>
+                                                            <semantic-token name="T_VARIABLE" line="14">$_SERVER</semantic-token>
                                                             </simple_variable>
                                                             </callable_variable>
                                                             </variable>
                                                             </dereferencable>
-                                                            <semantic-token name="'['" line="15">[</semantic-token>
+                                                            <semantic-token name="'['" line="14">[</semantic-token>
                                                             <optional_expr>
                                                             <expr>
                                                             <expr_without_variable>
                                                             <scalar>
                                                             <dereferencable_scalar>
-                                                            <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="15">'argv'</semantic-token>
+                                                            <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="14">'argv'</semantic-token>
                                                             </dereferencable_scalar>
                                                             </scalar>
                                                             </expr_without_variable>
                                                             </expr>
                                                             </optional_expr>
-                                                            <semantic-token name="']'" line="15">]</semantic-token>
+                                                            <semantic-token name="']'" line="14">]</semantic-token>
                                                             </callable_variable>
                                                             </variable>
                                                           </dereferencable>
-                                                          <semantic-token name="'['" line="15">[</semantic-token>
+                                                          <semantic-token name="'['" line="14">[</semantic-token>
                                                           <optional_expr>
                                                             <expr>
                                                             <expr_without_variable>
                                                             <scalar>
-                                                            <semantic-token name="T_LNUMBER" line="15">1</semantic-token>
+                                                            <semantic-token name="T_LNUMBER" line="14">1</semantic-token>
                                                             </scalar>
                                                             </expr_without_variable>
                                                             </expr>
                                                           </optional_expr>
-                                                          <semantic-token name="']'" line="15">]</semantic-token>
+                                                          <semantic-token name="']'" line="14">]</semantic-token>
                                                         </callable_variable>
                                                       </variable>
                                                     </expr>
                                                   </isset_variable>
                                                 </isset_variables>
-                                                <semantic-token name="')'" line="15">)</semantic-token>
+                                                <semantic-token name="')'" line="14">)</semantic-token>
                                               </internal_functions_in_yacc>
                                             </expr_without_variable>
                                           </expr>
-                                          <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
-                                          <semantic-token name="'?'" line="15">?</semantic-token>
-                                          <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
+                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
+                                          <semantic-token name="'?'" line="14">?</semantic-token>
+                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
                                           <expr>
                                             <variable>
                                               <callable_variable>
@@ -401,48 +344,48 @@
                                                         <variable>
                                                           <callable_variable>
                                                             <simple_variable>
-                                                            <semantic-token name="T_VARIABLE" line="15">$_SERVER</semantic-token>
+                                                            <semantic-token name="T_VARIABLE" line="14">$_SERVER</semantic-token>
                                                             </simple_variable>
                                                           </callable_variable>
                                                         </variable>
                                                       </dereferencable>
-                                                      <semantic-token name="'['" line="15">[</semantic-token>
+                                                      <semantic-token name="'['" line="14">[</semantic-token>
                                                       <optional_expr>
                                                         <expr>
                                                           <expr_without_variable>
                                                             <scalar>
                                                             <dereferencable_scalar>
-                                                            <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="15">'argv'</semantic-token>
+                                                            <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="14">'argv'</semantic-token>
                                                             </dereferencable_scalar>
                                                             </scalar>
                                                           </expr_without_variable>
                                                         </expr>
                                                       </optional_expr>
-                                                      <semantic-token name="']'" line="15">]</semantic-token>
+                                                      <semantic-token name="']'" line="14">]</semantic-token>
                                                     </callable_variable>
                                                   </variable>
                                                 </dereferencable>
-                                                <semantic-token name="'['" line="15">[</semantic-token>
+                                                <semantic-token name="'['" line="14">[</semantic-token>
                                                 <optional_expr>
                                                   <expr>
                                                     <expr_without_variable>
                                                       <scalar>
-                                                        <semantic-token name="T_LNUMBER" line="15">1</semantic-token>
+                                                        <semantic-token name="T_LNUMBER" line="14">1</semantic-token>
                                                       </scalar>
                                                     </expr_without_variable>
                                                   </expr>
                                                 </optional_expr>
-                                                <semantic-token name="']'" line="15">]</semantic-token>
+                                                <semantic-token name="']'" line="14">]</semantic-token>
                                               </callable_variable>
                                             </variable>
                                           </expr>
-                                          <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
-                                          <semantic-token name="':'" line="15">:</semantic-token>
-                                          <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
+                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
+                                          <semantic-token name="':'" line="14">:</semantic-token>
+                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
                                           <expr>
                                             <expr_without_variable>
                                               <scalar>
-                                                <semantic-token name="T_FILE" line="15">__FILE__</semantic-token>
+                                                <semantic-token name="T_FILE" line="14">__FILE__</semantic-token>
                                               </scalar>
                                             </expr_without_variable>
                                           </expr>
@@ -450,7 +393,7 @@
                                       </expr>
                                     </argument>
                                   </non_empty_argument_list>
-                                  <semantic-token name="')'" line="15">)</semantic-token>
+                                  <semantic-token name="')'" line="14">)</semantic-token>
                                 </argument_list>
                               </function_call>
                             </callable_variable>
@@ -458,10 +401,52 @@
                         </expr>
                       </argument>
                     </non_empty_argument_list>
-                    <semantic-token name="')'" line="15">)</semantic-token>
+                    <semantic-token name="')'" line="14">)</semantic-token>
                   </argument_list>
                 </callable_variable>
               </variable>
+            </expr>
+          </expr_without_variable>
+        </expr>
+        <semantic-token name="';'" line="14">;</semantic-token>
+      </statement>
+    </top_statement>
+    <asemantic-token name="T_WHITESPACE" line="14-15">
+</asemantic-token>
+    <top_statement>
+      <statement>
+        <expr>
+          <expr_without_variable>
+            <variable>
+              <dereferencable>
+                <variable>
+                  <callable_variable>
+                    <simple_variable>
+                      <semantic-token name="T_VARIABLE" line="15">$doc</semantic-token>
+                    </simple_variable>
+                  </callable_variable>
+                </variable>
+              </dereferencable>
+              <semantic-token name="T_OBJECT_OPERATOR" line="15">-&gt;</semantic-token>
+              <member_name>
+                <semantic-token name="T_STRING" line="15">preserveWhiteSpace</semantic-token>
+              </member_name>
+            </variable>
+            <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
+            <semantic-token name="'='" line="15">=</semantic-token>
+            <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <scalar>
+                  <constant>
+                    <name>
+                      <namespace_name>
+                        <semantic-token name="T_STRING" line="15">true</semantic-token>
+                      </namespace_name>
+                    </name>
+                  </constant>
+                </scalar>
+              </expr_without_variable>
             </expr>
           </expr_without_variable>
         </expr>
@@ -473,8 +458,8 @@
     <top_statement>
       <statement>
         <expr>
-          <variable>
-            <callable_variable>
+          <expr_without_variable>
+            <variable>
               <dereferencable>
                 <variable>
                   <callable_variable>
@@ -486,27 +471,26 @@
               </dereferencable>
               <semantic-token name="T_OBJECT_OPERATOR" line="16">-&gt;</semantic-token>
               <member_name>
-                <semantic-token name="T_STRING" line="16">appendChild</semantic-token>
+                <semantic-token name="T_STRING" line="16">formatOutput</semantic-token>
               </member_name>
-              <argument_list>
-                <semantic-token name="'('" line="16">(</semantic-token>
-                <non_empty_argument_list>
-                  <argument>
-                    <expr>
-                      <variable>
-                        <callable_variable>
-                          <simple_variable>
-                            <semantic-token name="T_VARIABLE" line="16">$ast</semantic-token>
-                          </simple_variable>
-                        </callable_variable>
-                      </variable>
-                    </expr>
-                  </argument>
-                </non_empty_argument_list>
-                <semantic-token name="')'" line="16">)</semantic-token>
-              </argument_list>
-            </callable_variable>
-          </variable>
+            </variable>
+            <asemantic-token name="T_WHITESPACE" line="16"> </asemantic-token>
+            <semantic-token name="'='" line="16">=</semantic-token>
+            <asemantic-token name="T_WHITESPACE" line="16"> </asemantic-token>
+            <expr>
+              <expr_without_variable>
+                <scalar>
+                  <constant>
+                    <name>
+                      <namespace_name>
+                        <semantic-token name="T_STRING" line="16">true</semantic-token>
+                      </namespace_name>
+                    </name>
+                  </constant>
+                </scalar>
+              </expr_without_variable>
+            </expr>
+          </expr_without_variable>
         </expr>
         <semantic-token name="';'" line="16">;</semantic-token>
       </statement>
@@ -516,93 +500,8 @@
 </asemantic-token>
     <top_statement>
       <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <dereferencable>
-                <variable>
-                  <callable_variable>
-                    <simple_variable>
-                      <semantic-token name="T_VARIABLE" line="18">$doc</semantic-token>
-                    </simple_variable>
-                  </callable_variable>
-                </variable>
-              </dereferencable>
-              <semantic-token name="T_OBJECT_OPERATOR" line="18">-&gt;</semantic-token>
-              <member_name>
-                <semantic-token name="T_STRING" line="18">preserveWhiteSpace</semantic-token>
-              </member_name>
-            </variable>
-            <asemantic-token name="T_WHITESPACE" line="18"> </asemantic-token>
-            <semantic-token name="'='" line="18">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="18"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <scalar>
-                  <constant>
-                    <name>
-                      <namespace_name>
-                        <semantic-token name="T_STRING" line="18">true</semantic-token>
-                      </namespace_name>
-                    </name>
-                  </constant>
-                </scalar>
-              </expr_without_variable>
-            </expr>
-          </expr_without_variable>
-        </expr>
-        <semantic-token name="';'" line="18">;</semantic-token>
-      </statement>
-    </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="18-19">
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <dereferencable>
-                <variable>
-                  <callable_variable>
-                    <simple_variable>
-                      <semantic-token name="T_VARIABLE" line="19">$doc</semantic-token>
-                    </simple_variable>
-                  </callable_variable>
-                </variable>
-              </dereferencable>
-              <semantic-token name="T_OBJECT_OPERATOR" line="19">-&gt;</semantic-token>
-              <member_name>
-                <semantic-token name="T_STRING" line="19">formatOutput</semantic-token>
-              </member_name>
-            </variable>
-            <asemantic-token name="T_WHITESPACE" line="19"> </asemantic-token>
-            <semantic-token name="'='" line="19">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="19"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <scalar>
-                  <constant>
-                    <name>
-                      <namespace_name>
-                        <semantic-token name="T_STRING" line="19">true</semantic-token>
-                      </namespace_name>
-                    </name>
-                  </constant>
-                </scalar>
-              </expr_without_variable>
-            </expr>
-          </expr_without_variable>
-        </expr>
-        <semantic-token name="';'" line="19">;</semantic-token>
-      </statement>
-    </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="19-21">
-
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <semantic-token name="T_ECHO" line="21">echo</semantic-token>
-        <asemantic-token name="T_WHITESPACE" line="21"> </asemantic-token>
+        <semantic-token name="T_ECHO" line="18">echo</semantic-token>
+        <asemantic-token name="T_WHITESPACE" line="18"> </asemantic-token>
         <echo_expr_list>
           <echo_expr>
             <expr>
@@ -612,39 +511,39 @@
                     <variable>
                       <callable_variable>
                         <simple_variable>
-                          <semantic-token name="T_VARIABLE" line="21">$doc</semantic-token>
+                          <semantic-token name="T_VARIABLE" line="18">$doc</semantic-token>
                         </simple_variable>
                       </callable_variable>
                     </variable>
                   </dereferencable>
-                  <semantic-token name="T_OBJECT_OPERATOR" line="21">-&gt;</semantic-token>
+                  <semantic-token name="T_OBJECT_OPERATOR" line="18">-&gt;</semantic-token>
                   <member_name>
-                    <semantic-token name="T_STRING" line="21">saveXML</semantic-token>
+                    <semantic-token name="T_STRING" line="18">saveXML</semantic-token>
                   </member_name>
                   <argument_list>
-                    <semantic-token name="'('" line="21">(</semantic-token>
-                    <semantic-token name="')'" line="21">)</semantic-token>
+                    <semantic-token name="'('" line="18">(</semantic-token>
+                    <semantic-token name="')'" line="18">)</semantic-token>
                   </argument_list>
                 </callable_variable>
               </variable>
             </expr>
           </echo_expr>
         </echo_expr_list>
-        <semantic-token name="';'" line="21">;</semantic-token>
+        <semantic-token name="';'" line="18">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="21-23">
+    <asemantic-token name="T_WHITESPACE" line="18-20">
 
 </asemantic-token>
     <top_statement>
-      <semantic-token name="T_HALT_COMPILER" line="23">__halt_compiler</semantic-token>
-      <semantic-token name="'('" line="23">(</semantic-token>
-      <semantic-token name="')'" line="23">)</semantic-token>
-      <semantic-token name="';'" line="23">;</semantic-token>
+      <semantic-token name="T_HALT_COMPILER" line="20">__halt_compiler</semantic-token>
+      <semantic-token name="'('" line="20">(</semantic-token>
+      <semantic-token name="')'" line="20">)</semantic-token>
+      <semantic-token name="';'" line="20">;</semantic-token>
     </top_statement>
     <top_statement>
       <statement>
-        <semantic-token name="T_INLINE_HTML" line="23-25">
+        <semantic-token name="T_INLINE_HTML" line="20-22">
 ()&lt;?php ()
 </semantic-token>
       </statement>
