@@ -4,7 +4,7 @@ namespace Tchwork\Parser;
 
 use DOMDocument;
 
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 $lexer = new Lexer\PhpLexer();
 

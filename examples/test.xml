@@ -42,11 +42,23 @@
               <asemantic-token name="T_WHITESPACE" line="7"> </asemantic-token>
               <expr>
                 <expr_without_variable>
-                  <scalar>
-                    <dereferencable_scalar>
-                      <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="7">'vendor/autoload.php'</semantic-token>
-                    </dereferencable_scalar>
-                  </scalar>
+                  <expr>
+                    <expr_without_variable>
+                      <scalar>
+                        <semantic-token name="T_DIR" line="7">__DIR__</semantic-token>
+                      </scalar>
+                    </expr_without_variable>
+                  </expr>
+                  <semantic-token name="'.'" line="7">.</semantic-token>
+                  <expr>
+                    <expr_without_variable>
+                      <scalar>
+                        <dereferencable_scalar>
+                          <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="7">'/../vendor/autoload.php'</semantic-token>
+                        </dereferencable_scalar>
+                      </scalar>
+                    </expr_without_variable>
+                  </expr>
                 </expr_without_variable>
               </expr>
             </internal_functions_in_yacc>

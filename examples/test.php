@@ -16,9 +16,16 @@ Parser                  #T_STRING
 require                    #T_REQUIRE
                            #expr
                             #expr_without_variable
-                             #scalar
-                              #dereferencable_scalar
-'vendor/autoload.php'          #T_CONSTANT_ENCAPSED_STRING
+                             #expr
+                              #expr_without_variable
+                               #scalar
+__DIR__                         #T_DIR
+.                            #'.'
+                             #expr
+                              #expr_without_variable
+                               #scalar
+                                #dereferencable_scalar
+'/../vendor/autoload.php'        #T_CONSTANT_ENCAPSED_STRING
 ;                       #';'
                       #top_statement
                        #statement

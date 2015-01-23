@@ -2,7 +2,7 @@
 
 namespace Tchwork\Parser;
 
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 echo "Welcome the simple Demo Calculator\n";
 echo "Please type your calculous:\n";
