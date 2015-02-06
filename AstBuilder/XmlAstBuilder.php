@@ -19,12 +19,12 @@ class XmlAstBuilder extends AbstractAstBuilder
     /**
      * {@inheritdoc}
      */
-    public function createToken($name, $id, $code, $startLine, $endLine, $semantic)
+    public function createToken($name, $token, $semantic, $pos)
     {
         $node = $this->doc->createElement($semantic ? 'semantic-token' : 'asemantic-token');
         $node->setAttribute('name', $name);
-        $node->setAttribute('line', $startLine !== $endLine ? $startLine.'-'.$endLine : $startLine);
-        $node->appendChild($this->doc->createTextNode($code));
+        $node->setAttribute('line', $token[2]);
+        $node->appendChild($this->doc->createTextNode($token[1]));
 
         return $node;
     }
@@ -32,7 +32,7 @@ class XmlAstBuilder extends AbstractAstBuilder
     /**
      * {@inheritdoc}
      */
-    public function createNode($name, $ruleId)
+    protected function createNode($name, $ruleId)
     {
         return $this->doc->createElement($name);
     }
@@ -40,7 +40,7 @@ class XmlAstBuilder extends AbstractAstBuilder
     /**
      * {@inheritdoc}
      */
-    public function appendChild(&$ast, $child)
+    protected function appendChild(&$ast, $child)
     {
         $ast->appendChild($child);
     }

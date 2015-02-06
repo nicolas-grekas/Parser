@@ -29,6 +29,12 @@ class #(-p) extends AbstractParser
     protected $yynode = array(
         #listvar nonterminals
     );
+#if -t
+
+    protected $productions = array(
+        #production-strings;
+    );
+#endif
 
     protected $yymap = array(
         #listvar yytranslate

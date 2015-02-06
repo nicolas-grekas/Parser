@@ -17,16 +17,9 @@ class DemoAstBuilder implements AstBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function createToken($name, $id, $code, $startLine, $endLine, $semantic)
+    public function createToken($name, $token, $semantic, $pos)
     {
-        return $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNode($name, $ruleId)
-    {
+        return $token[1];
     }
 
     /**

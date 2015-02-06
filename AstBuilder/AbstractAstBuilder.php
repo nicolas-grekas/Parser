@@ -27,23 +27,30 @@ abstract class AbstractAstBuilder implements AstBuilderInterface
      *
      * @return void
      */
-    abstract public function appendChild(&$ast, $child);
+    abstract protected function appendChild(&$ast, $child);
 
     /**
      * {@inheritdoc}
      */
-    abstract public function createToken($name, $id, $code, $startLine, $endLine, $semantic);
+    abstract public function createToken($name, $token, $semantic, $pos);
 
     /**
-     * {@inheritdoc}
+     * Creates an AST node representation.
+     *
+     * @param string $name   The name of the node's grammar rule
+     * @param int    $ruleId The identifier of the node's grammar rule
+     *
+     * @return mixed The node representation
      */
-    abstract public function createNode($name, $ruleId);
+    abstract protected function createNode($name, $ruleId);
 
     /**
      * {@inheritdoc}
      */
     public function reduceNode(array $node, array $children)
     {
+        isset($node['ast']) or $node['ast'] = $this->createNode($node['name'], $node['id']);
+
         foreach ($children as $n) {
             foreach ($n['asems'] as $a) {
                 $this->appendChild($node['ast'], $a);

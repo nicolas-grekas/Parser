@@ -107,192 +107,189 @@ abstract class AbstractParser
         $stateStack = array($state);
         $nodeStack = $array;
         $asems = $array;
-        $line = 1;
 
-        foreach ($this->lexer->getTokens($code) as $token) {
-            if (!isset($tokenNames[$token[0]])) {
-                $tokenName = "'{$token[1]}'";
-                $tokenId = $YYBADCH;
-            } else {
-                $tokenName = $tokenNames[$token[0]];
-                $tokenId = $tokenIds[$token[0]];
+        try {
+            foreach ($this->lexer->getTokens($code) as $pos => $token) {
+                if (isset($tokenNames[$token[0]])) {
+                    $tokenName = $tokenNames[$token[0]];
+                    $tokenId = $tokenIds[$token[0]];
 
-                if ($YYBADCH === $tokenId && null === $errTok) {
-                    $asems[] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], false);
-                    $line = $token[2];
+                    if ($YYBADCH === $tokenId && null === $errTok) {
+                        $asems[] = $ast->createToken($tokenName, $token, false, $pos);
 
-                    continue;
-                }
-            }
-
-            for (;;) {
-                if ($yybase[$state]
-                    && (isset($yycheck[$yyn = $yybase[$state] + $tokenId])
-                        && $yycheck[$yyn] === $tokenId
-                        || $state < $YY2TBLSTATE
-                        && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $tokenId])
-                        && $yycheck[$yyn] === $tokenId)
-                    && ($yyn = $yyaction[$yyn]) !== $YYDEFAULT
-                ) {
-                    if ($yyn > 0) {
-                        if (0 < $errFlag && 2 === --$errFlag) {
-                            /* reduce error */
-
-                            $node['id'] = $YYINTERRTOK - $YYBADCH; // Negative id for tokens, positive for nodes
-                            $node['name'] = 'error';
-                            $node['ast'] = $ast->createToken('error', -1, $errTok[1], $errTok[3], $errTok[2], true);
-                            $node['asems'] = $asems;
-                            $nodeStack[$stackPos] = $node;
-                            $asems = $array;
-
-                            foreach ($errTok[4] as $errTok) {
-                                $asems[] = $ast->createToken($errTok[3], $errTok[0], $errTok[1], $line, $errTok[2], false);
-                                $line = $errTok[2];
-                            }
-
-                            $errTok = null;
-                        }
-
-                        /* shift */
-
-                        ++$stackPos;
-
-                        $node['id'] = $tokenId - $YYBADCH; // Negative id for tokens, positive for nodes
-                        $node['name'] = $tokenName;
-                        $node['ast'] = $ast->createToken($tokenName, $token[0], $token[1], $line, $token[2], true);
-                        $node['asems'] = $asems;
-                        $nodeStack[$stackPos] = $node;
-                        $stateStack[$stackPos] = $state = $yyn;
-
-                        $tokenId = -1;
-                        $asems = $array;
-
-                        if (0 > $yyn -= $YYNLSTATES) {
-                            /* do not reduce */
-                            $line = $token[2];
-
-                            continue 2;
-                        }
-                    } else {
-                        $yyn = -$yyn;
+                        continue;
                     }
                 } else {
-                    $yyn = $yydefault[$state];
+                    $tokenName = "'{$token[1]}'";
+                    $tokenId = $YYBADCH;
                 }
 
                 for (;;) {
-                    if ($yyn === $YYUNEXPECTED) {
-                        /* error */
+                    if ($yybase[$state]
+                        && (isset($yycheck[$yyn = $yybase[$state] + $tokenId])
+                            && $yycheck[$yyn] === $tokenId
+                            || $state < $YY2TBLSTATE
+                            && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $tokenId])
+                            && $yycheck[$yyn] === $tokenId)
+                        && ($yyn = $yyaction[$yyn]) !== $YYDEFAULT
+                    ) {
+                        if ($yyn > 0) {
+                            if (0 < $errFlag && 2 === --$errFlag) {
+                                /* reduce error */
 
-                        if (3 === $errFlag) {
-                            /* discard */
+                                $node['id'] = $YYINTERRTOK - $YYBADCH; // Negative id for tokens, positive for nodes
+                                $node['name'] = 'error';
+                                $node['ast'] = $ast->createToken('error', $errTok, true, $pos);
+                                $node['asems'] = $asems;
+                                $nodeStack[$stackPos] = $node;
+                                $asems = $array;
 
-                            if (!$tokenId) {
-                                throw $this->getSyntaxError($tokenName, $state, $line);
-                            }
-
-                            if ($YYBADCH === $tokenId && isset($tokenNames[$token[0]])) {
-                                $token[3] = $tokenName;
-                                $errTok[4][] = $token;
-                            } else {
-                                $errTok[2] = $token[2];
-                                $errTok[4][] = $token;
-                                foreach ($errTok[4] as $token) {
-                                    $errTok[1] .= $token[1];
+                                foreach ($errTok[5] as $errTok) {
+                                    $asems[] = $ast->createToken($errTok[0], $errTok[1], false, $errTok[2]);
                                 }
-                                $errTok[4] = $array;
+
+                                $errTok = null;
                             }
+
+                            /* shift */
+
+                            ++$stackPos;
+
+                            $node['id'] = $tokenId - $YYBADCH; // Negative id for tokens, positive for nodes
+                            $node['name'] = $tokenName;
+                            $node['ast'] = $ast->createToken($tokenName, $token, true, $pos);
+                            $node['asems'] = $asems;
+                            $nodeStack[$stackPos] = $node;
+                            $stateStack[$stackPos] = $state = $yyn;
 
                             $tokenId = -1;
-                        } else {
-                            /* recover */
+                            $asems = $array;
 
-                            $errFlag = 3;
+                            if (0 > $yyn -= $YYNLSTATES) {
+                                /* do not reduce */
 
-                            while (!(isset($yycheck[$yyn = $yybase[$state] + $YYINTERRTOK])
-                                && $yycheck[$yyn] === $YYINTERRTOK
-                                || $state < $YY2TBLSTATE
-                                && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $YYINTERRTOK])
-                                && $yycheck[$yyn] === $YYINTERRTOK
-                            )) {
-                                if (0 >= $stackPos) {
-                                    throw $this->getSyntaxError($tokenName, $state, $line);
-                                }
-                                $state = $stateStack[--$stackPos];
+                                continue 2;
                             }
-                            $stateStack[++$stackPos] = $state = $yyn = $yyaction[$yyn];
-
-                            $errTok = array(-1, '', $token[2], $line, $array);
-                        }
-                    } elseif ($yyn) {
-                        /* reduce */
-
-                        if (isset($yyerror[$yyn])) {
-                            throw new Error($yyerror[$yyn], $line);
-                        }
-
-                        $yyl = $yylen[$yyn] - 1;
-                        $yyn = $yylhs[$yyn];
-                        $stackPos -= $yyl;
-
-                        if (0 > $yyl || $yyn !== $nodeStack[$stackPos]['id']) {
-                            $node['id'] = $yyn;
-                            $node['ast'] = $ast->createNode($node['name'] = $yynode[$yyn], $yyn);
-                            if (0 > $yyl) {
-                                $node['asems'] = $array;
-                            } else {
-                                $node['asems'] = $nodeStack[$stackPos]['asems'];
-                            }
-                            $nodeStack[$stackPos] = $ast->reduceNode($node, array_slice($nodeStack, $stackPos - 1, $yyl + 1));
                         } else {
-                            $nodeStack[$stackPos]['asems'] or $nodeStack[$stackPos]['asems'] = $nodeStack[$stackPos + 1]['asems'];
-                            $nodeStack[$stackPos] = $ast->reduceNode($nodeStack[$stackPos], array_slice($nodeStack, $stackPos, $yyl));
+                            $yyn = -$yyn;
                         }
-
-                        /* Goto - shift nonterminal */
-
-                        $yyp = $yygbase[$yyn] + $stateStack[$stackPos-1];
-                        $state = isset($yygcheck[$yyp]) && $yygcheck[$yyp] === $yyn
-                            ? $yygoto[$yyp]
-                            : $yygdefault[$yyn];
-
-                        $stateStack[$stackPos] = $state;
                     } else {
-                        /* accept */
-
-                        $node['id'] = 0;
-                        $node['name'] = 'EOF';
-                        $node['ast'] = $ast->createToken('EOF', $token[0], $token[1], $line, $token[2], true);
-                        $node['asems'] = $asems;
-                        $node = $ast->reduceNode($nodeStack[$stackPos], array($node));
-
-                        $node = $ast->getAst($node['ast']);
-                        $ast->clear();
-
-                        return $node;
+                        $yyn = $yydefault[$state];
                     }
 
-                    if ($state >= $YYNLSTATES) {
-                        /* shift-and-reduce */
+                    for (;;) {
+                        if ($yyn === $YYUNEXPECTED) {
+                            /* error */
 
-                        $yyn = $state - $YYNLSTATES;
-                    } elseif (-1 === $tokenId) {
-                        $line = $token[2];
+                            if (3 === $errFlag) {
+                                /* discard */
 
-                        continue 3;
-                    } else {
-                        break;
+                                if (!$tokenId) {
+                                    throw $this->getSyntaxError($tokenName, $state, $token[2], $token[3]);
+                                }
+
+                                if ($YYBADCH === $tokenId && isset($tokenNames[$token[0]])) {
+                                    $errTok[5][] = array($tokenName, $token, $pos);
+                                } else {
+                                    $errTok[5][] = array('', $token);
+                                    foreach ($errTok[5] as $token) {
+                                        $errTok[1] .= $token[1][1];
+                                    }
+                                    $errTok[5] = $array;
+                                }
+
+                                $tokenId = -1;
+                            } else {
+                                /* recover */
+
+                                $errFlag = 3;
+
+                                while (!(isset($yycheck[$yyn = $yybase[$state] + $YYINTERRTOK])
+                                    && $yycheck[$yyn] === $YYINTERRTOK
+                                    || $state < $YY2TBLSTATE
+                                    && isset($yycheck[$yyn = $yybase[$state + $YYNLSTATES] + $YYINTERRTOK])
+                                    && $yycheck[$yyn] === $YYINTERRTOK
+                                )) {
+                                    if (0 >= $stackPos) {
+                                        throw $this->getSyntaxError($tokenName, $state, $token[2], $token[3]);
+                                    }
+                                    $state = $stateStack[--$stackPos];
+                                }
+                                $stateStack[++$stackPos] = $state = $yyn = $yyaction[$yyn];
+
+                                $errTok = array(-1, '', $token[2], $token[3], $token[4], $array);
+                            }
+                        } elseif ($yyn) {
+                            /* reduce */
+
+                            if (isset($yyerror[$yyn])) {
+                                throw new Error($yyerror[$yyn], $token[2], $token[3]);
+                            }
+
+                            $yyl = $yylen[$yyn] - 1;
+                            $yyn = $yylhs[$yyn];
+                            $stackPos -= $yyl;
+
+                            if (0 > $yyl || $yyn !== $nodeStack[$stackPos]['id']) {
+                                $node['id'] = $yyn;
+                                $node['name'] = $yynode[$yyn];
+                                $node['ast'] = null;
+                                if (0 > $yyl) {
+                                    $node['asems'] = $array;
+                                } else {
+                                    $node['asems'] = $nodeStack[$stackPos]['asems'];
+                                }
+                                $nodeStack[$stackPos] = $ast->reduceNode($node, array_slice($nodeStack, $stackPos - 1, $yyl + 1));
+                            } else {
+                                $nodeStack[$stackPos]['asems'] or $nodeStack[$stackPos]['asems'] = $nodeStack[$stackPos + 1]['asems'];
+                                $nodeStack[$stackPos] = $ast->reduceNode($nodeStack[$stackPos], array_slice($nodeStack, $stackPos, $yyl));
+                            }
+
+                            /* Goto - shift nonterminal */
+
+                            $yyp = $yygbase[$yyn] + $stateStack[$stackPos-1];
+                            $state = isset($yygcheck[$yyp]) && $yygcheck[$yyp] === $yyn
+                                ? $yygoto[$yyp]
+                                : $yygdefault[$yyn];
+
+                            $stateStack[$stackPos] = $state;
+                        } else {
+                            /* accept */
+
+                            $node['id'] = 0;
+                            $node['name'] = 'EOF';
+                            $node['ast'] = $ast->createToken('EOF', $token, true, $pos);
+                            $node['asems'] = $asems;
+                            $node = $ast->reduceNode($nodeStack[$stackPos], array($node));
+
+                            $node = $ast->getAst($node['ast']);
+                            $ast->clear();
+
+                            return $node;
+                        }
+
+                        if ($state >= $YYNLSTATES) {
+                            /* shift-and-reduce */
+
+                            $yyn = $state - $YYNLSTATES;
+                        } elseif (-1 === $tokenId) {
+                            continue 3;
+                        } else {
+                            break;
+                        }
                     }
                 }
             }
+        } catch (\Exception $e) {
+            $ast->clear();
+
+            throw $e;
         }
     }
 
-    private function getSyntaxError($tokenName, $state, $line)
+    private function getSyntaxError($tokenName, $state, $line, $col)
     {
-        $this->ast->clear();
-
-        $expected = $array;
+        $expected = array();
 
         for ($i = 1; $i < $this->YYBADCH; ++$i) {
             if (isset($this->yycheck[$yyn = $this->yybase[$state] + $i])
@@ -319,6 +316,6 @@ abstract class AbstractParser
             $message .= ', expecting '.($expected ? implode(', ', $expected).' or ' : '').$last;
         }
 
-        return new Error($message, $line);
+        return new Error($message, $line, $col);
     }
 }

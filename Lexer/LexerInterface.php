@@ -28,10 +28,12 @@ interface LexerInterface
     /**
      * Splits a string of PHP code into a list of tokens.
      *
-     * Each token is a numerically indexed array of 3 items:
-     * - the token id: either a T_* constant or a single character
-     * - the source code excerpt
-     * - the ending line of the token
+     * Each token is a numerically indexed array of 5 items:
+     * - type identifier
+     * - source code excerpt
+     * - start line
+     * - start column
+     * - byte offset in the parsed code
      *
      * @param mixed $code The source code to lex
      *

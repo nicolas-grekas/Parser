@@ -94,24 +94,46 @@ class PhpLexer implements LexerInterface
         error_reporting($e);
         restore_error_handler();
 
-        $i = count($tokens);
+        $len = count($tokens);
         $token = array();
         $tokens[] = array(0, '', $endLine); // EOF token
+        $line = 1;
+        $col = 1;
+        $seek = 0;
 
-        // Put end line instead of start line in every $tokens[$i][2]
-        for (; $i >= 0; --$i) {
+        // Add column + seek offset to tokens
+        for ($i = 0; $i < $len; ++$i) {
             if (isset($tokens[$i][2])) {
-                $line = $tokens[$i][2];
-                $tokens[$i][2] = $endLine;
-                $endLine = $line;
-            } else {
-                $token[2] = $endLine;
-                if ('b"' === $token[0] = $token[1] = $tokens[$i]) {
-                    $token[0] = '"';
+                $token = $tokens[$i];
+                $tokenLen = strlen($token[1]);
+                $line = $token[2];
+                $token[3] = $col;
+                $token[4] = $seek;
+                $j = $i;
+                while (!isset($tokens[++$j][2])) {
+                    // No-op
                 }
-                $tokens[$i] = $token;
+                if ($tokens[$j][2] !== $line) {
+                    $col = 1 + $tokenLen - max(strrpos($token[1], "\r"), strrpos($token[1], "\n"));
+                } else {
+                    $col += $tokenLen;
+                }
+                $seek += $tokenLen;
+            } else {
+                $token[1] = $token[0] = $tokens[$i];
+                $token[2] = $line;
+                $token[3] = $col++;
+                $token[4] = $seek++;
+                if ('b"' === $token[0]) {
+                    $token[0] = '"';
+                    ++$col;
+                    ++$seek;
+                }
             }
+            $tokens[$i] = $token;
         }
+        $tokens[$i][3] = $col;
+        $tokens[$i][4] = $seek;
 
         return $tokens;
     }

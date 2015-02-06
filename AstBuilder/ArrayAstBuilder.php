@@ -17,12 +17,12 @@ class ArrayAstBuilder extends AbstractAstBuilder
     /**
      * {@inheritdoc}
      */
-    public function createToken($name, $id, $code, $startLine, $endLine, $semantic)
+    public function createToken($name, $token, $semantic, $pos)
     {
         return array(
             'name' => $name,
-            'code' => $code,
-            'line' => $startLine,
+            'code' => $token[1],
+            'line' => $token[2],
             'semantic' => $semantic,
         );
     }
@@ -30,7 +30,7 @@ class ArrayAstBuilder extends AbstractAstBuilder
     /**
      * {@inheritdoc}
      */
-    public function createNode($name, $ruleId)
+    protected function createNode($name, $ruleId)
     {
         return array(
             'name' => $name,
@@ -41,7 +41,7 @@ class ArrayAstBuilder extends AbstractAstBuilder
     /**
      * {@inheritdoc}
      */
-    public function appendChild(&$ast, $child)
+    protected function appendChild(&$ast, $child)
     {
         $ast['kids'][] = $child;
     }

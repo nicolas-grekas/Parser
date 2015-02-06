@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <start>
-  <asemantic-token name="T_OPEN_TAG" line="1-2">&lt;?php
+  <asemantic-token name="T_OPEN_TAG" line="1">&lt;?php
 </asemantic-token>
-  <asemantic-token name="T_WHITESPACE" line="2-3">
+  <asemantic-token name="T_WHITESPACE" line="2">
 </asemantic-token>
   <top_statement_list>
     <top_statement>
@@ -15,7 +15,7 @@
       </namespace_name>
       <semantic-token name="';'" line="3">;</semantic-token>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="3-5">
+    <asemantic-token name="T_WHITESPACE" line="3">
 
 </asemantic-token>
     <top_statement>
@@ -30,7 +30,7 @@
       </use_declarations>
       <semantic-token name="';'" line="5">;</semantic-token>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="5-7">
+    <asemantic-token name="T_WHITESPACE" line="5">
 
 </asemantic-token>
     <top_statement>
@@ -67,7 +67,7 @@
         <semantic-token name="';'" line="7">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="7-9">
+    <asemantic-token name="T_WHITESPACE" line="7">
 
 </asemantic-token>
     <top_statement>
@@ -114,7 +114,7 @@
         <semantic-token name="';'" line="9">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="9-11">
+    <asemantic-token name="T_WHITESPACE" line="9">
 
 </asemantic-token>
     <top_statement>
@@ -161,7 +161,7 @@
         <semantic-token name="';'" line="11">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="11-12">
+    <asemantic-token name="T_WHITESPACE" line="11">
 </asemantic-token>
     <top_statement>
       <statement>
@@ -233,7 +233,7 @@
         <semantic-token name="';'" line="12">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="12-14">
+    <asemantic-token name="T_WHITESPACE" line="12">
 
 </asemantic-token>
     <top_statement>
@@ -423,7 +423,7 @@
         <semantic-token name="';'" line="14">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="14-15">
+    <asemantic-token name="T_WHITESPACE" line="14">
 </asemantic-token>
     <top_statement>
       <statement>
@@ -465,7 +465,7 @@
         <semantic-token name="';'" line="15">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="15-16">
+    <asemantic-token name="T_WHITESPACE" line="15">
 </asemantic-token>
     <top_statement>
       <statement>
@@ -507,7 +507,7 @@
         <semantic-token name="';'" line="16">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="16-18">
+    <asemantic-token name="T_WHITESPACE" line="16">
 
 </asemantic-token>
     <top_statement>
@@ -544,7 +544,7 @@
         <semantic-token name="';'" line="18">;</semantic-token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="18-20">
+    <asemantic-token name="T_WHITESPACE" line="18">
 
 </asemantic-token>
     <top_statement>
@@ -555,7 +555,7 @@
     </top_statement>
     <top_statement>
       <statement>
-        <semantic-token name="T_INLINE_HTML" line="20-22">
+        <semantic-token name="T_INLINE_HTML" line="20">
 ()&lt;?php ()
 </semantic-token>
       </statement>

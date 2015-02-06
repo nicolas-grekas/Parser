@@ -14,10 +14,13 @@ namespace Tchwork\Parser\Exception;
  */
 class Error extends \Exception
 {
-    public function __construct($message, $line = -1)
+    public function __construct($message, $line = 0, $col = 0)
     {
         if (0 < $line) {
             $message .= ' on line '.$line;
+            if (0 < $col) {
+                $message .= ','.$col;
+            }
         }
 
         $this->message = $message;
