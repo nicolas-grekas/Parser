@@ -22,9 +22,9 @@ class PhpLexerTest extends \PHPUnit_Framework_TestCase
 
         $code = "<?php \x00";
         $x = array(
-            array(T_OPEN_TAG, '<?php ', 1, 1, 0),
-            array(T_BAD_CHARACTER, "\x00", 1, 7, 6),
-            array(0, '', 1, 8, 7),
+            array(T_OPEN_TAG, '<?php ', 0, 6, 6),
+            array(T_BAD_CHARACTER, "\x00", 0, 1, 1),
+            array(0, '', 0, 0, 0),
         );
 
         $this->assertSame($x, $lexer->getTokens($code));

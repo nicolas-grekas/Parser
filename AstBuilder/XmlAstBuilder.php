@@ -19,38 +19,38 @@ class XmlAstBuilder extends AbstractAstBuilder
     /**
      * {@inheritdoc}
      */
-    public function createToken($name, $token, $semantic, $pos)
+    public function createToken(&$node, $code, $type)
     {
-        $node = $this->doc->createElement($semantic ? 'semantic-token' : 'asemantic-token');
-        $node->setAttribute('name', $name);
-        $node->setAttribute('line', $token[2]);
-        $node->appendChild($this->doc->createTextNode($token[1]));
+        $elt = $this->doc->createElement(isset($node['asems']) ? 'semantic-token' : 'asemantic-token');
+        $elt->setAttribute('name', $node['name']);
+        $elt->setAttribute('line', $node['startLine']);
+        $elt->appendChild($this->doc->createTextNode($code));
 
-        return $node;
+        return $elt;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function createNode($name, $ruleId)
+    protected function createNode(&$node)
     {
-        return $this->doc->createElement($name);
+        return $this->doc->createElement($node['name']);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function appendChild(&$ast, $child)
+    protected function appendChild(&$node, $child)
     {
-        $ast->appendChild($child);
+        $node['ast']->appendChild($child['ast']);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAst($ast)
+    public function getAst($node)
     {
-        $this->doc->appendChild($ast);
+        $this->doc->appendChild($node['ast']);
 
         return $this->doc;
     }

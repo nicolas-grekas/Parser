@@ -31,9 +31,9 @@ interface LexerInterface
      * Each token is a numerically indexed array of 5 items:
      * - type identifier
      * - source code excerpt
-     * - start line
-     * - start column
-     * - byte offset in the parsed code
+     * - number of lines
+     * - number of columns on the last line
+     * - number of bytes
      *
      * @param mixed $code The source code to lex
      *

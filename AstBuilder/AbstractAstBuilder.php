@@ -22,42 +22,39 @@ abstract class AbstractAstBuilder implements AstBuilderInterface
     /**
      * Appends a child to an AST node.
      *
-     * @param mixed &$ast  The parent AST node, as returned by ->createNode()
-     * @param mixed $child The child AST node, as returned by ->createNode() or ->createToken()
+     * @param array &$node The parent node
+     * @param array $child The child node
      *
      * @return void
      */
-    abstract protected function appendChild(&$ast, $child);
+    abstract protected function appendChild(&$node, $child);
 
     /**
      * {@inheritdoc}
      */
-    abstract public function createToken($name, $token, $semantic, $pos);
+    abstract public function createToken(&$node, $code, $type);
 
     /**
      * Creates an AST node representation.
      *
-     * @param string $name   The name of the node's grammar rule
-     * @param int    $ruleId The identifier of the node's grammar rule
+     * @param array &$node The node missing an AST representation
      *
-     * @return mixed The node representation
+     * @return mixed The AST representation for the node
      */
-    abstract protected function createNode($name, $ruleId);
+    abstract protected function createNode(&$node);
 
     /**
      * {@inheritdoc}
      */
-    public function reduceNode(array $node, array $children)
+    public function reduceNode($node, $children)
     {
-        isset($node['ast']) or $node['ast'] = $this->createNode($node['name'], $node['id']);
+        isset($node['ast']) or $node['ast'] = $this->createNode($node);
 
         foreach ($children as $n) {
             foreach ($n['asems'] as $a) {
-                $this->appendChild($node['ast'], $a);
+                $this->appendChild($node, $a);
             }
-            if ($n['id']) {
-                $this->appendChild($node['ast'], $n['ast']);
-            }
+            $this->appendChild($node, $n);
         }
 
         return $node;
@@ -66,9 +63,9 @@ abstract class AbstractAstBuilder implements AstBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAst($ast)
+    public function getAst($node)
     {
-        return $ast;
+        return $node['ast'];
     }
 
     /**

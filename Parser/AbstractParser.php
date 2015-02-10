@@ -97,6 +97,21 @@ abstract class AbstractParser
         $array = array();
         $node = $array;
 
+        $nodeProto = array(
+            'id' => 0,
+            'name' => '',
+            'asems' => null,
+            'ast' => null,
+            'startLine' => 1,
+            'endLine' => 1,
+            'startCol' => 1,
+            'endCol' => 1,
+            'startByte' => 0,
+            'endByte' => 0,
+            'startPos' => 0,
+            'endPos' => 0,
+        );
+
         $ast = $this->ast;
         $tokenIds = $this->tokenIds;
         $tokenNames = $this->tokenNames;
@@ -105,17 +120,18 @@ abstract class AbstractParser
         $errFlag = 0;
         $errTok = null;
         $stateStack = array($state);
-        $nodeStack = $array;
+        $nodeStack = array($nodeProto);
         $asems = $array;
+        $tokens = $this->lexer->getTokens($code);
 
         try {
-            foreach ($this->lexer->getTokens($code) as $pos => $token) {
+            foreach ($tokens as $pos => $token) {
                 if (isset($tokenNames[$token[0]])) {
                     $tokenName = $tokenNames[$token[0]];
                     $tokenId = $tokenIds[$token[0]];
 
                     if ($YYBADCH === $tokenId && null === $errTok) {
-                        $asems[] = $ast->createToken($tokenName, $token, false, $pos);
+                        $asems[] = self::createToken($ast, $nodeProto, 0, $tokenName, $token, null, $pos, $pos);
 
                         continue;
                     }
@@ -137,15 +153,11 @@ abstract class AbstractParser
                             if (0 < $errFlag && 2 === --$errFlag) {
                                 /* reduce error */
 
-                                $node['id'] = $YYINTERRTOK - $YYBADCH; // Negative id for tokens, positive for nodes
-                                $node['name'] = 'error';
-                                $node['ast'] = $ast->createToken('error', $errTok, true, $pos);
-                                $node['asems'] = $asems;
-                                $nodeStack[$stackPos] = $node;
+                                $nodeStack[$stackPos] = self::createToken($ast, $nodeProto, $YYINTERRTOK - $YYBADCH, 'error', $errTok, $asems, $errTok[6], $errTok[7]);
                                 $asems = $array;
 
                                 foreach ($errTok[5] as $errTok) {
-                                    $asems[] = $ast->createToken($errTok[0], $errTok[1], false, $errTok[2]);
+                                    $asems[] = self::createToken($ast, $nodeProto, 0, $errTok[5], $errTok, null, $errTok[6], $errTok[6]);
                                 }
 
                                 $errTok = null;
@@ -155,15 +167,11 @@ abstract class AbstractParser
 
                             ++$stackPos;
 
-                            $node['id'] = $tokenId - $YYBADCH; // Negative id for tokens, positive for nodes
-                            $node['name'] = $tokenName;
-                            $node['ast'] = $ast->createToken($tokenName, $token, true, $pos);
-                            $node['asems'] = $asems;
-                            $nodeStack[$stackPos] = $node;
+                            $nodeStack[$stackPos] = self::createToken($ast, $nodeProto, $tokenId - $YYBADCH, $tokenName, $token, $asems, $pos, $pos);
                             $stateStack[$stackPos] = $state = $yyn;
+                            $asems = $array;
 
                             $tokenId = -1;
-                            $asems = $array;
 
                             if (0 > $yyn -= $YYNLSTATES) {
                                 /* do not reduce */
@@ -189,13 +197,16 @@ abstract class AbstractParser
                                 }
 
                                 if ($YYBADCH === $tokenId && isset($tokenNames[$token[0]])) {
-                                    $errTok[5][] = array($tokenName, $token, $pos);
+                                    $token[5] = $tokenName;
+                                    $token[6] = $pos;
+                                    $errTok[5][] = $token;
                                 } else {
-                                    $errTok[5][] = array('', $token);
+                                    $errTok[5][] = $token;
                                     foreach ($errTok[5] as $token) {
-                                        $errTok[1] .= $token[1][1];
+                                        $errTok[1] .= $token[1];
                                     }
                                     $errTok[5] = $array;
+                                    $errTok[7] = $pos;
                                 }
 
                                 $tokenId = -1;
@@ -217,7 +228,7 @@ abstract class AbstractParser
                                 }
                                 $stateStack[++$stackPos] = $state = $yyn = $yyaction[$yyn];
 
-                                $errTok = array(-1, '', $token[2], $token[3], $token[4], $array);
+                                $errTok = array(-1, '', $token[2], $token[3], $token[4], $array, $pos, $pos);
                             }
                         } elseif ($yyn) {
                             /* reduce */
@@ -231,23 +242,34 @@ abstract class AbstractParser
                             $stackPos -= $yyl;
 
                             if (0 > $yyl || $yyn !== $nodeStack[$stackPos]['id']) {
+                                $node = $nodeProto;
                                 $node['id'] = $yyn;
                                 $node['name'] = $yynode[$yyn];
-                                $node['ast'] = null;
                                 if (0 > $yyl) {
                                     $node['asems'] = $array;
                                 } else {
                                     $node['asems'] = $nodeStack[$stackPos]['asems'];
+                                    $node['startLine'] = $nodeStack[$stackPos]['startLine'];
+                                    $node['startCol'] = $nodeStack[$stackPos]['startCol'];
+                                    $node['startByte'] = $nodeStack[$stackPos]['startByte'];
+                                    $node['startPos'] = $nodeStack[$stackPos]['startPos'];
                                 }
-                                $nodeStack[$stackPos] = $ast->reduceNode($node, array_slice($nodeStack, $stackPos - 1, $yyl + 1));
+                                $yyp = 1;
                             } else {
-                                $nodeStack[$stackPos]['asems'] or $nodeStack[$stackPos]['asems'] = $nodeStack[$stackPos + 1]['asems'];
-                                $nodeStack[$stackPos] = $ast->reduceNode($nodeStack[$stackPos], array_slice($nodeStack, $stackPos, $yyl));
+                                $node = $nodeStack[$stackPos];
+                                $node['asems'] or $node['asems'] = $nodeStack[$stackPos + 1]['asems'];
+                                $node['endLine'] = $nodeProto['endLine'];
+                                $node['endCol'] = $nodeProto['endCol'];
+                                $node['endByte'] = $nodeProto['endByte'];
+                                $node['endPos'] = $nodeProto['endPos'];
+                                $yyp = 0;
                             }
+
+                            $nodeStack[$stackPos] = $ast->reduceNode($node, array_slice($nodeStack, 1 + $stackPos - $yyp, $yyl + $yyp));
 
                             /* Goto - shift nonterminal */
 
-                            $yyp = $yygbase[$yyn] + $stateStack[$stackPos-1];
+                            $yyp = $yygbase[$yyn] + $stateStack[$stackPos - 1];
                             $state = isset($yygcheck[$yyp]) && $yygcheck[$yyp] === $yyn
                                 ? $yygoto[$yyp]
                                 : $yygdefault[$yyn];
@@ -256,13 +278,7 @@ abstract class AbstractParser
                         } else {
                             /* accept */
 
-                            $node['id'] = 0;
-                            $node['name'] = 'EOF';
-                            $node['ast'] = $ast->createToken('EOF', $token, true, $pos);
-                            $node['asems'] = $asems;
-                            $node = $ast->reduceNode($nodeStack[$stackPos], array($node));
-
-                            $node = $ast->getAst($node['ast']);
+                            $node = $ast->getAst($nodeStack[$stackPos]);
                             $ast->clear();
 
                             return $node;
@@ -285,6 +301,30 @@ abstract class AbstractParser
 
             throw $e;
         }
+    }
+
+    private static function createToken($ast, &$nodeProto, $tokenId, $tokenName, $token, $asems, $startPos, $endPos)
+    {
+        $node = $nodeProto;
+        $node['id'] = $tokenId;
+        $node['name'] = $tokenName;
+        $node['asems'] = $asems;
+        $node['startPos'] = $startPos;
+        $node['endPos'] = $endPos;
+
+        if ($token[2]) {
+            $node['endLine'] = $nodeProto['startLine'] += $token[2];
+            $node['endCol'] = $nodeProto['startCol'] = 1;
+        }
+        $node['endCol']  = ($nodeProto['startCol'] += $token[3]) - 1;
+        $node['endByte'] = ($nodeProto['startByte'] += $token[4]) - 1;
+        $nodeProto['endLine'] = $nodeProto['startLine'];
+        $nodeProto['endCol'] = $nodeProto['startCol'];
+        $nodeProto['endByte'] = $nodeProto['startByte'] - 1;
+
+        $node['ast'] = $ast->createToken($node, $token[1], $token[0]);
+
+        return $node;
     }
 
     private function getSyntaxError($tokenName, $state, $line, $col)

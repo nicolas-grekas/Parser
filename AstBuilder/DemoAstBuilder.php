@@ -17,18 +17,21 @@ class DemoAstBuilder implements AstBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function createToken($name, $token, $semantic, $pos)
+    public function createToken(&$node, $code, $type)
     {
-        return $token[1];
+        return $code;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reduceNode(array $node, array $children)
+    public function reduceNode($node, $children)
     {
         if (self::ERROR === $node['name']) {
-            $node['ast'] .= implode('', $children[0]['asems']).$children[0]['ast'];
+            foreach ($children[0]['asems'] as $a) {
+                $node['ast'] .= $a['ast'];
+            }
+            $node['ast'] .= $children[0]['ast'];
 
             return $node;
         }
@@ -60,9 +63,9 @@ class DemoAstBuilder implements AstBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAst($ast)
+    public function getAst($node)
     {
-        return $ast;
+        return $node['ast'];
     }
 
     /**

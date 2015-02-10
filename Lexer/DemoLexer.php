@@ -46,28 +46,17 @@ class DemoLexer implements LexerInterface
      */
     public function getTokens($code)
     {
-        $lineNo = 1;
-        $colNo = 1;
-        $seekNo = 0;
-
         while (false !== $line = fgets($code)) {
             while (isset($line[0])) {
                 if (preg_match('/^\d+/', $line, $match)) {
-                    yield [257, $match[0], $lineNo, $colNo, $seekNo];
                     $len = strlen($match[0]);
+                    yield [257, $match[0], 0, $len, $len];
                     $line = substr($line, $len);
-                    $colNo += $len;
-                    $seekNo += $len;
                 } else {
-                    if ("\n" === $line[0]) {
-                        ++$lineNo;
-                        $colNo = 1;
-                    }
+                    $lf = (int) ("\n" === $line[0]);
+                    yield [$line[0], $line[0], $lf, 1 - $lf, 1];
 
-                    yield [$line[0], $line[0], $lineNo, $colNo, $seekNo];
                     $line = substr($line, 1);
-                    ++$colNo;
-                    ++$seekNo;
                 }
             }
         }
