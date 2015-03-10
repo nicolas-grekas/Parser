@@ -19,7 +19,7 @@ class Error extends \Exception
         if (0 < $line) {
             $message .= ' on line '.$line;
             if (0 < $col) {
-                $message .= ','.$col;
+                $message .= ':'.$col;
             }
         }
 

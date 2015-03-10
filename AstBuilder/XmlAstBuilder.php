@@ -21,9 +21,10 @@ class XmlAstBuilder extends AbstractAstBuilder
      */
     public function createToken(&$node, $code, $type)
     {
-        $elt = $this->doc->createElement(isset($node['asems']) ? 'semantic-token' : 'asemantic-token');
+        $elt = $this->doc->createElement(isset($node['asems']) ? 'token' : 'asem');
         $elt->setAttribute('name', $node['name']);
-        $elt->setAttribute('line', $node['startLine']);
+        $elt->setAttribute('lines', $node['startLine'].':'.$node['startCol'].'-'.$node['endLine'].':'.$node['endCol']);
+        $elt->setAttribute('bytes', $node['startByte'].'-'.$node['endByte']);
         $elt->appendChild($this->doc->createTextNode($code));
 
         return $elt;
@@ -42,6 +43,8 @@ class XmlAstBuilder extends AbstractAstBuilder
      */
     protected function appendChild(&$node, $child)
     {
+        $node['ast']->setAttribute('lines', $node['startLine'].':'.$node['startCol'].'-'.$node['endLine'].':'.$node['endCol']);
+        $node['ast']->setAttribute('bytes', $node['startByte'].'-'.$node['endByte']);
         $node['ast']->appendChild($child['ast']);
     }
 

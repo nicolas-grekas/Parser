@@ -1,60 +1,60 @@
 <?xml version="1.0"?>
-<start>
-  <asemantic-token name="T_OPEN_TAG" line="1">&lt;?php
-</asemantic-token>
-  <asemantic-token name="T_WHITESPACE" line="2">
-</asemantic-token>
-  <top_statement_list>
-    <top_statement>
-      <semantic-token name="T_NAMESPACE" line="3">namespace</semantic-token>
-      <asemantic-token name="T_WHITESPACE" line="3"> </asemantic-token>
-      <namespace_name>
-        <semantic-token name="T_STRING" line="3">Tchwork</semantic-token>
-        <semantic-token name="T_NS_SEPARATOR" line="3">\</semantic-token>
-        <semantic-token name="T_STRING" line="3">Parser</semantic-token>
+<start lines="3:1-22:1" bytes="7-430">
+  <asem name="T_OPEN_TAG" lines="1:1-2:0" bytes="0-5">&lt;?php
+</asem>
+  <asem name="T_WHITESPACE" lines="2:1-3:0" bytes="6-6">
+</asem>
+  <top_statement_list lines="3:1-22:1" bytes="7-430">
+    <top_statement lines="3:1-3:26" bytes="7-31">
+      <token name="T_NAMESPACE" lines="3:1-3:9" bytes="7-15">namespace</token>
+      <asem name="T_WHITESPACE" lines="3:10-3:10" bytes="16-16"> </asem>
+      <namespace_name lines="3:11-3:25" bytes="17-30">
+        <token name="T_STRING" lines="3:11-3:17" bytes="17-23">Tchwork</token>
+        <token name="T_NS_SEPARATOR" lines="3:18-3:18" bytes="24-24">\</token>
+        <token name="T_STRING" lines="3:19-3:24" bytes="25-30">Parser</token>
       </namespace_name>
-      <semantic-token name="';'" line="3">;</semantic-token>
+      <token name="';'" lines="3:25-3:25" bytes="31-31">;</token>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="3">
+    <asem name="T_WHITESPACE" lines="3:26-5:0" bytes="32-33">
 
-</asemantic-token>
-    <top_statement>
-      <semantic-token name="T_USE" line="5">use</semantic-token>
-      <asemantic-token name="T_WHITESPACE" line="5"> </asemantic-token>
-      <use_declarations>
-        <use_declaration>
-          <namespace_name>
-            <semantic-token name="T_STRING" line="5">DOMDocument</semantic-token>
+</asem>
+    <top_statement lines="5:1-5:17" bytes="34-49">
+      <token name="T_USE" lines="5:1-5:3" bytes="34-36">use</token>
+      <asem name="T_WHITESPACE" lines="5:4-5:4" bytes="37-37"> </asem>
+      <use_declarations lines="5:5-5:16" bytes="38-48">
+        <use_declaration lines="5:5-5:16" bytes="38-48">
+          <namespace_name lines="5:5-5:16" bytes="38-48">
+            <token name="T_STRING" lines="5:5-5:15" bytes="38-48">DOMDocument</token>
           </namespace_name>
         </use_declaration>
       </use_declarations>
-      <semantic-token name="';'" line="5">;</semantic-token>
+      <token name="';'" lines="5:16-5:16" bytes="49-49">;</token>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="5">
+    <asem name="T_WHITESPACE" lines="5:17-7:0" bytes="50-51">
 
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <internal_functions_in_yacc>
-              <semantic-token name="T_REQUIRE" line="7">require</semantic-token>
-              <asemantic-token name="T_WHITESPACE" line="7"> </asemantic-token>
-              <expr>
-                <expr_without_variable>
-                  <expr>
-                    <expr_without_variable>
-                      <scalar>
-                        <semantic-token name="T_DIR" line="7">__DIR__</semantic-token>
+</asem>
+    <top_statement lines="7:1-7:43" bytes="52-93">
+      <statement lines="7:1-7:43" bytes="52-93">
+        <expr lines="7:1-7:42" bytes="52-92">
+          <expr_without_variable lines="7:1-7:42" bytes="52-92">
+            <internal_functions_in_yacc lines="7:1-7:42" bytes="52-92">
+              <token name="T_REQUIRE" lines="7:1-7:7" bytes="52-58">require</token>
+              <asem name="T_WHITESPACE" lines="7:8-7:8" bytes="59-59"> </asem>
+              <expr lines="7:9-7:42" bytes="60-92">
+                <expr_without_variable lines="7:9-7:42" bytes="60-92">
+                  <expr lines="7:9-7:16" bytes="60-66">
+                    <expr_without_variable lines="7:9-7:16" bytes="60-66">
+                      <scalar lines="7:9-7:16" bytes="60-66">
+                        <token name="T_DIR" lines="7:9-7:15" bytes="60-66">__DIR__</token>
                       </scalar>
                     </expr_without_variable>
                   </expr>
-                  <semantic-token name="'.'" line="7">.</semantic-token>
-                  <expr>
-                    <expr_without_variable>
-                      <scalar>
-                        <dereferencable_scalar>
-                          <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="7">'/../vendor/autoload.php'</semantic-token>
+                  <token name="'.'" lines="7:16-7:16" bytes="67-67">.</token>
+                  <expr lines="7:17-7:42" bytes="68-92">
+                    <expr_without_variable lines="7:17-7:42" bytes="68-92">
+                      <scalar lines="7:17-7:42" bytes="68-92">
+                        <dereferencable_scalar lines="7:17-7:42" bytes="68-92">
+                          <token name="T_CONSTANT_ENCAPSED_STRING" lines="7:17-7:41" bytes="68-92">'/../vendor/autoload.php'</token>
                         </dereferencable_scalar>
                       </scalar>
                     </expr_without_variable>
@@ -64,46 +64,46 @@
             </internal_functions_in_yacc>
           </expr_without_variable>
         </expr>
-        <semantic-token name="';'" line="7">;</semantic-token>
+        <token name="';'" lines="7:42-7:42" bytes="93-93">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="7">
+    <asem name="T_WHITESPACE" lines="7:43-9:0" bytes="94-95">
 
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <callable_variable>
-                <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="9">$lexer</semantic-token>
+</asem>
+    <top_statement lines="9:1-9:31" bytes="96-125">
+      <statement lines="9:1-9:31" bytes="96-125">
+        <expr lines="9:1-9:30" bytes="96-124">
+          <expr_without_variable lines="9:1-9:30" bytes="96-124">
+            <variable lines="9:1-9:8" bytes="96-102">
+              <callable_variable lines="9:1-9:7" bytes="96-101">
+                <simple_variable lines="9:1-9:7" bytes="96-101">
+                  <token name="T_VARIABLE" lines="9:1-9:6" bytes="96-101">$lexer</token>
                 </simple_variable>
               </callable_variable>
             </variable>
-            <asemantic-token name="T_WHITESPACE" line="9"> </asemantic-token>
-            <semantic-token name="'='" line="9">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="9"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <new_expr>
-                  <semantic-token name="T_NEW" line="9">new</semantic-token>
-                  <asemantic-token name="T_WHITESPACE" line="9"> </asemantic-token>
-                  <class_name_reference>
-                    <class_name>
-                      <name>
-                        <namespace_name>
-                          <semantic-token name="T_STRING" line="9">Lexer</semantic-token>
-                          <semantic-token name="T_NS_SEPARATOR" line="9">\</semantic-token>
-                          <semantic-token name="T_STRING" line="9">PhpLexer</semantic-token>
+            <asem name="T_WHITESPACE" lines="9:7-9:7" bytes="102-102"> </asem>
+            <token name="'='" lines="9:8-9:8" bytes="103-103">=</token>
+            <asem name="T_WHITESPACE" lines="9:9-9:9" bytes="104-104"> </asem>
+            <expr lines="9:10-9:30" bytes="105-124">
+              <expr_without_variable lines="9:10-9:30" bytes="105-124">
+                <new_expr lines="9:10-9:30" bytes="105-124">
+                  <token name="T_NEW" lines="9:10-9:12" bytes="105-107">new</token>
+                  <asem name="T_WHITESPACE" lines="9:13-9:13" bytes="108-108"> </asem>
+                  <class_name_reference lines="9:14-9:28" bytes="109-122">
+                    <class_name lines="9:14-9:28" bytes="109-122">
+                      <name lines="9:14-9:28" bytes="109-122">
+                        <namespace_name lines="9:14-9:28" bytes="109-122">
+                          <token name="T_STRING" lines="9:14-9:18" bytes="109-113">Lexer</token>
+                          <token name="T_NS_SEPARATOR" lines="9:19-9:19" bytes="114-114">\</token>
+                          <token name="T_STRING" lines="9:20-9:27" bytes="115-122">PhpLexer</token>
                         </namespace_name>
                       </name>
                     </class_name>
                   </class_name_reference>
-                  <ctor_arguments>
-                    <argument_list>
-                      <semantic-token name="'('" line="9">(</semantic-token>
-                      <semantic-token name="')'" line="9">)</semantic-token>
+                  <ctor_arguments lines="9:28-9:30" bytes="123-124">
+                    <argument_list lines="9:28-9:30" bytes="123-124">
+                      <token name="'('" lines="9:28-9:28" bytes="123-123">(</token>
+                      <token name="')'" lines="9:29-9:29" bytes="124-124">)</token>
                     </argument_list>
                   </ctor_arguments>
                 </new_expr>
@@ -111,46 +111,46 @@
             </expr>
           </expr_without_variable>
         </expr>
-        <semantic-token name="';'" line="9">;</semantic-token>
+        <token name="';'" lines="9:30-9:30" bytes="125-125">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="9">
+    <asem name="T_WHITESPACE" lines="9:31-11:0" bytes="126-127">
 
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <callable_variable>
-                <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="11">$ast</semantic-token>
+</asem>
+    <top_statement lines="11:1-11:39" bytes="128-165">
+      <statement lines="11:1-11:39" bytes="128-165">
+        <expr lines="11:1-11:38" bytes="128-164">
+          <expr_without_variable lines="11:1-11:38" bytes="128-164">
+            <variable lines="11:1-11:6" bytes="128-132">
+              <callable_variable lines="11:1-11:5" bytes="128-131">
+                <simple_variable lines="11:1-11:5" bytes="128-131">
+                  <token name="T_VARIABLE" lines="11:1-11:4" bytes="128-131">$ast</token>
                 </simple_variable>
               </callable_variable>
             </variable>
-            <asemantic-token name="T_WHITESPACE" line="11"> </asemantic-token>
-            <semantic-token name="'='" line="11">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="11"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <new_expr>
-                  <semantic-token name="T_NEW" line="11">new</semantic-token>
-                  <asemantic-token name="T_WHITESPACE" line="11"> </asemantic-token>
-                  <class_name_reference>
-                    <class_name>
-                      <name>
-                        <namespace_name>
-                          <semantic-token name="T_STRING" line="11">AstBuilder</semantic-token>
-                          <semantic-token name="T_NS_SEPARATOR" line="11">\</semantic-token>
-                          <semantic-token name="T_STRING" line="11">XmlAstBuilder</semantic-token>
+            <asem name="T_WHITESPACE" lines="11:5-11:5" bytes="132-132"> </asem>
+            <token name="'='" lines="11:6-11:6" bytes="133-133">=</token>
+            <asem name="T_WHITESPACE" lines="11:7-11:7" bytes="134-134"> </asem>
+            <expr lines="11:8-11:38" bytes="135-164">
+              <expr_without_variable lines="11:8-11:38" bytes="135-164">
+                <new_expr lines="11:8-11:38" bytes="135-164">
+                  <token name="T_NEW" lines="11:8-11:10" bytes="135-137">new</token>
+                  <asem name="T_WHITESPACE" lines="11:11-11:11" bytes="138-138"> </asem>
+                  <class_name_reference lines="11:12-11:36" bytes="139-162">
+                    <class_name lines="11:12-11:36" bytes="139-162">
+                      <name lines="11:12-11:36" bytes="139-162">
+                        <namespace_name lines="11:12-11:36" bytes="139-162">
+                          <token name="T_STRING" lines="11:12-11:21" bytes="139-148">AstBuilder</token>
+                          <token name="T_NS_SEPARATOR" lines="11:22-11:22" bytes="149-149">\</token>
+                          <token name="T_STRING" lines="11:23-11:35" bytes="150-162">XmlAstBuilder</token>
                         </namespace_name>
                       </name>
                     </class_name>
                   </class_name_reference>
-                  <ctor_arguments>
-                    <argument_list>
-                      <semantic-token name="'('" line="11">(</semantic-token>
-                      <semantic-token name="')'" line="11">)</semantic-token>
+                  <ctor_arguments lines="11:36-11:38" bytes="163-164">
+                    <argument_list lines="11:36-11:38" bytes="163-164">
+                      <token name="'('" lines="11:36-11:36" bytes="163-163">(</token>
+                      <token name="')'" lines="11:37-11:37" bytes="164-164">)</token>
                     </argument_list>
                   </ctor_arguments>
                 </new_expr>
@@ -158,71 +158,71 @@
             </expr>
           </expr_without_variable>
         </expr>
-        <semantic-token name="';'" line="11">;</semantic-token>
+        <token name="';'" lines="11:38-11:38" bytes="165-165">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="11">
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <callable_variable>
-                <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="12">$parser</semantic-token>
+    <asem name="T_WHITESPACE" lines="11:39-12:0" bytes="166-166">
+</asem>
+    <top_statement lines="12:1-12:46" bytes="167-211">
+      <statement lines="12:1-12:46" bytes="167-211">
+        <expr lines="12:1-12:45" bytes="167-210">
+          <expr_without_variable lines="12:1-12:45" bytes="167-210">
+            <variable lines="12:1-12:9" bytes="167-174">
+              <callable_variable lines="12:1-12:8" bytes="167-173">
+                <simple_variable lines="12:1-12:8" bytes="167-173">
+                  <token name="T_VARIABLE" lines="12:1-12:7" bytes="167-173">$parser</token>
                 </simple_variable>
               </callable_variable>
             </variable>
-            <asemantic-token name="T_WHITESPACE" line="12"> </asemantic-token>
-            <semantic-token name="'='" line="12">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="12"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <new_expr>
-                  <semantic-token name="T_NEW" line="12">new</semantic-token>
-                  <asemantic-token name="T_WHITESPACE" line="12"> </asemantic-token>
-                  <class_name_reference>
-                    <class_name>
-                      <name>
-                        <namespace_name>
-                          <semantic-token name="T_STRING" line="12">Parser</semantic-token>
-                          <semantic-token name="T_NS_SEPARATOR" line="12">\</semantic-token>
-                          <semantic-token name="T_STRING" line="12">PhpParser</semantic-token>
+            <asem name="T_WHITESPACE" lines="12:8-12:8" bytes="174-174"> </asem>
+            <token name="'='" lines="12:9-12:9" bytes="175-175">=</token>
+            <asem name="T_WHITESPACE" lines="12:10-12:10" bytes="176-176"> </asem>
+            <expr lines="12:11-12:45" bytes="177-210">
+              <expr_without_variable lines="12:11-12:45" bytes="177-210">
+                <new_expr lines="12:11-12:45" bytes="177-210">
+                  <token name="T_NEW" lines="12:11-12:13" bytes="177-179">new</token>
+                  <asem name="T_WHITESPACE" lines="12:14-12:14" bytes="180-180"> </asem>
+                  <class_name_reference lines="12:15-12:31" bytes="181-196">
+                    <class_name lines="12:15-12:31" bytes="181-196">
+                      <name lines="12:15-12:31" bytes="181-196">
+                        <namespace_name lines="12:15-12:31" bytes="181-196">
+                          <token name="T_STRING" lines="12:15-12:20" bytes="181-186">Parser</token>
+                          <token name="T_NS_SEPARATOR" lines="12:21-12:21" bytes="187-187">\</token>
+                          <token name="T_STRING" lines="12:22-12:30" bytes="188-196">PhpParser</token>
                         </namespace_name>
                       </name>
                     </class_name>
                   </class_name_reference>
-                  <ctor_arguments>
-                    <argument_list>
-                      <semantic-token name="'('" line="12">(</semantic-token>
-                      <non_empty_argument_list>
-                        <argument>
-                          <expr>
-                            <variable>
-                              <callable_variable>
-                                <simple_variable>
-                                  <semantic-token name="T_VARIABLE" line="12">$lexer</semantic-token>
+                  <ctor_arguments lines="12:31-12:45" bytes="197-210">
+                    <argument_list lines="12:31-12:45" bytes="197-210">
+                      <token name="'('" lines="12:31-12:31" bytes="197-197">(</token>
+                      <non_empty_argument_list lines="12:32-12:44" bytes="198-209">
+                        <argument lines="12:32-12:38" bytes="198-203">
+                          <expr lines="12:32-12:38" bytes="198-203">
+                            <variable lines="12:32-12:38" bytes="198-203">
+                              <callable_variable lines="12:32-12:38" bytes="198-203">
+                                <simple_variable lines="12:32-12:38" bytes="198-203">
+                                  <token name="T_VARIABLE" lines="12:32-12:37" bytes="198-203">$lexer</token>
                                 </simple_variable>
                               </callable_variable>
                             </variable>
                           </expr>
                         </argument>
-                        <semantic-token name="','" line="12">,</semantic-token>
-                        <asemantic-token name="T_WHITESPACE" line="12"> </asemantic-token>
-                        <argument>
-                          <expr>
-                            <variable>
-                              <callable_variable>
-                                <simple_variable>
-                                  <semantic-token name="T_VARIABLE" line="12">$ast</semantic-token>
+                        <token name="','" lines="12:38-12:38" bytes="204-204">,</token>
+                        <asem name="T_WHITESPACE" lines="12:39-12:39" bytes="205-205"> </asem>
+                        <argument lines="12:40-12:44" bytes="206-209">
+                          <expr lines="12:40-12:44" bytes="206-209">
+                            <variable lines="12:40-12:44" bytes="206-209">
+                              <callable_variable lines="12:40-12:44" bytes="206-209">
+                                <simple_variable lines="12:40-12:44" bytes="206-209">
+                                  <token name="T_VARIABLE" lines="12:40-12:43" bytes="206-209">$ast</token>
                                 </simple_variable>
                               </callable_variable>
                             </variable>
                           </expr>
                         </argument>
                       </non_empty_argument_list>
-                      <semantic-token name="')'" line="12">)</semantic-token>
+                      <token name="')'" lines="12:44-12:44" bytes="210-210">)</token>
                     </argument_list>
                   </ctor_arguments>
                 </new_expr>
@@ -230,174 +230,174 @@
             </expr>
           </expr_without_variable>
         </expr>
-        <semantic-token name="';'" line="12">;</semantic-token>
+        <token name="';'" lines="12:45-12:45" bytes="211-211">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="12">
+    <asem name="T_WHITESPACE" lines="12:46-14:0" bytes="212-213">
 
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <callable_variable>
-                <simple_variable>
-                  <semantic-token name="T_VARIABLE" line="14">$doc</semantic-token>
+</asem>
+    <top_statement lines="14:1-14:103" bytes="214-315">
+      <statement lines="14:1-14:103" bytes="214-315">
+        <expr lines="14:1-14:102" bytes="214-314">
+          <expr_without_variable lines="14:1-14:102" bytes="214-314">
+            <variable lines="14:1-14:6" bytes="214-218">
+              <callable_variable lines="14:1-14:5" bytes="214-217">
+                <simple_variable lines="14:1-14:5" bytes="214-217">
+                  <token name="T_VARIABLE" lines="14:1-14:4" bytes="214-217">$doc</token>
                 </simple_variable>
               </callable_variable>
             </variable>
-            <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
-            <semantic-token name="'='" line="14">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
-            <expr>
-              <variable>
-                <callable_variable>
-                  <dereferencable>
-                    <variable>
-                      <callable_variable>
-                        <simple_variable>
-                          <semantic-token name="T_VARIABLE" line="14">$parser</semantic-token>
+            <asem name="T_WHITESPACE" lines="14:5-14:5" bytes="218-218"> </asem>
+            <token name="'='" lines="14:6-14:6" bytes="219-219">=</token>
+            <asem name="T_WHITESPACE" lines="14:7-14:7" bytes="220-220"> </asem>
+            <expr lines="14:8-14:102" bytes="221-314">
+              <variable lines="14:8-14:102" bytes="221-314">
+                <callable_variable lines="14:8-14:102" bytes="221-314">
+                  <dereferencable lines="14:8-14:15" bytes="221-227">
+                    <variable lines="14:8-14:15" bytes="221-227">
+                      <callable_variable lines="14:8-14:15" bytes="221-227">
+                        <simple_variable lines="14:8-14:15" bytes="221-227">
+                          <token name="T_VARIABLE" lines="14:8-14:14" bytes="221-227">$parser</token>
                         </simple_variable>
                       </callable_variable>
                     </variable>
                   </dereferencable>
-                  <semantic-token name="T_OBJECT_OPERATOR" line="14">-&gt;</semantic-token>
-                  <member_name>
-                    <semantic-token name="T_STRING" line="14">parse</semantic-token>
+                  <token name="T_OBJECT_OPERATOR" lines="14:15-14:16" bytes="228-229">-&gt;</token>
+                  <member_name lines="14:17-14:22" bytes="230-234">
+                    <token name="T_STRING" lines="14:17-14:21" bytes="230-234">parse</token>
                   </member_name>
-                  <argument_list>
-                    <semantic-token name="'('" line="14">(</semantic-token>
-                    <non_empty_argument_list>
-                      <argument>
-                        <expr>
-                          <variable>
-                            <callable_variable>
-                              <function_call>
-                                <name>
-                                  <namespace_name>
-                                    <semantic-token name="T_STRING" line="14">file_get_contents</semantic-token>
+                  <argument_list lines="14:22-14:102" bytes="235-314">
+                    <token name="'('" lines="14:22-14:22" bytes="235-235">(</token>
+                    <non_empty_argument_list lines="14:23-14:101" bytes="236-313">
+                      <argument lines="14:23-14:101" bytes="236-313">
+                        <expr lines="14:23-14:101" bytes="236-313">
+                          <variable lines="14:23-14:101" bytes="236-313">
+                            <callable_variable lines="14:23-14:101" bytes="236-313">
+                              <function_call lines="14:23-14:101" bytes="236-313">
+                                <name lines="14:23-14:40" bytes="236-252">
+                                  <namespace_name lines="14:23-14:40" bytes="236-252">
+                                    <token name="T_STRING" lines="14:23-14:39" bytes="236-252">file_get_contents</token>
                                   </namespace_name>
                                 </name>
-                                <argument_list>
-                                  <semantic-token name="'('" line="14">(</semantic-token>
-                                  <non_empty_argument_list>
-                                    <argument>
-                                      <expr>
-                                        <expr_without_variable>
-                                          <expr>
-                                            <expr_without_variable>
-                                              <internal_functions_in_yacc>
-                                                <semantic-token name="T_ISSET" line="14">isset</semantic-token>
-                                                <semantic-token name="'('" line="14">(</semantic-token>
-                                                <isset_variables>
-                                                  <isset_variable>
-                                                    <expr>
-                                                      <variable>
-                                                        <callable_variable>
-                                                          <dereferencable>
-                                                            <variable>
-                                                            <callable_variable>
-                                                            <dereferencable>
-                                                            <variable>
-                                                            <callable_variable>
-                                                            <simple_variable>
-                                                            <semantic-token name="T_VARIABLE" line="14">$_SERVER</semantic-token>
+                                <argument_list lines="14:40-14:101" bytes="253-313">
+                                  <token name="'('" lines="14:40-14:40" bytes="253-253">(</token>
+                                  <non_empty_argument_list lines="14:41-14:100" bytes="254-312">
+                                    <argument lines="14:41-14:100" bytes="254-312">
+                                      <expr lines="14:41-14:100" bytes="254-312">
+                                        <expr_without_variable lines="14:41-14:100" bytes="254-312">
+                                          <expr lines="14:41-14:67" bytes="254-279">
+                                            <expr_without_variable lines="14:41-14:67" bytes="254-279">
+                                              <internal_functions_in_yacc lines="14:41-14:67" bytes="254-279">
+                                                <token name="T_ISSET" lines="14:41-14:45" bytes="254-258">isset</token>
+                                                <token name="'('" lines="14:46-14:46" bytes="259-259">(</token>
+                                                <isset_variables lines="14:47-14:66" bytes="260-278">
+                                                  <isset_variable lines="14:47-14:66" bytes="260-278">
+                                                    <expr lines="14:47-14:66" bytes="260-278">
+                                                      <variable lines="14:47-14:66" bytes="260-278">
+                                                        <callable_variable lines="14:47-14:66" bytes="260-278">
+                                                          <dereferencable lines="14:47-14:63" bytes="260-275">
+                                                            <variable lines="14:47-14:63" bytes="260-275">
+                                                            <callable_variable lines="14:47-14:63" bytes="260-275">
+                                                            <dereferencable lines="14:47-14:55" bytes="260-267">
+                                                            <variable lines="14:47-14:55" bytes="260-267">
+                                                            <callable_variable lines="14:47-14:55" bytes="260-267">
+                                                            <simple_variable lines="14:47-14:55" bytes="260-267">
+                                                            <token name="T_VARIABLE" lines="14:47-14:54" bytes="260-267">$_SERVER</token>
                                                             </simple_variable>
                                                             </callable_variable>
                                                             </variable>
                                                             </dereferencable>
-                                                            <semantic-token name="'['" line="14">[</semantic-token>
-                                                            <optional_expr>
-                                                            <expr>
-                                                            <expr_without_variable>
-                                                            <scalar>
-                                                            <dereferencable_scalar>
-                                                            <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="14">'argv'</semantic-token>
+                                                            <token name="'['" lines="14:55-14:55" bytes="268-268">[</token>
+                                                            <optional_expr lines="14:56-14:62" bytes="269-274">
+                                                            <expr lines="14:56-14:62" bytes="269-274">
+                                                            <expr_without_variable lines="14:56-14:62" bytes="269-274">
+                                                            <scalar lines="14:56-14:62" bytes="269-274">
+                                                            <dereferencable_scalar lines="14:56-14:62" bytes="269-274">
+                                                            <token name="T_CONSTANT_ENCAPSED_STRING" lines="14:56-14:61" bytes="269-274">'argv'</token>
                                                             </dereferencable_scalar>
                                                             </scalar>
                                                             </expr_without_variable>
                                                             </expr>
                                                             </optional_expr>
-                                                            <semantic-token name="']'" line="14">]</semantic-token>
+                                                            <token name="']'" lines="14:62-14:62" bytes="275-275">]</token>
                                                             </callable_variable>
                                                             </variable>
                                                           </dereferencable>
-                                                          <semantic-token name="'['" line="14">[</semantic-token>
-                                                          <optional_expr>
-                                                            <expr>
-                                                            <expr_without_variable>
-                                                            <scalar>
-                                                            <semantic-token name="T_LNUMBER" line="14">1</semantic-token>
+                                                          <token name="'['" lines="14:63-14:63" bytes="276-276">[</token>
+                                                          <optional_expr lines="14:64-14:65" bytes="277-277">
+                                                            <expr lines="14:64-14:65" bytes="277-277">
+                                                            <expr_without_variable lines="14:64-14:65" bytes="277-277">
+                                                            <scalar lines="14:64-14:65" bytes="277-277">
+                                                            <token name="T_LNUMBER" lines="14:64-14:64" bytes="277-277">1</token>
                                                             </scalar>
                                                             </expr_without_variable>
                                                             </expr>
                                                           </optional_expr>
-                                                          <semantic-token name="']'" line="14">]</semantic-token>
+                                                          <token name="']'" lines="14:65-14:65" bytes="278-278">]</token>
                                                         </callable_variable>
                                                       </variable>
                                                     </expr>
                                                   </isset_variable>
                                                 </isset_variables>
-                                                <semantic-token name="')'" line="14">)</semantic-token>
+                                                <token name="')'" lines="14:66-14:66" bytes="279-279">)</token>
                                               </internal_functions_in_yacc>
                                             </expr_without_variable>
                                           </expr>
-                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
-                                          <semantic-token name="'?'" line="14">?</semantic-token>
-                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
-                                          <expr>
-                                            <variable>
-                                              <callable_variable>
-                                                <dereferencable>
-                                                  <variable>
-                                                    <callable_variable>
-                                                      <dereferencable>
-                                                        <variable>
-                                                          <callable_variable>
-                                                            <simple_variable>
-                                                            <semantic-token name="T_VARIABLE" line="14">$_SERVER</semantic-token>
+                                          <asem name="T_WHITESPACE" lines="14:67-14:67" bytes="280-280"> </asem>
+                                          <token name="'?'" lines="14:68-14:68" bytes="281-281">?</token>
+                                          <asem name="T_WHITESPACE" lines="14:69-14:69" bytes="282-282"> </asem>
+                                          <expr lines="14:70-14:90" bytes="283-302">
+                                            <variable lines="14:70-14:90" bytes="283-302">
+                                              <callable_variable lines="14:70-14:89" bytes="283-301">
+                                                <dereferencable lines="14:70-14:86" bytes="283-298">
+                                                  <variable lines="14:70-14:86" bytes="283-298">
+                                                    <callable_variable lines="14:70-14:86" bytes="283-298">
+                                                      <dereferencable lines="14:70-14:78" bytes="283-290">
+                                                        <variable lines="14:70-14:78" bytes="283-290">
+                                                          <callable_variable lines="14:70-14:78" bytes="283-290">
+                                                            <simple_variable lines="14:70-14:78" bytes="283-290">
+                                                            <token name="T_VARIABLE" lines="14:70-14:77" bytes="283-290">$_SERVER</token>
                                                             </simple_variable>
                                                           </callable_variable>
                                                         </variable>
                                                       </dereferencable>
-                                                      <semantic-token name="'['" line="14">[</semantic-token>
-                                                      <optional_expr>
-                                                        <expr>
-                                                          <expr_without_variable>
-                                                            <scalar>
-                                                            <dereferencable_scalar>
-                                                            <semantic-token name="T_CONSTANT_ENCAPSED_STRING" line="14">'argv'</semantic-token>
+                                                      <token name="'['" lines="14:78-14:78" bytes="291-291">[</token>
+                                                      <optional_expr lines="14:79-14:85" bytes="292-297">
+                                                        <expr lines="14:79-14:85" bytes="292-297">
+                                                          <expr_without_variable lines="14:79-14:85" bytes="292-297">
+                                                            <scalar lines="14:79-14:85" bytes="292-297">
+                                                            <dereferencable_scalar lines="14:79-14:85" bytes="292-297">
+                                                            <token name="T_CONSTANT_ENCAPSED_STRING" lines="14:79-14:84" bytes="292-297">'argv'</token>
                                                             </dereferencable_scalar>
                                                             </scalar>
                                                           </expr_without_variable>
                                                         </expr>
                                                       </optional_expr>
-                                                      <semantic-token name="']'" line="14">]</semantic-token>
+                                                      <token name="']'" lines="14:85-14:85" bytes="298-298">]</token>
                                                     </callable_variable>
                                                   </variable>
                                                 </dereferencable>
-                                                <semantic-token name="'['" line="14">[</semantic-token>
-                                                <optional_expr>
-                                                  <expr>
-                                                    <expr_without_variable>
-                                                      <scalar>
-                                                        <semantic-token name="T_LNUMBER" line="14">1</semantic-token>
+                                                <token name="'['" lines="14:86-14:86" bytes="299-299">[</token>
+                                                <optional_expr lines="14:87-14:88" bytes="300-300">
+                                                  <expr lines="14:87-14:88" bytes="300-300">
+                                                    <expr_without_variable lines="14:87-14:88" bytes="300-300">
+                                                      <scalar lines="14:87-14:88" bytes="300-300">
+                                                        <token name="T_LNUMBER" lines="14:87-14:87" bytes="300-300">1</token>
                                                       </scalar>
                                                     </expr_without_variable>
                                                   </expr>
                                                 </optional_expr>
-                                                <semantic-token name="']'" line="14">]</semantic-token>
+                                                <token name="']'" lines="14:88-14:88" bytes="301-301">]</token>
                                               </callable_variable>
                                             </variable>
                                           </expr>
-                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
-                                          <semantic-token name="':'" line="14">:</semantic-token>
-                                          <asemantic-token name="T_WHITESPACE" line="14"> </asemantic-token>
-                                          <expr>
-                                            <expr_without_variable>
-                                              <scalar>
-                                                <semantic-token name="T_FILE" line="14">__FILE__</semantic-token>
+                                          <asem name="T_WHITESPACE" lines="14:89-14:89" bytes="302-302"> </asem>
+                                          <token name="':'" lines="14:90-14:90" bytes="303-303">:</token>
+                                          <asem name="T_WHITESPACE" lines="14:91-14:91" bytes="304-304"> </asem>
+                                          <expr lines="14:92-14:100" bytes="305-312">
+                                            <expr_without_variable lines="14:92-14:100" bytes="305-312">
+                                              <scalar lines="14:92-14:100" bytes="305-312">
+                                                <token name="T_FILE" lines="14:92-14:99" bytes="305-312">__FILE__</token>
                                               </scalar>
                                             </expr_without_variable>
                                           </expr>
@@ -405,7 +405,7 @@
                                       </expr>
                                     </argument>
                                   </non_empty_argument_list>
-                                  <semantic-token name="')'" line="14">)</semantic-token>
+                                  <token name="')'" lines="14:100-14:100" bytes="313-313">)</token>
                                 </argument_list>
                               </function_call>
                             </callable_variable>
@@ -413,47 +413,47 @@
                         </expr>
                       </argument>
                     </non_empty_argument_list>
-                    <semantic-token name="')'" line="14">)</semantic-token>
+                    <token name="')'" lines="14:101-14:101" bytes="314-314">)</token>
                   </argument_list>
                 </callable_variable>
               </variable>
             </expr>
           </expr_without_variable>
         </expr>
-        <semantic-token name="';'" line="14">;</semantic-token>
+        <token name="';'" lines="14:102-14:102" bytes="315-315">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="14">
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <dereferencable>
-                <variable>
-                  <callable_variable>
-                    <simple_variable>
-                      <semantic-token name="T_VARIABLE" line="15">$doc</semantic-token>
+    <asem name="T_WHITESPACE" lines="14:103-15:0" bytes="316-316">
+</asem>
+    <top_statement lines="15:1-15:33" bytes="317-348">
+      <statement lines="15:1-15:33" bytes="317-348">
+        <expr lines="15:1-15:32" bytes="317-347">
+          <expr_without_variable lines="15:1-15:32" bytes="317-347">
+            <variable lines="15:1-15:26" bytes="317-341">
+              <dereferencable lines="15:1-15:5" bytes="317-320">
+                <variable lines="15:1-15:5" bytes="317-320">
+                  <callable_variable lines="15:1-15:5" bytes="317-320">
+                    <simple_variable lines="15:1-15:5" bytes="317-320">
+                      <token name="T_VARIABLE" lines="15:1-15:4" bytes="317-320">$doc</token>
                     </simple_variable>
                   </callable_variable>
                 </variable>
               </dereferencable>
-              <semantic-token name="T_OBJECT_OPERATOR" line="15">-&gt;</semantic-token>
-              <member_name>
-                <semantic-token name="T_STRING" line="15">preserveWhiteSpace</semantic-token>
+              <token name="T_OBJECT_OPERATOR" lines="15:5-15:6" bytes="321-322">-&gt;</token>
+              <member_name lines="15:7-15:25" bytes="323-340">
+                <token name="T_STRING" lines="15:7-15:24" bytes="323-340">preserveWhiteSpace</token>
               </member_name>
             </variable>
-            <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
-            <semantic-token name="'='" line="15">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="15"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <scalar>
-                  <constant>
-                    <name>
-                      <namespace_name>
-                        <semantic-token name="T_STRING" line="15">true</semantic-token>
+            <asem name="T_WHITESPACE" lines="15:25-15:25" bytes="341-341"> </asem>
+            <token name="'='" lines="15:26-15:26" bytes="342-342">=</token>
+            <asem name="T_WHITESPACE" lines="15:27-15:27" bytes="343-343"> </asem>
+            <expr lines="15:28-15:32" bytes="344-347">
+              <expr_without_variable lines="15:28-15:32" bytes="344-347">
+                <scalar lines="15:28-15:32" bytes="344-347">
+                  <constant lines="15:28-15:32" bytes="344-347">
+                    <name lines="15:28-15:32" bytes="344-347">
+                      <namespace_name lines="15:28-15:32" bytes="344-347">
+                        <token name="T_STRING" lines="15:28-15:31" bytes="344-347">true</token>
                       </namespace_name>
                     </name>
                   </constant>
@@ -462,40 +462,40 @@
             </expr>
           </expr_without_variable>
         </expr>
-        <semantic-token name="';'" line="15">;</semantic-token>
+        <token name="';'" lines="15:32-15:32" bytes="348-348">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="15">
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <expr>
-          <expr_without_variable>
-            <variable>
-              <dereferencable>
-                <variable>
-                  <callable_variable>
-                    <simple_variable>
-                      <semantic-token name="T_VARIABLE" line="16">$doc</semantic-token>
+    <asem name="T_WHITESPACE" lines="15:33-16:0" bytes="349-349">
+</asem>
+    <top_statement lines="16:1-16:27" bytes="350-375">
+      <statement lines="16:1-16:27" bytes="350-375">
+        <expr lines="16:1-16:26" bytes="350-374">
+          <expr_without_variable lines="16:1-16:26" bytes="350-374">
+            <variable lines="16:1-16:20" bytes="350-368">
+              <dereferencable lines="16:1-16:5" bytes="350-353">
+                <variable lines="16:1-16:5" bytes="350-353">
+                  <callable_variable lines="16:1-16:5" bytes="350-353">
+                    <simple_variable lines="16:1-16:5" bytes="350-353">
+                      <token name="T_VARIABLE" lines="16:1-16:4" bytes="350-353">$doc</token>
                     </simple_variable>
                   </callable_variable>
                 </variable>
               </dereferencable>
-              <semantic-token name="T_OBJECT_OPERATOR" line="16">-&gt;</semantic-token>
-              <member_name>
-                <semantic-token name="T_STRING" line="16">formatOutput</semantic-token>
+              <token name="T_OBJECT_OPERATOR" lines="16:5-16:6" bytes="354-355">-&gt;</token>
+              <member_name lines="16:7-16:19" bytes="356-367">
+                <token name="T_STRING" lines="16:7-16:18" bytes="356-367">formatOutput</token>
               </member_name>
             </variable>
-            <asemantic-token name="T_WHITESPACE" line="16"> </asemantic-token>
-            <semantic-token name="'='" line="16">=</semantic-token>
-            <asemantic-token name="T_WHITESPACE" line="16"> </asemantic-token>
-            <expr>
-              <expr_without_variable>
-                <scalar>
-                  <constant>
-                    <name>
-                      <namespace_name>
-                        <semantic-token name="T_STRING" line="16">true</semantic-token>
+            <asem name="T_WHITESPACE" lines="16:19-16:19" bytes="368-368"> </asem>
+            <token name="'='" lines="16:20-16:20" bytes="369-369">=</token>
+            <asem name="T_WHITESPACE" lines="16:21-16:21" bytes="370-370"> </asem>
+            <expr lines="16:22-16:26" bytes="371-374">
+              <expr_without_variable lines="16:22-16:26" bytes="371-374">
+                <scalar lines="16:22-16:26" bytes="371-374">
+                  <constant lines="16:22-16:26" bytes="371-374">
+                    <name lines="16:22-16:26" bytes="371-374">
+                      <namespace_name lines="16:22-16:26" bytes="371-374">
+                        <token name="T_STRING" lines="16:22-16:25" bytes="371-374">true</token>
                       </namespace_name>
                     </name>
                   </constant>
@@ -504,60 +504,60 @@
             </expr>
           </expr_without_variable>
         </expr>
-        <semantic-token name="';'" line="16">;</semantic-token>
+        <token name="';'" lines="16:26-16:26" bytes="375-375">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="16">
+    <asem name="T_WHITESPACE" lines="16:27-18:0" bytes="376-377">
 
-</asemantic-token>
-    <top_statement>
-      <statement>
-        <semantic-token name="T_ECHO" line="18">echo</semantic-token>
-        <asemantic-token name="T_WHITESPACE" line="18"> </asemantic-token>
-        <echo_expr_list>
-          <echo_expr>
-            <expr>
-              <variable>
-                <callable_variable>
-                  <dereferencable>
-                    <variable>
-                      <callable_variable>
-                        <simple_variable>
-                          <semantic-token name="T_VARIABLE" line="18">$doc</semantic-token>
+</asem>
+    <top_statement lines="18:1-18:22" bytes="378-398">
+      <statement lines="18:1-18:22" bytes="378-398">
+        <token name="T_ECHO" lines="18:1-18:4" bytes="378-381">echo</token>
+        <asem name="T_WHITESPACE" lines="18:5-18:5" bytes="382-382"> </asem>
+        <echo_expr_list lines="18:6-18:21" bytes="383-397">
+          <echo_expr lines="18:6-18:21" bytes="383-397">
+            <expr lines="18:6-18:21" bytes="383-397">
+              <variable lines="18:6-18:21" bytes="383-397">
+                <callable_variable lines="18:6-18:21" bytes="383-397">
+                  <dereferencable lines="18:6-18:10" bytes="383-386">
+                    <variable lines="18:6-18:10" bytes="383-386">
+                      <callable_variable lines="18:6-18:10" bytes="383-386">
+                        <simple_variable lines="18:6-18:10" bytes="383-386">
+                          <token name="T_VARIABLE" lines="18:6-18:9" bytes="383-386">$doc</token>
                         </simple_variable>
                       </callable_variable>
                     </variable>
                   </dereferencable>
-                  <semantic-token name="T_OBJECT_OPERATOR" line="18">-&gt;</semantic-token>
-                  <member_name>
-                    <semantic-token name="T_STRING" line="18">saveXML</semantic-token>
+                  <token name="T_OBJECT_OPERATOR" lines="18:10-18:11" bytes="387-388">-&gt;</token>
+                  <member_name lines="18:12-18:19" bytes="389-395">
+                    <token name="T_STRING" lines="18:12-18:18" bytes="389-395">saveXML</token>
                   </member_name>
-                  <argument_list>
-                    <semantic-token name="'('" line="18">(</semantic-token>
-                    <semantic-token name="')'" line="18">)</semantic-token>
+                  <argument_list lines="18:19-18:21" bytes="396-397">
+                    <token name="'('" lines="18:19-18:19" bytes="396-396">(</token>
+                    <token name="')'" lines="18:20-18:20" bytes="397-397">)</token>
                   </argument_list>
                 </callable_variable>
               </variable>
             </expr>
           </echo_expr>
         </echo_expr_list>
-        <semantic-token name="';'" line="18">;</semantic-token>
+        <token name="';'" lines="18:21-18:21" bytes="398-398">;</token>
       </statement>
     </top_statement>
-    <asemantic-token name="T_WHITESPACE" line="18">
+    <asem name="T_WHITESPACE" lines="18:22-20:0" bytes="399-400">
 
-</asemantic-token>
-    <top_statement>
-      <semantic-token name="T_HALT_COMPILER" line="20">__halt_compiler</semantic-token>
-      <semantic-token name="'('" line="20">(</semantic-token>
-      <semantic-token name="')'" line="20">)</semantic-token>
-      <semantic-token name="';'" line="20">;</semantic-token>
+</asem>
+    <top_statement lines="20:1-20:19" bytes="401-418">
+      <token name="T_HALT_COMPILER" lines="20:1-20:15" bytes="401-415">__halt_compiler</token>
+      <token name="'('" lines="20:16-20:16" bytes="416-416">(</token>
+      <token name="')'" lines="20:17-20:17" bytes="417-417">)</token>
+      <token name="';'" lines="20:18-20:18" bytes="418-418">;</token>
     </top_statement>
-    <top_statement>
-      <statement>
-        <semantic-token name="T_INLINE_HTML" line="20">
+    <top_statement lines="20:19-22:1" bytes="419-430">
+      <statement lines="20:19-22:1" bytes="419-430">
+        <token name="T_INLINE_HTML" lines="20:19-22:0" bytes="419-430">
 ()&lt;?php ()
-</semantic-token>
+</token>
       </statement>
     </top_statement>
   </top_statement_list>
